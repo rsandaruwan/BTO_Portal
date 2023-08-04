@@ -1,0 +1,399 @@
+<mat-drawer-container class="example-container secound_back" autosize>
+  <mat-drawer #drawer class="example-sidenav secound_back" mode="side" opened>
+  </mat-drawer>
+
+  <div class="example-sidenav-content"></div>
+</mat-drawer-container>
+
+<div class="main-container">
+  <mat-toolbar class="example-toolbar top_bar">
+    <button mat-icon-button (click)="sidebarmenu.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- <h1 class="example-app-name">PortCity Portal</h1> -->
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="example-sidenav-container h-100 m-auto primary_back"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #sidebarmenu
+      [mode]="isLargeScreen() ? 'side' : 'over'"
+      opened
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list class="p-0">
+        <mat-accordion>
+          <div class="Body2_text p-0 white_back sticky-top" hideToggle>
+            <div class="h-100 py-1">
+              <div class="nav-link py-3">
+                <div class="col-md-11 m-3">
+                  <img
+                    src="../../../assets/image/bto_logo.png"
+                    class="logo"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3">
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer ">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/dashboard.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Dashboard</p></div>
+                </div>
+              </div>
+              <div class="col-md-10 mx-3 mt-4">
+                <div class="row ">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/page.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="caption gray">Page</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer "  [routerLink]="['/product_categories']">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/p_category.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Product categories</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/product.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Products</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/attribute.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Attributes</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/ingredience.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Ingredients</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/recipes.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Recipes</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/orders.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Orders</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/users.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Users</p></div>
+                </div>
+              </div>
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/profile.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Profile</p></div>
+                </div>
+              </div>
+
+              <div class="col-md-10 mx-3 mt-3">
+                <div class="row pointer">
+                  <div class="col-2">
+                    <img src="../../../assets/icons/logout.png" alt="" />
+                  </div>
+                  <div class="col-10 p-0"><p class="body-3 gray">Logout</p></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class=" Body2_text p-0 bg-gray" hideToggle id="admin">
+                            <div class="h-100 py-1">
+                                <mat-panel-title class="nav-link py-3 m-0">
+                                    <div class="row w-100">
+                                        <div class="col-4">
+                                            <div class="profile">
+                                                <div *ngIf="user_img">
+                                                    <img src="user_img" alt="">
+                                                </div>
+                                                <div *ngIf="!user_img">
+                                                    <img src="../../../assets/images/default_profile.png" alt=""
+                                                        class="profile">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-start align-items-center justify-content-center ">
+                                            <div class="row mb-1">
+                                                <div class="Overline_text user-name-text">{{userName}}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="Caption_text text-scale">{{userRole}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="dashboard-option-container">
+                                                <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+                                            </div>
+                                            <mat-menu #menu="matMenu" xPosition="before">
+                                                <mat-expansion-panel hideToggle (click)="logout()"
+                                                    class="mat-elevation-z0">
+                                                    <mat-expansion-panel-header class="h-100">
+                                                        <mat-panel-title class="nav-link text-danger">
+                                                            <mat-icon>exit_to_app</mat-icon>
+                                                            <div class="px-2">Logout</div>
+                                                        </mat-panel-title>
+                                                    </mat-expansion-panel-header>
+                                                </mat-expansion-panel>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                </mat-panel-title>
+                            </div>
+                        </div> -->
+          </div>
+          <div
+            class="d-none d-md-none d-lg-block"
+            *ngFor="let navItem of navRouteList; let i = index"
+          >
+            <mat-expansion-panel
+              class="nav-item Body2_text p-0 mat-elevation-z0"
+              [ngClass]="{ 'active-color': i == selectedNavItem }"
+              [hideToggle]="navItem.children.length == 0"
+              id="{{ i }}"
+            >
+              <mat-expansion-panel-header
+                class="h-100 py-1"
+                (click)="
+                  selectMenuItem(
+                    navItem.route,
+                    navItem.group_name,
+                    '',
+                    sidebarmenu,
+                    i,
+                    -1,
+                    false
+                  )
+                "
+              >
+                <mat-panel-title
+                  class="nav-link py-3"
+                  [ngClass]="{ 'active-text-color': i == selectedNavItem }"
+                >
+                  {{ navItem.group_name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-list class="sublink pl-2">
+                <div *ngIf="navItem.children.length != 0">
+                  <div
+                    *ngFor="let subNavItem of navItem.children; let j = index"
+                  >
+                    <mat-list-item
+                      [ngClass]="{ 'active-color': j == selectedSubNavItem }"
+                      class="sub_nav_item"
+                      (click)="
+                        selectMenuItem(
+                          subNavItem.route,
+                          navItem.group_name,
+                          subNavItem.group_name,
+                          sidebarmenu,
+                          i,
+                          j,
+                          false
+                        )
+                      "
+                    >
+                      <div
+                        class="Sub_menu_text"
+                        [ngClass]="{
+                          'active-text-color': j == selectedSubNavItem
+                        }"
+                      >
+                        {{ subNavItem.group_name }}
+                      </div>
+                    </mat-list-item>
+                  </div>
+                </div>
+              </mat-list>
+            </mat-expansion-panel>
+          </div>
+          <div
+            class="d-block d-md-block d-lg-none"
+            *ngFor="let navItem of navRouteList; let i = index"
+          >
+            <mat-expansion-panel
+              class="nav-item Body2_text p-0 mat-elevation-z0"
+              [ngClass]="{ 'active-color': i == selectedNavItem }"
+              [hideToggle]="navItem.children.length == 0"
+              id="{{ i }}"
+            >
+              <mat-expansion-panel-header
+                class="h-100 py-1"
+                *ngIf="navItem.children.length == 0"
+                (click)="
+                  selectMenuItem(
+                    navItem.route,
+                    navItem.group_name,
+                    '',
+                    sidebarmenu,
+                    i,
+                    -1,
+                    true
+                  )
+                "
+              >
+                <mat-panel-title
+                  class="nav-link py-3"
+                  [ngClass]="{ 'active-text-color': i == selectedNavItem }"
+                >
+                  {{ navItem.group_name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-expansion-panel-header
+                class="h-100 py-1"
+                *ngIf="navItem.children.length != 0"
+                (click)="
+                  selectMenuItem(
+                    navItem.route,
+                    navItem.group_name,
+                    '',
+                    sidebarmenu,
+                    i,
+                    -1,
+                    false
+                  )
+                "
+              >
+                <mat-panel-title
+                  class="nav-link py-3"
+                  [ngClass]="{ 'active-text-color': i == selectedNavItem }"
+                >
+                  {{ navItem.group_name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-list class="sublink pl-2">
+                <div *ngIf="navItem.children.length != 0">
+                  <div
+                    *ngFor="let subNavItem of navItem.children; let j = index"
+                  >
+                    <mat-list-item
+                      [ngClass]="{ 'active-color': j == selectedSubNavItem }"
+                      class="sub_nav_item"
+                      (click)="
+                        selectMenuItem(
+                          subNavItem.route,
+                          navItem.group_name,
+                          subNavItem.group_name,
+                          sidebarmenu,
+                          i,
+                          j,
+                          true
+                        )
+                      "
+                    >
+                      <div
+                        class="Sub_menu_text"
+                        [ngClass]="{
+                          'active-text-color': j == selectedSubNavItem
+                        }"
+                      >
+                        {{ subNavItem.group_name }}
+                      </div>
+                    </mat-list-item>
+                  </div>
+                </div>
+              </mat-list>
+            </mat-expansion-panel>
+          </div>
+
+          <div style="padding-bottom: 100px"></div>
+
+          <!-- <div class="ambrum">
+                        <p class="Body2_text m-0">version {{version}}</p>
+                        <p class="Caption_text">Powered By<span class="mx-1 red-text"> Ambrum Solutions</span></p>
+                    </div> -->
+        </mat-accordion>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <div class="col-12 mx-5 header sticky-top nav-bar secound_back">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="mx-4 mt-3">
+              <p class="headline_4">products</p>
+              <p>All the Details are shown below.</p>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+
+      <!-- <nav class="top-nav-bar sticky-top nav-bar" style="overflow: hidden;">
+                <div class="navbar navbar-expand-lg navbar-light navbar-custom">
+                    <div class="container-fluid">
+                        <div class="col-9"></div>
+                        <div class="col-12 col-lg-3 p-0">
+                            <div class="navbar-nav p-2">
+                                <div class=" d-flex text-center">
+                                    <p class="m-auto px-4 white-text">Visitors Today</p>
+                                    <h1 class="m-auto white-text"> <span>{{currentPopulation}}</span> /
+                                        <span>{{portCityTotalCapacity}}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex">
+                    <div class="col-12 p-0 ">
+                        <div class="px-4 py-3 nav-layer white_back  bg-light">
+                            <div class="Subtitle2_text">{{mainMenuItemName}} <a class="arrow-icon"
+                                    *ngIf="subMainMenuItemName != ''">></a>
+                                {{subMainMenuItemName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav> -->
+
+      <div *ngIf="mainMenuItemName == 'Dashboard'">
+        <app-product-categories></app-product-categories>
+      </div>
+
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

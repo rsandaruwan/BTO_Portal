@@ -1,0 +1,71 @@
+{
+    "dashboard": {
+        "role": "ROLE_USER"
+    },
+    "gateKeeper": {
+        "role": "ROLE_USER"
+    },
+    "capacityManager": {
+        "role": "ROLE_USER"
+    },
+    "approvalManager": {
+        "role": "ROLE_USER"
+    },
+    "auditTrial": {
+        "role": "ROLE_USER"
+    },
+    "gateManager": {
+        "role": "ROLE_USER"
+    },
+    "portCityCapacityManager": {
+        "role": "ROLE_USER"
+    },
+    "que": {
+        "role": "ROLE_USER"
+    },
+    "serviceProviders": {
+        "role": "ROLE_USER"
+    },
+    "services": {
+        "role": "ROLE_USER"
+    },
+    "userRoles": {
+        "role": "ROLE_USER"
+    },
+    "users": {
+        "role": "ROLE_USER"
+    },
+    "operatorusers": {
+        "role": "ROLE_USER"
+    },
+    "bookingDetails": {
+        "role": "ROLE_USER"
+    },
+    "tv": {
+        "role": "ROLE_USER"
+    },
+    "vipPass": {
+        "role": "ROLE_USER"
+    },
+    "activateAccount": {
+        "role": "ROLE_USER"
+    },
+    "manualChecking": {
+        "role": "ROLE_USER"
+    },
+    "checkingSuccess": {
+        "role": "ROLE_USER"
+    },
+    "newuserChecking": {
+        "role": "ROLE_USER"
+    },
+    "serviceProviderApplication": {
+        "role": "ROLE_USER"
+    },
+    "createBooking": {
+        "role": "ROLE_USER"
+    },
+    "vipPassGateview": {
+        "role": "ROLE_USER"
+    }
+}

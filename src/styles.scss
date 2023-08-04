@@ -1,0 +1,216 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+
+//fonts
+
+.headline_1 {
+  font-family: Inter;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.headline_3 {
+  font-family: Inter;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.headline_2 {
+  font-family: Poppins;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.headline_4 {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.25px;
+}
+.body-1 {
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.body-2 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.25px;
+}
+.body-3 {
+  font-family: Poppins;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.25px;
+}
+.body-4 {
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.content {
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.overline_1 {
+  font-family: Poppins;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.25px;
+}
+.upper {
+  text-transform: uppercase;
+}
+
+.f_500 {
+  font-weight: 500 !important;
+}
+.f_400 {
+  font-weight: 400 !important;
+}
+.f_300 {
+  font-weight: 300 !important;
+}
+
+//colors
+
+.primary {
+  color: #fff;
+}
+.input_color {
+  color: #1d1d1d;
+}
+
+.primary_back {
+  background: #0f1114 !important;
+}
+.secound_back {
+  background: #15171a !important;
+}
+
+.primary_green {
+  color: #d0ff67;
+}
+.secound_green {
+  color: #97be41;
+}
+.third_green {
+  color: #29381b;
+}
+.background_green {
+  border-radius: 20px;
+  background: #536134;
+}
+.background_red {
+  border-radius: 20px;
+  background: #613434;;
+}
+.primary_red {
+  color: #FF6666;
+}
+.black {
+  color: #000;
+}
+.gray {
+  color: #757983;
+}
+.gray-text {
+  color: #838383;
+}
+
+.primary_btn {
+  border-radius: 10px;
+  background: #97be41;
+  color: #fff;
+  padding: 10px 30px 10px 30px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// common css
+
+.mdc-checkbox__background {
+  border-radius: 7px !important;
+}
+.mat-drawer-inner-container.ng-tns-c15-1 {
+  background: #15171a;
+}
+.mat-drawer-inner-container.ng-tns-c15-1 {
+  height: 95% !important;
+}
+.mat-sidenav.mat-drawer.mat-sidenav.ng-tns-c15-1.ng-trigger.ng-trigger-transform.mat-drawer-side.mat-drawer-opened.ng-star-inserted {
+  background: #0f1114 !important ;
+  border-right: solid 0px #0f1114;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: 20px !important;
+
+  border-bottom-left-radius: 20px !important;
+}
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-bottom-right-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+.mat_icon{
+color: #fff;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+.active {
+  
+  background-color: #787eff;
+  border-radius: 10px;
+  color: white;
+  span {
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+

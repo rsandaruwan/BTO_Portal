@@ -1,0 +1,101 @@
+[
+    {
+        "group_name": "Dashboard",
+        "route": "dashboard"
+    },
+    {
+        "group_name": "Gate Keeper",
+        "route": "gate-keeper"
+    },
+    {
+        "group_name": "Capacity Manager",
+        "route": "capacity-manager"
+    },
+    {
+        "group_name": "Approval Manager",
+        "route": "approval-manager"
+    },
+    {
+        "group_name": "Audit Trial",
+        "route": "audit-trial"
+    },
+    {
+        "group_name": "Gate Manager",
+        "route": "gate-manager"
+    },
+    {
+        "group_name": "Port City Capacity Manager",
+        "route": "port-city-capacity-manager"
+    },
+    {
+        "group_name": "Booking Management",
+        "route": "que"
+    },
+    {
+        "group_name": "Service Providers",
+        "route": "service-providers"
+    },
+    {
+        "group_name": "Service Management",
+        "route": "services"
+    },
+    {
+        "group_name": "User Roles",
+        "route": "user-roles"
+    },
+    {
+        "group_name": "Users",
+        "route": "users"
+    },{
+        "group_name": "Operator Users",
+        "route": "operator-users"
+    },
+    {
+        "group_name": "Booking Details",
+        "route": "booking-details"
+    },
+    {
+        "group_name": "TV",
+        "route": "tv"
+    },
+    {
+        "group_name": "Vip Pass",
+        "route": "vip-pass"
+    },
+    {
+        "group_name": "Activate Account",
+        "route": "activate-account"
+    },
+    {
+        "group_name": "Manual Checking",
+        "route": "manual-checking"
+    },
+    {
+        "group_name": "Checking Success",
+        "route": "checking-success"
+    },
+    {
+        "group_name": "Newuser Checking",
+        "route": "newuser-checking"
+    },
+    {
+        "group_name": "Service Provider Application",
+        "route": "service-provider-application"
+    },
+    {
+        "group_name": "Operator Management",
+        "route": ""
+    },
+    {
+        "group_name": "User Mamangement",
+        "route": ""
+    },
+    {
+        "group_name": "Create Booking",
+        "route": "make-booking"
+    },
+    {
+        "group_name": "Vip Pass Gateview",
+        "route": "vip-pass-gateview"
+    }
+]

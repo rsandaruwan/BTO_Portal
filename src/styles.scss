@@ -150,19 +150,25 @@ body {
 .gray-text {
   color: #838383;
 }
+.gray-bg {
+  background-color: #3F3D3E;
+}
 
 .primary_btn {
   border-radius: 10px;
-  background: #97be41;
+  background: #97be41 ;
   color: #fff;
   padding: 10px 30px 10px 30px;
+  border: 2px solid #97be41;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-// common css
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
 
 .mdc-checkbox__background {
   border-radius: 7px !important;
@@ -188,6 +194,47 @@ body {
   border-top-right-radius: 12px !important;
 }
 
+.mat-mdc-dialog-surface.mdc-dialog__surface{
+  border-radius: 15px !important;
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 px grey;
+  border-radius: 2px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  // background: rgb(222 70 137);;
+  background: rgb(187, 187, 187);
+  border-radius: 2px;
+}
+
+tr.ng-tns-c49-2.ng-star-inserted {
+  border-color: #191B1E;;
+}
+.mat-mdc-table{
+  background-color: #15171A;
+} 
+.mat-mdc-table .mdc-data-table__header-row {
+  height: 56px;
+  background-color: #3F3D3Eed;
+}
+
+.mat-mdc-paginator{
+  background-color: #15171A;
+  border-top: 0.5px solid #3F3D3Eed ;
+  border-radius: 0px 0px 20px 20px ;
+
+}
+
+
+
+
 .mat_icon{
 color: #fff;
 }
@@ -211,6 +258,10 @@ color: #fff;
       filter: brightness(0) invert(1);
     }
   }
+}
+.popup{
+  background-color: #3F3D3E;
+  border-radius: 20px;
 }
 
 

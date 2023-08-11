@@ -1,0 +1,13 @@
+<input type="checkbox" [id]="id" [checked]="on"
+(change)="Valchange($event.target)">
+<label #lable class="toggle-button-switch"  [class.primary]="on"  
+[for]="id"></label>
+
+<div class="toggle-button-text" [class.primary-text]="on">
+  <div class="toggle-button-text-on">
+    <ng-container *ngIf="showLabels && on">{{ leftText }}</ng-container>
+  </div>
+  <div class="toggle-button-text-off">
+    <ng-container *ngIf="showLabels && !on">{{ rightText }}</ng-container>
+  </div>
+</div>

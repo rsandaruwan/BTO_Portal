@@ -1,0 +1,146 @@
+.header {
+    width: 95%;
+    border-radius: 10px;
+  }
+  
+  .body-header {
+    margin-right: 3rem;
+    margin-left: 3rem;
+    width: 95%;
+  }
+  
+  
+  .body-table {
+    width: 95%;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 1200px) {
+    .body-header {
+      width: 95%;
+      margin: auto;
+    }
+    .primary_btn {
+      border-radius: 10px;
+      background: #97be41;
+      color: #fff;
+      padding: 5px 20px 5px 20px;
+    }
+  
+    .body-table {
+      width: 95%;
+      margin: auto;
+    }
+    .status_btn {
+      width: 100%;
+    }
+    .first_row{
+        height: 100px;
+    }
+  }
+
+  .avatar-upload {
+    position: relative;
+    max-width: 75px;
+  
+  
+    .avatar-edit {
+      position: absolute;
+      align-items: center;
+  
+      z-index: 1;
+     
+      input {
+        display: none;
+        + label {
+          display: inline-block;
+          width: 75px;
+          height: 75px;
+          margin-bottom: 0;
+          border-radius: 100%;
+          background: transparent;
+          // border: 1px solid transparent;
+          // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+          background-color: transparent;
+          cursor: pointer;
+          font-weight: normal;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background: transparent;
+            border-color: transparent;
+          }
+          &:after {
+            content: "";
+            font-family: "FontAwesome";
+            color: transparent;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin: auto;
+          }
+        }
+      }
+    }
+    .avatar-preview {
+    border: solid 1px black;
+    border-radius: 10px;
+      width: 50px;
+      height: 50px;
+      position: relative;
+      border-radius: 10 px;
+      // border: 6px solid #F8F8F8;
+      // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+      > div {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+  .text-area{
+    width: 90%;
+ 
+  }
+
+
+  
+
+
+  tr:first-child th:first-child{
+    border-top-left-radius: 10px;
+  }
+
+  tr:last-child th:first-child{
+    border-bottom-left-radius: 10px;
+  }
+
+  tr:first-child th:last-child{
+    border-top-right-radius: 10px;
+  }
+ 
+  tr:last-child th:last-child{
+    border-bottom-right-radius: 10px;
+  }
+  .borderRL{
+    border-right: 2px solid #676767;
+    border-left: 2px solid #676767;
+  }
+  .border_bottom{
+    border-bottom: 2px solid #676767;;
+  }
+
+  .add_row_btn{
+    background-color:#404040 ;
+    color: white;
+    border-radius: 20px;
+  } 
+
+
+  

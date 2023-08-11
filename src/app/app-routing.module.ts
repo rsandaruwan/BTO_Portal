@@ -7,14 +7,35 @@ import { ConfirmPasswordComponent } from './components/confirm-password/confirm-
 import { DynamicDashboardComponent } from './pages/dynamic-dashboard/dynamic-dashboard.component';
 import { ProductCategoriesComponent } from './pages/product-categories/product-categories.component';
 import { AuthGuardService } from './services/authentication/auth-gurd.service';
+import { ProductsComponent } from './pages/products/products.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { SubCategoriesComponent } from './pages/sub-categories/sub-categories.component';
+import { AddProductsComponent } from './pages/add-products/add-products.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { AttributesComponent } from './pages/attributes/attributes.component';
+import { IngredientsComponent } from './pages/ingredients/ingredients.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'reset_password', component: ResetPasswordComponent },
   { path: 'verify_password', component: VerifyPasswordComponent },
   { path: 'confirm_password', component: ConfirmPasswordComponent },
-  { path: 'dashboard', component: DynamicDashboardComponent},
-  { path: 'product_categories', component: ProductCategoriesComponent }
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'product_categories', component: ProductCategoriesComponent },
+  { path: 'product', component: ProductsComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'sub_categories', component: SubCategoriesComponent },
+  { path: 'add_product', component: AddProductsComponent },
+  { path: 'order', component: OrdersComponent },
+  { path: 'attributes', component: AttributesComponent },
+  { path: 'ingredients', component: IngredientsComponent },
+
+
+
+
+  
+
 
 
   // {

@@ -1,0 +1,40 @@
+.header {
+    width: 95%;
+    border-radius: 10px;
+  }
+  
+  .body-header {
+    margin-right: 3rem;
+    margin-left: 3rem;
+    width: 95%;
+  }
+  
+  
+  .body-table {
+    width: 95%;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 1200px) {
+    .body-header {
+      width: 95%;
+      margin: auto;
+    }
+    .primary_btn {
+      border-radius: 10px;
+      background: #97be41;
+      color: #fff;
+      padding: 5px 20px 5px 20px;
+    }
+  
+    .body-table {
+      width: 95%;
+      margin: auto;
+    }
+    .status_btn {
+      width: 100%;
+    }
+  }
+  

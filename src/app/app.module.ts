@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// pages
+// components
 
 
 import { LoginComponent } from './pages/login/login.component';
@@ -16,6 +16,11 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { VerifyPasswordComponent } from './components/verify-password/verify-password.component';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
+import { CategoryPopupComponent } from './components/popups/category-popup/category-popup.component';
+import { SubCategoryPopupComponent } from './components/popups/sub-category-popup/sub-category-popup.component';
+import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
+import { AttributePopupComponent } from './components/popups/attribute-popup/attribute-popup.component';
+
 
 // pages
 
@@ -23,6 +28,14 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SideNavigationComponent } from './pages/side-navigation/side-navigation.component';
 import { DynamicDashboardComponent } from './pages/dynamic-dashboard/dynamic-dashboard.component';
 import { ProductCategoriesComponent } from './pages/product-categories/product-categories.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { SubCategoriesComponent } from './pages/sub-categories/sub-categories.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { AddProductsComponent } from './pages/add-products/add-products.component';
+import { AttributesComponent } from './pages/attributes/attributes.component';
+import { IngredientsComponent } from './pages/ingredients/ingredients.component';
+
 
 
 
@@ -39,7 +52,18 @@ import { ProductCategoriesComponent } from './pages/product-categories/product-c
     DashboardComponent,
     SideNavigationComponent,
     DynamicDashboardComponent,
-    ProductCategoriesComponent
+    ProductCategoriesComponent,
+    ProductsComponent,
+    CategoriesComponent,
+    SubCategoriesComponent,
+    CategoryPopupComponent,
+    SubCategoryPopupComponent,
+    AddProductsComponent,
+    ToggleButtonComponent,
+    OrdersComponent,
+    AttributesComponent,
+    IngredientsComponent,
+    AttributePopupComponent
 
 
 

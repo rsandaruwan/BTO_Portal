@@ -1,0 +1,354 @@
+<div class="col-12 mt-4 body-table secound_back">
+  <div class="row mx-2 py-3">
+    <div class="col-6">
+      <p class="headline_4 f_400">
+        Add Products <span class="content f_400"> 254</span>
+      </p>
+    </div>
+    <div class="col-6 d-flex flex-row-reverse">
+      <button [routerLink]="['/add_product']" class="primary_btn content">
+        SAVE DETAILS
+      </button>
+    </div>
+  </div>
+
+  <!-- Product table -->
+  <div class="col-md-12">
+    <div class="row m-0 p-0 first_row border-bottom border-top">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">| Basic Details</p>
+      </div>
+      <div class="col-10"></div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Category</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="selectedValue"
+            name="food"
+            placeholder="Select Category"
+          >
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Sub Category</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="selectedValue"
+            name="food"
+            placeholder="Select A Sub Category"
+          >
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Product Name</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Search by Product Name" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Product Main Image</p>
+      </div>
+      <div class="col-10">
+        <div class="avatar-upload my-3 mx-4">
+          <div class="avatar-edit">
+            <input
+              type="file"
+              id="imageUpload"
+              accept=".png, .jpg, .jpeg"
+              (change)="fileChangeEvent($event)"
+            />
+            <label for="imageUpload" class="d-flex"></label>
+          </div>
+          <div class="avatar-preview">
+            <div
+              id="imagePreview"
+              [@selectedImage]="imageState"
+              [style.background-image]="'url(' + image + ')'"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Description</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field
+          floatLabel="always"
+          appearance="outline"
+          class="text-area my-3 mx-4"
+        >
+          <textarea
+            placeholder="Description"
+            matInput
+            [(ngModel)]="textareaContent"
+            (input)="adjustTextareaHeight($event)"
+            #autoHeightTextarea
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Ingredients</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="selectedValue"
+            name="food"
+            placeholder="Select A Sub Category"
+          >
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Product Status</p>
+      </div>
+      <div class="col-10">
+        <app-toggle-button
+          class="my-3 mx-4"
+          style="width: 140px"
+          [width]="140"
+          [on]="false"
+          [showLabels]="true"
+          leftText="Available"
+          rightText="Out of Stock  "
+          (changed)="checked = $event"
+          [id]="1"
+        ></app-toggle-button>
+      </div>
+    </div>
+    <div
+      class="row m-0 p-0 first_row border-bottom"
+      style="border-radius: 0pc 15px 15px 15px"
+    >
+      <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+        <p class="content mt-4 text-center">Preview Status</p>
+      </div>
+      <div class="col-10">
+        <app-toggle-button
+          class="my-3 mx-4"
+          style="width: 85px"
+          [width]="85"
+          [on]="false"
+          [showLabels]="true"
+          leftText="Yes"
+          rightText="No  "
+          (changed)="checked1 = $event"
+          [id]="2"
+        ></app-toggle-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 mt-5 body-table secound_back">
+  <div class="row mx-2 py-3">
+    <div class="col-12">
+      <p class="headline_4 f_400">
+        Variants<span class="content f_400"> 254</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Product table -->
+  <div class="col-md-12">
+    <div class="row m-0 p-0 first_row border-bottom border-top">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Variant Name</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Search by Product Name" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Variant Images</p>
+      </div>
+      <div class="col-10"></div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Description</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field
+          floatLabel="always"
+          appearance="outline"
+          class="text-area my-3 mx-4"
+        >
+          <textarea
+            placeholder="Description"
+            matInput
+            [(ngModel)]="textareaContent"
+            (input)="adjustTextareaHeight($event)"
+            #autoHeightTextarea
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Gross Weight</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Enter a Value" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Net Weight</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Enter a Value" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Package Type</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Enter a Value" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Product Type</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+          <input matInput placeholder="Enter a Value" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 text-center">Nutrition</p>
+      </div>
+      <div class="col-10 overflow-auto">
+        <div class="d-flex">
+          <table class="table w-25 my-3 mx-4" style="background-color: #191B1E;;">
+            <thead>
+              <tr
+              class="border_bottom"
+                style="background-color: #404040"
+              >
+                <th scope="col" >
+                  <mat-form-field appearance="outline" class="m-2">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+                </th>
+                <th class=" borderRL">
+                  <mat-form-field appearance="outline" class="m-2">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+                </th>
+                <th scope="col">
+                  <mat-form-field appearance="outline" class="m-2">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+             
+              
+      
+              <tr  *ngFor="let row of getrowFormControls()" >
+                <th scope="row"  class="border_bottom ">
+                  <mat-form-field appearance="outline" class="m-2">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+                </th>
+                <th class="borderRL border_bottom" >
+                  <mat-form-field appearance="outline" class="m-2  " *ngFor="let col2_2 of getcell2_2FormControls()">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+
+                  <div class="d-flex" (click)="addcell2_2()">
+                    <p class="content my-auto mx-2 primary text-decoration-underline">Add another Value</p>
+                  </div>
+                </th>
+                <th class="border_bottom">
+                  <mat-form-field appearance="outline" class="m-2"  *ngFor="let col2_3 of getcell2_3FormControls()">
+                    <input matInput placeholder="Enter a Value" />
+                  </mat-form-field>
+                  <div class="d-flex" (click)="addcell2_3()">
+                    <p class="content my-auto mx-2 primary text-decoration-underline">Add another Value</p>
+                  </div>
+                </th>
+                
+              </tr>
+
+        
+            </tbody>
+          </table>
+        </div>
+
+        <button (click)="addrow()" type="button " class="btn  my-3 mx-4  add_row_btn ">Add Row</button>
+
+
+       
+
+
+       
+      </div>
+    </div>
+    <div
+      class="row m-0 p-0 first_row border-bottom"
+      style="border-radius: 0pc 15px 15px 15px"
+    >
+      <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+        <p class="content mt-4 text-center">Price</p>
+      </div>
+      <div class="col-10"></div>
+    </div>
+  </div>
+</div>

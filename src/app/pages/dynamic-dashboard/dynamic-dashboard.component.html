@@ -41,15 +41,17 @@
 
             <div class="p-3">
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer ">
+                <div class="row pointer" [routerLink]="['/dashboard']">
                   <div class="col-2">
                     <img src="../../../assets/icons/dashboard.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Dashboard</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Dashboard</p>
+                  </div>
                 </div>
               </div>
               <div class="col-md-10 mx-3 mt-4">
-                <div class="row ">
+                <div class="row pointer">
                   <div class="col-2">
                     <img src="../../../assets/icons/page.png" alt="" />
                   </div>
@@ -58,38 +60,51 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer "  [routerLink]="['/product_categories']">
+                <div class="row pointer" [routerLink]="['/product_categories']">
                   <div class="col-2">
                     <img src="../../../assets/icons/p_category.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Product categories</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Product categories</p>
+                   
+                  </div>
                 </div>
+                <ul>
+                  <li [routerLink]="['/categories']">Categories</li>
+                  <li [routerLink]="['/sub_categories']">Sub Categories</li>
+                 </ul>
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer">
+                <div class="row pointer" [routerLink]="['/product']">
                   <div class="col-2">
                     <img src="../../../assets/icons/product.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Products</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Products</p>
+                  </div>
                 </div>
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer">
+                <div class="row pointer"  [routerLink]="['/attributes']">
                   <div class="col-2">
                     <img src="../../../assets/icons/attribute.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Attributes</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Attributes</p>
+                  </div>
                 </div>
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer">
+                <div class="row pointer"  [routerLink]="['/ingredients']">
                   <div class="col-2">
                     <img src="../../../assets/icons/ingredience.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Ingredients</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Ingredients</p>
+                  </div>
                 </div>
               </div>
 
@@ -98,16 +113,20 @@
                   <div class="col-2">
                     <img src="../../../assets/icons/recipes.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Recipes</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Recipes</p>
+                  </div>
                 </div>
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer">
+                <div class="row pointer"  [routerLink]="['/order']">
                   <div class="col-2">
                     <img src="../../../assets/icons/orders.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Orders</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Orders</p>
+                  </div>
                 </div>
               </div>
 
@@ -124,7 +143,9 @@
                   <div class="col-2">
                     <img src="../../../assets/icons/profile.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Profile</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Profile</p>
+                  </div>
                 </div>
               </div>
 
@@ -133,7 +154,9 @@
                   <div class="col-2">
                     <img src="../../../assets/icons/logout.png" alt="" />
                   </div>
-                  <div class="col-10 p-0"><p class="body-3 gray">Logout</p></div>
+                  <div class="col-10 p-0">
+                    <p class="body-3 gray">Logout</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -389,9 +412,9 @@
                 </div>
             </nav> -->
 
-      <div *ngIf="mainMenuItemName == 'Dashboard'">
+      <!-- <div *ngIf="mainMenuItemName == 'Dashboard'">
         <app-product-categories></app-product-categories>
-      </div>
+      </div> -->
 
       <router-outlet></router-outlet>
     </mat-sidenav-content>

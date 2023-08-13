@@ -31,6 +31,7 @@
             [(ngModel)]="selectedValue"
             name="food"
             placeholder="Select Category"
+            class="matSelectPlaceholder"
           >
             <mat-option *ngFor="let food of foods" [value]="food.value">
               {{ food.viewValue }}
@@ -50,6 +51,7 @@
             [(ngModel)]="selectedValue"
             name="food"
             placeholder="Select A Sub Category"
+            class="matSelectPlaceholder"
           >
             <mat-option *ngFor="let food of foods" [value]="food.value">
               {{ food.viewValue }}
@@ -73,32 +75,18 @@
       <div class="col-2 gray-bg">
         <p class="content mt-4 text-center">Product Main Image</p>
       </div>
-      <div class="col-10">
-        <div class="avatar-upload my-3 mx-4">
-          <div class="avatar-edit">
-            <input
-              type="file"
-              id="imageUpload"
-              accept=".png, .jpg, .jpeg"
-              (change)="fileChangeEvent($event)"
-            />
-            <label for="imageUpload" class="d-flex"></label>
-          </div>
-          <div class="avatar-preview">
-            <div
-              id="imagePreview"
-              [@selectedImage]="imageState"
-              [style.background-image]="'url(' + image + ')'"
-            ></div>
-          </div>
-        </div>
+      <div class="col-10 w-75 my-3 mx-4">
+      <app-image-upload></app-image-upload>
+
+       
+
       </div>
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
       <div class="col-2 gray-bg">
         <p class="content mt-4 text-center">Description</p>
       </div>
-      <div class="col-10">
+      <div class="col-10 ">
         <mat-form-field
           floatLabel="always"
           appearance="outline"
@@ -125,6 +113,7 @@
             [(ngModel)]="selectedValue"
             name="food"
             placeholder="Select A Sub Category"
+            class="matSelectPlaceholder"
           >
             <mat-option *ngFor="let food of foods" [value]="food.value">
               {{ food.viewValue }}

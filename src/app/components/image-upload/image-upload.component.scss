@@ -1,0 +1,52 @@
+
+
+img {
+  height: 75px;
+  width: 75px;
+  border-radius: 15px;
+
+}
+.hoverable {
+  position: relative;
+//   display: block;
+  cursor: pointer;
+  height: 75px;
+  width: 75px;
+
+}
+.hoverable .hover-text {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 15px;
+}
+.hoverable .background {
+  position: absolute;
+  display: none;
+  top: 30%;
+  left: 30%;
+  bottom: 30%;
+  right: 30%;
+  background-image: url(../../../assets/icons/imageAdd.png);
+  background-repeat: no-repeat;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  z-index: 1;
+  scale: 1;
+  
+}
+.hoverable:hover .hover-text {
+  display: block;
+}
+.hoverable:hover .background {
+  display: block;
+}
+
+#fileInput {
+  display: none;
+}

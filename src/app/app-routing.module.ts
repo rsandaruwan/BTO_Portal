@@ -15,6 +15,7 @@ import { AddProductsComponent } from './pages/add-products/add-products.componen
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AttributesComponent } from './pages/attributes/attributes.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'order', component: OrdersComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'ingredients', component: IngredientsComponent },
+  { path: 'imageUpload', component: ImageUploadComponent },
 
 
 

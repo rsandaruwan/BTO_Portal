@@ -263,5 +263,29 @@ color: #fff;
   background-color: #3F3D3E;
   border-radius: 20px;
 }
+.mdc-notched-outline {
+  height: 85% !important;
+}
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 11px !important;
+  padding-bottom: 16px !important;
+}
+input,
+input::placeholder {
+    font:12px  Poppins;
+}
+.mdc-floating-label {
+  top: 22px !important;
+}
+.matSelectPlaceholder{
+  font-size: 12px ;
+  font-family: Poppins;
+}
+.text-area {
+  font-size: 12px ;
+  font-family: Poppins;
+
+  
+}
 
 

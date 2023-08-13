@@ -20,6 +20,7 @@ import { CategoryPopupComponent } from './components/popups/category-popup/categ
 import { SubCategoryPopupComponent } from './components/popups/sub-category-popup/sub-category-popup.component';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { AttributePopupComponent } from './components/popups/attribute-popup/attribute-popup.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 
 // pages
@@ -63,7 +64,8 @@ import { IngredientsComponent } from './pages/ingredients/ingredients.component'
     OrdersComponent,
     AttributesComponent,
     IngredientsComponent,
-    AttributePopupComponent
+    AttributePopupComponent,
+    ImageUploadComponent
 
 
 

@@ -1,4 +1,5 @@
-:host {
+
+  :host {
     display: block;
     position: relative;
     width: 74px;
@@ -9,6 +10,7 @@
     display: none; 
   }
 
+  .type0{
   .toggle-button-switch {
     position: absolute;
     top: 4px;
@@ -77,3 +79,78 @@
   input[type="checkbox"]:checked ~ .toggle-button-text {
     background-color: #283F0C;
   }
+}
+
+.type1{
+ 
+
+
+  .toggle-button-switch {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background-color: #838383;;
+    border: 1px solid #838383;;
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 100;
+    transition: left 0.3s;
+  }
+
+  .primary {
+    background-color: #78BE21;
+    border: 1px solid #78BE21;
+    left: 80% !important;
+  }
+
+
+  .toggle-button-text {
+    border: px solid #757575;
+    overflow: hidden;
+    border-radius: 25px;
+    min-height: 32px;
+    transition: background-color 0.3s;
+    background-color: #323232;
+  }
+
+  .primary-text {
+    border: px solid #ffffff;
+  }
+
+  .toggle-button-text-on,
+  .toggle-button-text-off {
+    display: inline-block;
+    width: auto;
+    height: 100%;
+    line-height: 32px;
+    font-family:Poppins;
+    font-weight: 400;
+    text-align: center;
+    font-size: 12px;
+
+    position: relative;
+    left: 36px;
+  }
+
+  .toggle-button-text-off {
+    color: #838383;
+  }
+  .toggle-button-text-on {
+    color: #78BE21;
+    // padding-left: 3px
+  }
+
+  input[type="checkbox"]:checked ~ .toggle-button-switch {
+    // -webkit-transform: translateX(40px);
+    // -ms-transform: translateX(40px);
+    // transform: translateX(40px);
+  
+  
+  }
+
+  input[type="checkbox"]:checked ~ .toggle-button-text {
+    background-color: #283F0C;
+  }
+}

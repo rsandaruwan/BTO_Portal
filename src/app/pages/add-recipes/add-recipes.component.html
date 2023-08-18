@@ -1,0 +1,119 @@
+<div class="col-12 mt-4 body-table secound_back">
+  <div class="row mx-2 py-3">
+    <div class="col-6">
+      <p class="headline_4 f_400">
+        Add Recipe<span class="content f_400"> 254</span>
+      </p>
+    </div>
+    <div class="col-6 d-flex flex-row-reverse">
+      <button [routerLink]="['/add_product']" class="primary_btn content">
+        SAVE DETAILS
+      </button>
+    </div>
+  </div>
+
+  <!-- Product table -->
+  <div class="col-md-12">
+    <div class="row m-0 p-0 first_row border-bottom border-top">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">| Basic Details</p>
+      </div>
+      <div class="col-10"></div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Recipe Name</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+          <input matInput placeholder="Search by Product Name" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Recipe Image</p>
+      </div>
+      <div class="col-10 w-75 my-3 mx-4">
+        <app-image-upload id="fileInput1"></app-image-upload>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Description</p>
+      </div>
+      <div class="col-10">
+        <mat-form-field
+          floatLabel="always"
+          appearance="outline"
+          class="text-area my-3 mx-4"
+        >
+          <textarea
+            placeholder="Description"
+            matInput
+            [(ngModel)]="textareaContent"
+            (input)="adjustTextareaHeight($event)"
+            #autoHeightTextarea
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Ingredients</p>
+      </div>
+      <div class="col-10">
+        <p class="primary content my-3 mx-4">
+          Type how you want to display your ingredients, you can select your
+          products when you type the name.
+        </p>
+        <div *ngFor="let Ingredients of getIngredientsFormControls(); let i = index">
+          <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
+            <input matInput placeholder="Enter a name" />
+          </mat-form-field>
+        </div>
+
+       
+        <button class="primary_btn m-auto content my-3 mx-4"  (click)="addIngredients()">
+          SAVE DETAILS
+        </button>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Preview Status</p>
+      </div>
+      <div class="col-10">
+        <app-toggle-button
+          [type]="0"
+          class="my-3 mx-4"
+          style="width: 85px"
+          [width]="85"
+          [on]="false"
+          [showLabels]="true"
+          leftText="Yes"
+          rightText="No  "
+          (changed)="checked = $event"
+          [id]="1"
+        ></app-toggle-button>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg"> 
+        <p class="content mt-4 detail_text">Steps</p>
+      </div>
+      <div class="col-10 ">
+        <div class="mt-3" *ngFor="let Step of getStepFormControls(); let i = index">
+            <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
+              <input matInput placeholder="Enter your step" />
+            </mat-form-field>
+          </div>
+  
+       
+          <button class="primary_btn m-auto content my-3 mx-4"  (click)="addStep()">
+            SAVE DETAILS
+          </button>
+      </div>
+    </div>
+  </div>
+</div>

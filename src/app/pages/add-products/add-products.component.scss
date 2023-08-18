@@ -72,3 +72,65 @@ tr:last-child th:last-child {
   color: white;
   border-radius: 20px;
 }
+
+.red-close-btn {
+  right: 10px;
+}
+.attribite_input {
+  width: 80%;
+}
+
+// table effct
+.btn_back {
+  background-color: #15171a;
+}
+
+.show-image td {
+  // border: solid 1px black;
+}
+
+.show-image th {
+  // border-top: solid 1px black;
+}
+
+.show-image th:first-child {
+  // border-left: solid 1px black;
+}
+
+.show-image th:last-child {
+  // border-right: 1px solid black;
+}
+
+.show-image td:last-child {
+  border: 0;
+}
+
+.show-image td:last-child button {
+  display: none;
+}
+
+.show-image tr:hover > td:last-child > button {
+  display: block;
+}
+
+table.show-image {
+  table-padding: 0;
+  table-spacing: 0;
+  border-collapse: collapse;
+}
+.row-del-btn {
+  bottom: 0;
+  top: 0;
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+  border-radius: 0px 15px 15px 0px;
+  background-color: #4A1313;
+  color: #fff;
+  border: 1px solid #4A1313;
+
+
+}
+.detail_text{
+  margin-left: 40%;
+}
+

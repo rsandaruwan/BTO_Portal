@@ -1,0 +1,78 @@
+.header {
+  width: 95%;
+  border-radius: 10px;
+}
+
+.body-header {
+  margin-right: 3rem;
+  margin-left: 3rem;
+  width: 95%;
+  border-radius: 15px;
+}
+
+.body-table {
+  width: 95%;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  border-radius: 10px;
+}
+.invoice-icon {
+  position: relative;
+  bottom: 2px;
+  margin-right: 10px;
+}
+
+.card-desk {
+  margin-right: 3rem;
+  margin-left: 3rem;
+  width: 95%;
+  border-radius: 15px;
+}
+.single-card {
+  border-radius: 15px;
+  background-color: #15171a;
+
+}
+.right-card {
+  border-radius: 15px;
+  background-color: #15171a;
+  width: 97%;
+}
+
+.cancel_order{
+  background-color: #F66; 
+  border: 1px solid #F66; 
+}
+
+.round-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px !important;
+}
+.border-col{
+  border: 1px dotted rgb(221, 221, 221) ;
+}
+
+@media (max-width: 1200px) {
+  .body-header {
+    width: 95%;
+    margin: auto;
+  }
+  .primary_btn {
+    border-radius: 10px;
+    background: #97be41;
+    color: #fff;
+    padding: 5px 20px 5px 20px;
+  }
+
+  .body-table {
+    width: 95%;
+    margin: auto;
+  }
+  .status_btn {
+    width: 100%;
+  }
+}

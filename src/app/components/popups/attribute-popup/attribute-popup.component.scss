@@ -1,20 +1,18 @@
-.popup{
-    width: 40vw;
-   max-height: 65vh;
+.popup {
+  width: 40vw;
+  max-height: 65vh;
 }
-.primary_btn{
-    border-radius: 20px !important;
-   
-
+.primary_btn {
+  border-radius: 20px !important;
 }
-.clear_btn{
-    background-color: #1E2021 !important;
-    border: 2px solid #1E2021;
+.clear_btn {
+  background-color: #1e2021 !important;
+  border: 2px solid #1e2021;
 }
 
 @media screen and (max-width: 1200px) {
-    .popup{
-        width: auto;
-       max-height: 65vh;
-    }
+  .popup {
+    width: auto;
+    max-height: 65vh;
   }
+}

@@ -1,11 +1,16 @@
+<label class="hoverable" [for]="uploadId">
+  <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
 
-  <label class="hoverable" for="fileInput">
-    <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+  <div class="hover-text"></div>
+  <div class="background"></div>
+</label>
+<br />
 
-    <div class="hover-text"></div>
-    <div class="background"></div>
-  </label>
-  <br />
-  <input id="fileInput" type="file" (change)="onSelectFile($event)" />
+  <input
+    [id]="uploadId"
+    type="file"
+    class="uploadId"
+    (change)="onSelectFile($event)"
+  />
   <button *ngIf="url" (click)="delete()">delete</button>
 

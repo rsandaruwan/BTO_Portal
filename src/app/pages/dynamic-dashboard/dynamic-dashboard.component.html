@@ -66,13 +66,12 @@
                   </div>
                   <div class="col-10 p-0">
                     <p class="body-3 gray">Product categories</p>
-                   
                   </div>
                 </div>
                 <ul>
-                  <li [routerLink]="['/categories']">Categories</li>
-                  <li [routerLink]="['/sub_categories']">Sub Categories</li>
-                 </ul>
+                  <li class="body-3 gray mt-2"  [routerLink]="['/categories']">Categories</li>
+                  <li class="body-3 gray mt-2"  [routerLink]="['/sub_categories']">Sub Categories</li>
+                </ul>
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
@@ -87,7 +86,7 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer"  [routerLink]="['/attributes']">
+                <div class="row pointer" [routerLink]="['/attributes']">
                   <div class="col-2">
                     <img src="../../../assets/icons/attribute.png" alt="" />
                   </div>
@@ -98,7 +97,7 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer"  [routerLink]="['/ingredients']">
+                <div class="row pointer" [routerLink]="['/ingredients']">
                   <div class="col-2">
                     <img src="../../../assets/icons/ingredience.png" alt="" />
                   </div>
@@ -109,9 +108,9 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer"  [routerLink]="['/imageUpload']" >
+                <div class="row pointer" [routerLink]="['/recipes']">
                   <div class="col-2">
-                    <img src="../../../assets/icons/recipes.png" alt=""  />
+                    <img src="../../../assets/icons/recipes.png" alt="" />
                   </div>
                   <div class="col-10 p-0">
                     <p class="body-3 gray">Recipes</p>
@@ -120,7 +119,7 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer"  [routerLink]="['/order']">
+                <div class="row pointer" [routerLink]="['/order']">
                   <div class="col-2">
                     <img src="../../../assets/icons/orders.png" alt="" />
                   </div>
@@ -137,6 +136,11 @@
                   </div>
                   <div class="col-10 p-0"><p class="body-3 gray">Users</p></div>
                 </div>
+                <ul>
+                  <li class="body-3 gray mt-2" [routerLink]="['/user_list']">User list</li>
+                  <li class="body-3 gray mt-2"  [routerLink]="['/user_roles']">User Roles</li>
+                  <li class="body-3 gray mt-2"  [routerLink]="['/permission']">Permissions</li>
+                </ul>
               </div>
               <div class="col-md-10 mx-3 mt-3">
                 <div class="row pointer">

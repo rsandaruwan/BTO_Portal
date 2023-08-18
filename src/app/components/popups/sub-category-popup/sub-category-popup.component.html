@@ -13,31 +13,98 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-3 my-auto">
+      <p class="primary content">Sub Category Name</p>
+    </div>
+    <div class="col-5">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label class="body-2 gray-text">Search by Product Name1</mat-label>
+        <input type="text" matInput placeholder="Spice" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <hr class=" " style="background-color: #9a9a9a; height: 2px" />
 
   <div *ngFor="let phone of getPhonesFormControls(); let i = index">
-    <div class="row ">
+    <div class="row">
       <div class="col-3 my-auto">
-        <p class="primary content">Category Name</p>
+        <p class="primary content">Select Category</p>
       </div>
       <div class="col-5">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label class="body-2 gray-text"
-            >Search by Product Name1</mat-label
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="selectedCategory"
+            name="food"
+            placeholder="Select A Sub Category"
+            class="matSelectPlaceholder"
           >
-          <input type="text" matInput placeholder="Search by Product Name" />
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
+      <div class="col-4 d-flex flex-row-reverse">
+        <button
+          class="botton_normal px-3 content h-75"
+          (click)="removecategory(i)"
+        >
+          Remove Section
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 my-auto">
+        <p class="primary content">Select Attribute</p>
+      </div>
+      <div class="col-5">
+        <mat-form-field appearance="outline" class="w-100">
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="selectedCategory"
+            [value]="selectedCategory"
+            name="food"
+            placeholder="Select A Sub Category"
+            class="matSelectPlaceholder"
+            multiple
+            (selectionChange)="onSelectionChange()"
+          >
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex">
+        <div
+          class="d-flex seletted_attribute"
+          *ngFor="let category of selectedCategory let i = index"
+        >
+          <p class="content mx-3  my-2 primary">{{ category }}</p>
+          <mat-icon
+            ><img src="../../../../assets/icons/close-red.png" alt="" (click)="closebtn(i)" 
+          /></mat-icon>
+        </div>
+      </div>
+
       <!-- <button (click)="removePhone(i)">Remove Phone</button> -->
     </div>
-    <br />
+
+    <hr class=" " style="background-color: #9a9a9a; height: 2px" />
   </div>
 
   <div class="d-flex">
-    <img (click)="addPhone()"
+    <img
+      (click)="addPhone()"
       src="../../../../../../assets/icons/addicon.png"
       alt=""
     />
-    <p class="content my-auto mx-2  primary">Add another Sub Category</p>
+    <p class="content my-auto mx-2 primary">Add another Category</p>
   </div>
 
   <!-- <button (click)="addPhone()">Add new phone</button> -->

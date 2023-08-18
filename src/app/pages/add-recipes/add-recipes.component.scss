@@ -1,0 +1,87 @@
+.header {
+    width: 95%;
+    border-radius: 10px;
+  }
+  
+  .body-header {
+    margin-right: 3rem;
+    margin-left: 3rem;
+    width: 95%;
+  }
+  
+  .body-table {
+    width: 95%;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 1200px) {
+    .body-header {
+      width: 95%;
+      margin: auto;
+    }
+    .primary_btn {
+      border-radius: 10px;
+      background: #97be41;
+      color: #fff;
+      padding: 5px 20px 5px 20px;
+    }
+  
+    .body-table {
+      width: 95%;
+      margin: auto;
+    }
+    .status_btn {
+      width: 100%;
+    }
+    .first_row {
+      height: 100px;
+    }
+  }
+  
+  .text-area {
+    width: 90%;
+  }
+  
+  tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+  tr:last-child th:first-child {
+    border-bottom-left-radius: 10px;
+  }
+  
+  tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+  }
+  
+  tr:last-child th:last-child {
+    border-bottom-right-radius: 10px;
+  }
+  .borderRL {
+    border-right: 2px solid #676767;
+    border-left: 2px solid #676767;
+  }
+  .border_bottom {
+    border-bottom: 2px solid #676767;
+  }
+  
+  .add_row_btn {
+    background-color: #404040;
+    color: white;
+    border-radius: 20px;
+  }
+  
+  .red-close-btn {
+    right: 10px;
+  }
+  .attribite_input {
+    width: 80%;
+  }
+  .detail_text{
+    margin-left: 40%;
+  }
+  .primary_btn {
+    border-radius: 20px !important;
+  }

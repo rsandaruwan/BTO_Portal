@@ -21,6 +21,9 @@ import { SubCategoryPopupComponent } from './components/popups/sub-category-popu
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { AttributePopupComponent } from './components/popups/attribute-popup/attribute-popup.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { IngredientPopupComponent } from './components/popups/ingredient-popup/ingredient-popup.component';
+import { DynamicConfirmationPopupComponent } from './components/popups/dynamic-confirmation-popup/dynamic-confirmation-popup.component';
+import { DynamicDonePopupComponent } from './components/popups/dynamic-done-popup/dynamic-done-popup.component';
 
 
 // pages
@@ -36,8 +39,12 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { AddProductsComponent } from './pages/add-products/add-products.component';
 import { AttributesComponent } from './pages/attributes/attributes.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
-
-
+import { UserRolesComponent } from './user-roles/user-roles.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { PermissionComponent } from './permission/permission.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
+import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
+import { SingleOrderComponent } from './pages/single-order/single-order.component';
 
 
 
@@ -65,7 +72,16 @@ import { IngredientsComponent } from './pages/ingredients/ingredients.component'
     AttributesComponent,
     IngredientsComponent,
     AttributePopupComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    UserRolesComponent,
+    UserListComponent,
+    PermissionComponent,
+    IngredientPopupComponent,
+    RecipesComponent,
+    AddRecipesComponent,
+    DynamicConfirmationPopupComponent,
+    DynamicDonePopupComponent,
+    SingleOrderComponent
 
 
 

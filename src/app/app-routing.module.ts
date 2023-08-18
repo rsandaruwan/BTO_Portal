@@ -16,6 +16,12 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { AttributesComponent } from './pages/attributes/attributes.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserRolesComponent } from './user-roles/user-roles.component';
+import { PermissionComponent } from './permission/permission.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
+import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
+import { SingleOrderComponent } from './pages/single-order/single-order.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -31,7 +37,13 @@ const routes: Routes = [
   { path: 'order', component: OrdersComponent },
   { path: 'attributes', component: AttributesComponent },
   { path: 'ingredients', component: IngredientsComponent },
-  { path: 'imageUpload', component: ImageUploadComponent },
+  { path: 'user_list', component: UserListComponent },
+  { path: 'user_roles', component: UserRolesComponent },
+  { path: 'permission', component: PermissionComponent },
+  { path: 'recipes', component: RecipesComponent },
+  { path: 'add_recipes', component: AddRecipesComponent },
+  { path: 'single_order/:order_id', component: SingleOrderComponent },
+
 
 
 

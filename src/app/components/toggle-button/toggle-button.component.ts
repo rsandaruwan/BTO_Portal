@@ -19,13 +19,20 @@ export class ToggleButtonComponent {
   @Input() leftText = 'Yes';
   @Input() width = 140;
   @Input() rightText = 'No';
+  @Input() type :number | undefined;
   @Output() changed = new EventEmitter<boolean>();
   @ViewChild('lable') lable: ElementRef | undefined;
   private on1: boolean | undefined;
 
 
+
   constructor() {
 
+
+  }
+
+  ngOnInit(){
+    console.log(this.type);
   }
 
   Valchange(data: any) {
@@ -43,5 +50,6 @@ export class ToggleButtonComponent {
     
     this.on = data.checked;
     this.changed.next(data.checked);
+    
   }
 }

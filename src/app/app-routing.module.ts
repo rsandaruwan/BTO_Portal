@@ -22,6 +22,7 @@ import { PermissionComponent } from './permission/permission.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
 import { SingleOrderComponent } from './pages/single-order/single-order.component';
+import { CustomerComponent } from './pages/customer/customer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'recipes', component: RecipesComponent },
   { path: 'add_recipes', component: AddRecipesComponent },
   { path: 'single_order/:order_id', component: SingleOrderComponent },
+  { path: 'customer', component: CustomerComponent },
 
 
 

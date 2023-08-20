@@ -45,6 +45,7 @@ import { PermissionComponent } from './permission/permission.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
 import { SingleOrderComponent } from './pages/single-order/single-order.component';
+import { CustomerComponent } from './pages/customer/customer.component';
 
 
 
@@ -81,7 +82,8 @@ import { SingleOrderComponent } from './pages/single-order/single-order.componen
     AddRecipesComponent,
     DynamicConfirmationPopupComponent,
     DynamicDonePopupComponent,
-    SingleOrderComponent
+    SingleOrderComponent,
+    CustomerComponent
 
 
 

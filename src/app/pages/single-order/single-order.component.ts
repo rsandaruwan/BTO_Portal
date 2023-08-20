@@ -58,6 +58,48 @@ export class SingleOrderComponent {
         '25',
         amount: '660.63',
     },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
+    {
+      product_name: 'PID.01535',
+      item_price: '$220.21',
+      quantity:
+        '25',
+        amount: '660.63',
+    },
 
     
   ];

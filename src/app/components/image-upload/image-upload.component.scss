@@ -1,18 +1,14 @@
-
-
 img {
   height: 75px;
   width: 75px;
   border-radius: 15px;
-
 }
 .hoverable {
   position: relative;
-//   display: block;
+  //   display: block;
   cursor: pointer;
   height: 75px;
   width: 75px;
-
 }
 .hoverable .hover-text {
   position: absolute;
@@ -38,7 +34,6 @@ img {
   border-radius: 15px;
   z-index: 1;
   scale: 1;
-  
 }
 .hoverable:hover .hover-text {
   display: block;
@@ -48,5 +43,18 @@ img {
 }
 
 .uploadId {
-  display: none;
+   display: none;
+}
+
+.closebtn {
+  position: relative;
+  bottom: 75px;
+  left: 50px;
+  color: red;
+}
+.closebtn1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
 }

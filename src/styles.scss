@@ -288,3 +288,44 @@ input::placeholder {
   border: 1px solid #8f8f8f;
   border-radius: 15px;
 }
+
+span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline{
+  border-color: #97BE41 !important;
+}
+
+
+.mat-mdc-form-field-icon-prefix.ng-tns-c20-2.ng-star-inserted{
+  padding-bottom: 8px;
+}
+span.mdc-list-item__primary-text{
+  color: #a1a1a1;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: var(--mdc-theme-primary, #97BE41);
+}
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: #97BE41;}
+
+  // .mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color.ng-star-inserted{
+  //   color: red;
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ::ng-deep [dir=rtl] .textFieldInvalid.mat-mdc-form-field:hover .mat-mdc-text-field-wrapper .mdc-notched-outline__leading,
+  ::ng-deep .textFieldInvalid.mat-mdc-form-field:hover .mat-mdc-text-field-wrapper .mdc-notched-outline__leading {
+    border-color: red;
+    background-color: red; /* Change the background color on hover */
+  }

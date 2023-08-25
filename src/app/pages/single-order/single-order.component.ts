@@ -27,7 +27,7 @@ export class SingleOrderComponent {
 
   ngOnInit() {
     this.Order_id = this.route.snapshot.paramMap.get('order_id');
-    console.log(this.Order_id);
+
     
   }
 

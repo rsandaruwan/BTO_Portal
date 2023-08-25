@@ -1,16 +1,59 @@
-<label class="hoverable" [for]="uploadId">
-  <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+<ng-container *ngIf="multiple">
+  <!-- multiple -->
+  <label class="hoverable" for="uploadId_{{ id }}">
+    <div class="d-flex gap-2 ">
+      
+        <img *ngIf="urls.length < 1" src="../../../assets/icons/imageBack.png" />
+        <ng-container *ngFor="let url of urls" >
+          <div class="position-relative ">
+          <img
+            [src]="url ? url : '../../../assets/icons/imageBack.png'"
+          
+          />
+          <mat-icon class="closebtn1" *ngIf="urls" (click)="delete1(id)">cancel</mat-icon>
+         </div>
+        </ng-container>
+      
+     
+    </div>
+   
 
-  <div class="hover-text"></div>
-  <div class="background"></div>
-</label>
-<br />
+    <div class="hover-text"></div>
+    <div class="background"></div>
+
+    <input
+      id="uploadId_{{ id }}"
+      multiple="multiple"
+      type="file"
+      class="uploadId"
+      (change)="onSelectFiles($event)"
+    />
+  </label>
+ 
+  <br />
+
+  <!-- <mat-icon class="closebtn" *ngIf="urls" (click)="delete1(id)"
+    >cancel</mat-icon
+  > -->
+</ng-container>
+
+<ng-container *ngIf="!multiple">
+  <!-- single -->
+
+  <label class="hoverable" for="uploadId_{{ id }}">
+    <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+
+    <div class="hover-text"></div>
+    <div class="background"></div>
+  </label>
+  <br />
 
   <input
-    [id]="uploadId"
+    id="uploadId_{{ id }}"
     type="file"
     class="uploadId"
     (change)="onSelectFile($event)"
   />
-  <button *ngIf="url" (click)="delete()">delete</button>
 
+  <mat-icon class="closebtn" *ngIf="url" (click)="delete()">cancel</mat-icon>
+</ng-container>

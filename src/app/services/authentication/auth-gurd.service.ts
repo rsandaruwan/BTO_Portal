@@ -59,7 +59,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanDeact
           return false;
         }
       }).catch((error: any) => {
-        console.log(error);
+   
       })
       return true;
     }

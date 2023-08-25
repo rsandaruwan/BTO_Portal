@@ -65,15 +65,15 @@ export class DynamicDashboardComponent {
   }
 
   ngAfterContentInit() {
-    this.getPortCityTotalCapacity();
+    // this.getPortCityTotalCapacity();
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // true for mobile device
-      // alert("mobile device");
+      
       this.sidename_mod = 'over';
       // this.sidebarmenu.mode = 'over';
     } else {
       // false for not mobile device
-      // alert("not mobile device");
+    
 
       this.sidename_mod = 'side';
       // this.sidebarmenu.mode = 'side';
@@ -114,13 +114,13 @@ if(this.sidenavContainer && this.sidebarmenu)
 
   }
 
-  getPortCityTotalCapacity() {
-    this.applicationService.get("", "facility-manager/get-total-capacity", "").then((response: any) => {
-      this.portCityTotalCapacity = response.result[0].port_city_capacity;
-    }).catch((error: any) => {
-      console.log(error);
-    })
-  }
+  // getPortCityTotalCapacity() {
+  //   this.applicationService.get("", "facility-manager/get-total-capacity", "").then((response: any) => {
+  //     this.portCityTotalCapacity = response.result[0].port_city_capacity;
+  //   }).catch((error: any) => {
+   
+  //   })
+  // }
 
   isLargeScreen() {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -154,7 +154,7 @@ if(this.sidenavContainer && this.sidebarmenu)
       this.currentPopulation = response.result;
       this.commonStorage.saveCurrentPopulation(response.result);
     }).catch((error: any) => {
-      console.log(error);
+    
     })
   }
 

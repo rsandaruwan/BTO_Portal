@@ -5,6 +5,7 @@ import {
   FormControl,
   FormArray,
   AbstractControl,
+  Validators,
 } from '@angular/forms';
 
 interface Food {
@@ -18,7 +19,7 @@ interface Food {
   styleUrls: ['./sub-category-popup.component.scss'],
 })
 export class SubCategoryPopupComponent {
-  selectedCategory: Array<any> | undefined;
+  selectedCategory: Array<any> =[{category:'',attributes:[]}];
   userForm: FormGroup;
   selectedValuesArray: string[] = [];
 
@@ -27,6 +28,9 @@ export class SubCategoryPopupComponent {
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
+  ngOnInit(): void {
+   
+  }
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
@@ -35,7 +39,13 @@ export class SubCategoryPopupComponent {
     });
   }
 
+  sub_category_nameformcontrol = new FormControl('', [
+    Validators.required
+   
+  ]);
+
   addPhone(): void {
+    this.selectedCategory.push([{category:'',attributes:[]}]);
     (this.userForm.get('phones') as FormArray).push(this.fb.control(null));
   }
 
@@ -48,12 +58,15 @@ export class SubCategoryPopupComponent {
   }
 
   onSelectionChange(): void {
-    console.log(this.selectedCategory);
+  
   }
 
   closebtn(id: any) {
     if (this.selectedCategory) {
       this.selectedCategory.splice(id, 1);
     }
+  }
+  save(){
+
   }
 }

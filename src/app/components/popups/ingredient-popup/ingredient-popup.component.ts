@@ -31,7 +31,7 @@ export class IngredientPopupComponent {
       this.fb.control(null)
     );
     this.attribute_array.push("")
-    console.log(this.getPhonesFormControls())
+   
   }
 
   removePhone(index: any) {

@@ -24,6 +24,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { IngredientPopupComponent } from './components/popups/ingredient-popup/ingredient-popup.component';
 import { DynamicConfirmationPopupComponent } from './components/popups/dynamic-confirmation-popup/dynamic-confirmation-popup.component';
 import { DynamicDonePopupComponent } from './components/popups/dynamic-done-popup/dynamic-done-popup.component';
+import { AddUserComponent } from './components/popups/add-user/add-user.component';
 
 
 // pages
@@ -46,6 +47,7 @@ import { RecipesComponent } from './pages/recipes/recipes.component';
 import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
 import { SingleOrderComponent } from './pages/single-order/single-order.component';
 import { CustomerComponent } from './pages/customer/customer.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 
@@ -83,7 +85,9 @@ import { CustomerComponent } from './pages/customer/customer.component';
     DynamicConfirmationPopupComponent,
     DynamicDonePopupComponent,
     SingleOrderComponent,
-    CustomerComponent
+    CustomerComponent,
+    AddUserComponent,
+    ProfileComponent
 
 
 

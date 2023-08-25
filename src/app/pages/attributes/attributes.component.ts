@@ -21,7 +21,7 @@ export class AttributesComponent  implements AfterViewInit{
 
   selectedValue: string | undefined;
 
-  displayedColumns: string[] = ['att_id', 'att_name','action'];
+  displayedColumns: string[] = ['attribute_id', 'attribute_name','action'];
   dataSource: MatTableDataSource<AttributeIntarface>;
 
   constructor(public dialog: MatDialog) {
@@ -34,31 +34,6 @@ export class AttributesComponent  implements AfterViewInit{
   }
 
   ELEMENT_DATA: AttributeIntarface[] = [
-    {
-      att_id: 'PID.01535',
-      att_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      att_id: 'PID.01535',
-      att_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      att_id: 'PID.01535',
-      att_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      att_id: 'PID.01535',
-      att_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      att_id: 'PID.01535',
-      att_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
    
   ];
 

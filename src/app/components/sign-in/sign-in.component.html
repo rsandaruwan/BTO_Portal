@@ -19,6 +19,7 @@
                 type="email"
                 class="form-control form_css my-3 content black"
                 placeholder="Email"
+                [formControl]="emailFormControl"
               />
             </div>
             <div class="col">
@@ -26,12 +27,13 @@
                 type="password"
                 class="form-control form_css my-3 content black"
                 placeholder="Password"
+                [formControl]="passwordFormControl"
               />
             </div>
 
             <div class="row">
               <div class="col-6">
-                <mat-checkbox class="content"> Remember Me</mat-checkbox>
+                <mat-checkbox class="content"  [(ngModel)]="remember_me_checked"> Remember Me</mat-checkbox>
               </div>
               <div class="col-6 my-auto">
                 <p

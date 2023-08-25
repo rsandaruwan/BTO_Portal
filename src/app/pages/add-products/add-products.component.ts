@@ -11,6 +11,11 @@ interface Food {
   value: string;
   viewValue: string;
 }
+interface ROWDATA {
+  column1: string;
+  column2: Array<string>;
+  column3: Array<string>;
+}
 
 @Component({
   selector: 'app-add-products',
@@ -30,6 +35,11 @@ export class AddProductsComponent {
   checked1: boolean | undefined;
   selectedValuesArray: string[] = [];
 
+  inputcol_1: any[] = [[]];
+  inputcol_2: any[] = [[]];
+
+  table_row: Array<any> = [{ column1: '', column2: [''], column3: [''] }];
+
   name = 'Angular 4';
   url: string | ArrayBuffer | null = null;
 
@@ -45,7 +55,7 @@ export class AddProductsComponent {
     textarea.style.height = textarea.scrollHeight + 'px';
   }
   test(data: any) {
-    alert(data);
+   
   }
 
   userForm: FormGroup;
@@ -59,19 +69,24 @@ export class AddProductsComponent {
   }
 
   addrow(): void {
+    this.table_row.push({ column1: '', column2: [''], column3: [''] });
     (this.userForm.get('rows') as FormArray).push(this.fb.control(null));
   }
   getrowFormControls(): AbstractControl[] {
-    return (<FormArray>this.userForm.get('rows')).controls;
+    return this.table_row;
   }
-  addcell2_2(): void {
+  addcell2_2(i: number): void {
+    this.table_row[i].column2.push('');
     (this.userForm.get('col2_2s') as FormArray).push(this.fb.control(null));
+    this.inputcol_1.push('');
   }
   getcell2_2FormControls(): AbstractControl[] {
     return (<FormArray>this.userForm.get('col2_2s')).controls;
   }
-  addcell2_3(): void {
+  addcell2_3(i: number): void {
+    this.table_row[i].column3.push('');
     (this.userForm.get('col2_3s') as FormArray).push(this.fb.control(null));
+    this.inputcol_2.push('');
   }
   getcell2_3FormControls(): AbstractControl[] {
     return (<FormArray>this.userForm.get('col2_3s')).controls;
@@ -84,27 +99,32 @@ export class AddProductsComponent {
     ) {
       this.selectedValuesArray.push(this.selectedValue);
 
-      console.log(this.selectedValuesArray);
+
     }
   }
 
-
-  removeinput2_2(index: number) {
-    (this.userForm.get('col2_2s') as FormArray).removeAt(index);
+  removeinput2_2(index: number, id: any) {
+  
+    if (this.table_row[index].column2.length>1) {
+      this.table_row[index].column2.splice(id, 1);
+    }
   }
-  removeinput2_3(index: number) {
-    (this.userForm.get('col2_3s') as FormArray).removeAt(index);
+  removeinput2_3(index: number, id: any) {
+    if (this.table_row[index].column3.length>1) {
+      this.table_row[index].column3.splice(id, 1);
+    }
   }
   deleteRow(index: number) {
-    (this.userForm.get('rows') as FormArray).removeAt(index);
+    if(this.table_row.length > 1) {
+    this.table_row.splice(index, 1);
+    }
   }
-
 
   closebtn(id: any) {
     let array_selected_value = this.selectedValuesArray[id];
     let array_selected_id = id;
 
-    // this.selectedValuesArray = this.selectedValuesArray.splice(array_selected_id, 1);
+   
     if (
       array_selected_id >= 0 &&
       array_selected_id < this.selectedValuesArray.length

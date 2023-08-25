@@ -1,44 +1,91 @@
 .header {
-    width: 95%;
-    border-radius: 10px;
-  }
-  
+  width: 95%;
+  border-radius: 10px;
+}
+
+.body-header {
+  margin-right: 3rem;
+  margin-left: 3rem;
+  width: 95%;
+}
+
+.body-table {
+  width: 95%;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  border-radius: 10px;
+}
+.round-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 60%;
+  height: 30px;
+  width: 30px !important;
+}
+.round-image1 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 60%;
+  height: 100px;
+  width: 100px !important;
+}
+.right-col {
+  background-color: #15171a;
+  border-radius: 15px;
+  width: 35%;
+  max-height: 78vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.left_col {
+  width: 60%;
+}
+
+@media (max-width: 1200px) {
   .body-header {
-    margin-right: 3rem;
-    margin-left: 3rem;
     width: 95%;
+    margin: auto;
   }
-  
-  
+  .primary_btn {
+    border-radius: 10px;
+    background: #97be41;
+    color: #fff;
+    padding: 5px 20px 5px 20px;
+  }
+
   .body-table {
     width: 95%;
-    margin-right: 3rem;
-    margin-left: 3rem;
-    border-radius: 10px;
+    margin: auto;
   }
-  
-  @media (max-width: 1200px) {
-    .body-header {
-      width: 95%;
-      margin: auto;
-    }
-    .primary_btn {
-      border-radius: 10px;
-      background: #97be41;
-      color: #fff;
-      padding: 5px 20px 5px 20px;
-    }
-  
-    .body-table {
-      width: 95%;
-      margin: auto;
-    }
-    .status_btn {
-      width: 100%;
-    }
-    .primary_btn{
-      margin-top: 20px;
-      height: 50px;
-      
-    }
+  .status_btn {
+    width: 100%;
   }
+  .primary_btn {
+    margin-top: 20px;
+    height: 50px;
+  }
+}
+
+
+.mat-table {
+  overflow-x: scroll;
+}
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.mat-row,
+.mat-header-row {
+  display: table-row;
+}

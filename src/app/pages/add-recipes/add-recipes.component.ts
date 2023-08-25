@@ -43,7 +43,7 @@ export class AddRecipesComponent {
       this.fb.control(null)
     );
     this.attribute_array_Ind.push("")
-    console.log(this.getIngredientsFormControls())
+   
   }
   getIngredientsFormControls(): AbstractControl[] {
     return (<FormArray> this.userForm1.get('Ingredients')).controls
@@ -55,7 +55,7 @@ export class AddRecipesComponent {
       this.fb.control(null)
     );
     this.attribute_array_step.push("")
-    console.log(this.getStepFormControls())
+
   }
   getStepFormControls(): AbstractControl[] {
     return (<FormArray> this.userForm2.get('Step')).controls

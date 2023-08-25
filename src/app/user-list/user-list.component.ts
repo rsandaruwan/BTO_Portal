@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AttributePopupComponent } from 'src/app/components/popups/attribute-popup/attribute-popup.component';
 import { UserListIntarface } from '../modals/user_list.model';
+import { AddUserComponent } from '../components/popups/add-user/add-user.component';
 
 @Component({
   selector: 'app-user-list',
@@ -74,6 +75,11 @@ export class UserListComponent implements AfterViewInit{
   openAttribute(){
     let dialogRef = this.dialog.open(AttributePopupComponent, {
       autoFocus: false,
+    });
+  }
+  addUser(){
+    this.dialog.open(AddUserComponent, {
+
     });
   }
 }

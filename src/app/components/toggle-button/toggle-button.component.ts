@@ -32,7 +32,7 @@ export class ToggleButtonComponent {
   }
 
   ngOnInit(){
-    console.log(this.type);
+   
   }
 
   Valchange(data: any) {

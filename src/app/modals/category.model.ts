@@ -1,8 +1,9 @@
-import { SubCategoryIntarface } from "./sub_category.model";
+import { SubCategoryIntarface } from './sub_category.model';
 
 export interface CategoryInterface {
-  c_id: string;
-  c_name: string;
-  sub_category:  Array<SubCategoryIntarface>,
-  action: string;
+  category_id: string;
+  category_name: string;
+  created_user: string;
+  created_user_name: string;
+  action: any;
 }

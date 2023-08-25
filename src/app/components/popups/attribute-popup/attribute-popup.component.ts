@@ -29,7 +29,7 @@ export class AttributePopupComponent {
       this.fb.control(null)
     );
     this.attribute_array.push("")
-    console.log(this.getPhonesFormControls())
+   
   }
 
   removePhone(index: any) {

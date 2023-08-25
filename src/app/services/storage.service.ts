@@ -11,8 +11,7 @@ const REMEMBER_KEY = 'rememberMe';
 })
 export class StorageService {
   signOut(): void {
-    // window.sessionStorage.clear();
-    // window.localStorage.clear();
+  
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.removeItem(ROUTES_KEY);

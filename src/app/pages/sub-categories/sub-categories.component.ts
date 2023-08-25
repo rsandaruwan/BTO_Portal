@@ -1,10 +1,13 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CategoryPopupComponent } from 'src/app/components/popups/category-popup/category-popup.component';
 import { SubCategoryPopupComponent } from 'src/app/components/popups/sub-category-popup/sub-category-popup.component';
 import { SubCategoryIntarface } from 'src/app/modals/sub_category.model';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-sub-categories',
@@ -18,13 +21,24 @@ export class SubCategoriesComponent implements AfterViewInit{
   @ViewChild(MatSort)
   sort!: MatSort;
 
+  search_sub_cat: any = '';
+  selectedPageSize: number = 10;
+  sub_category_data: any;
+  
+
+
+
   selectedValue: string | undefined;
 
-  displayedColumns: string[] = ['sub_id', 'sub_name','action'];
+  displayedColumns: string[] = ['sub_category_id', 'sub_category_name','sub_category_has_category_details','attribute','action'];
   dataSource: MatTableDataSource<SubCategoryIntarface>;
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  constructor(
+    public dialog: MatDialog,
+    private tokestorage: StorageService,
+    private apiService: ApiService
+  ) {
+    this.dataSource = new MatTableDataSource();
   }
 
   ngAfterViewInit(): void {
@@ -32,28 +46,66 @@ export class SubCategoriesComponent implements AfterViewInit{
     this.dataSource.sort = this.sort;
   }
 
+  ngOnInit(): void {
+    this.getSubCategoryData();
+
+  
+  }
+
   ELEMENT_DATA: SubCategoryIntarface[] = [
-    {
-      sub_id: 'PID.01535',
-      sub_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      sub_id: 'PID.01535',
-      sub_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
-    {
-      sub_id: 'PID.01535',
-      sub_name: 'Pure Ceylon Cinnamon Powder',
-      action: 'yuiy',
-    },
- 
+  
   ];
 
   openCategory(){
     let dialogRef = this.dialog.open(SubCategoryPopupComponent, {
       autoFocus: false,
+    });
+  }
+
+  getSubCategoryData() {
+    var limit = '';
+    var name = '';
+
+    if (this.search_sub_cat != undefined) {
+      name = '?sub_category_name=' + this.search_sub_cat;
+    }
+    if (this.selectedPageSize != undefined) {
+      limit = '&limit=' + this.selectedPageSize;
+    }
+
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'sub-category' + name + limit)
+      .then((response: any) => {
+
+        console.log(" sub cat", response);
+        
+        this.sub_category_data = response.result.data;
+        console.log(this.sub_category_data);
+        this.dataSource = this.dataSource = new MatTableDataSource(
+          this.sub_category_data
+        );
+      });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.selectedPageSize = event.pageSize;
+
+    console.log(this.selectedPageSize);
+    this.getSubCategoryData();
+  }
+
+  search(event: any) {
+    console.log(event.target.value);
+    this.search_sub_cat = event.target.value;
+
+    this.getSubCategoryData();
+  }
+
+  editclick(id: any, name: string) {
+    let dialogRef = this.dialog.open(CategoryPopupComponent, {
+      autoFocus: false,
+
+      data: {id :id, categoryName: name }
     });
   }
 }

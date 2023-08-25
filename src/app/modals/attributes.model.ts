@@ -1,6 +1,7 @@
 export interface AttributeIntarface {
-    att_id: string;
-    att_name: string;
-    action: string;
+  attribute_id: string;
+  attribute_name: string;
+  created_by_user_name: string;
+  created_at: string;
   }
   

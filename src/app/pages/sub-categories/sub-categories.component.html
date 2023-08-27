@@ -99,7 +99,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
+              <button mat-menu-item (click)="editclick(row.sub_category_id)">
                 <mat-icon class="mat_icon">edit_square</mat-icon>
                 <span>Edit</span>
               </button>

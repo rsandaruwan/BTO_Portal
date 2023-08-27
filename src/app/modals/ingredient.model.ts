@@ -1,7 +1,7 @@
 export interface IngredientIntarface {
-    ing_id: string;
-    ing_name: string;
-    description: string;
-    action: string;
-  }
-  
+  ingredient_id: string;
+  ingredient_name: string;
+  ingredient_description: string;
+  ingredient_image: string;
+  action: string;
+}

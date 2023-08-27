@@ -27,7 +27,7 @@
 
   <hr class=" " style="background-color: #9a9a9a; height: 2px" />
 
-  <div *ngFor="let phone of getPhonesFormControls(); let i = index">
+  <div *ngFor="let attribute of getAttributesFormControls(); let i = index">
     <div class="row">
       <div class="col-3 my-auto">
         <p class="primary content">Select Category</p>
@@ -37,12 +37,12 @@
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
             [(ngModel)]="selectedCategory[i].category"
-            name="food"
+            name="categorie"
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <mat-option *ngFor="let categorie of categories" [value]="categorie.category_id">
+              {{ categorie.category_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -67,25 +67,27 @@
           <mat-select
             [(ngModel)]="selectedCategory[i].attributes"
             [value]="selectedCategory[i]"
-            name="food"
+            name="attribute"
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
             multiple
             (selectionChange)="onSelectionChange()"
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <mat-option *ngFor="let attribute of attributes" [value]="attribute.attribute_id">
+              {{ attribute.attribute_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-      <div class="d-flex">
+      <div class=" col-12 d-flex " style="max-width: 40vw;">
         <div
-          class="d-flex seletted_attribute"
+          class="  d-flex seletted_attribute"
+          
           *ngFor="let attribute of selectedCategory[i].attributes; let i = index"
+          
         >
-          <p class="content mx-3 my-2 primary">{{attribute }}</p>
+          <p class="content mx-3 my-2 primary">{{attribute}}</p>
           <mat-icon
             ><img
               src="../../../../assets/icons/close-red.png"
@@ -95,7 +97,6 @@
         </div>
       </div>
 
-      <!-- <button (click)="removePhone(i)">Remove Phone</button> -->
     </div>
 
     <hr class=" " style="background-color: #9a9a9a; height: 2px" />
@@ -103,14 +104,14 @@
 
   <div class="d-flex">
     <img
-      (click)="addPhone()"
+      (click)="addAttribute()"
       src="../../../../../../assets/icons/addicon.png"
       alt=""
     />
     <p class="content my-auto mx-2 primary">Add another Category</p>
   </div>
 
-  <!-- <button (click)="addPhone()">Add new phone</button> -->
+  
 
   <div class="row">
     <div class="col-12">

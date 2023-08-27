@@ -1,4 +1,4 @@
-import { SubCategoryIntarface } from './sub_category.model';
+
 
 export interface CategoryInterface {
   category_id: string;

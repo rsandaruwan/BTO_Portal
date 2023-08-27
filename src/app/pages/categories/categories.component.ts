@@ -37,7 +37,6 @@ export class CategoriesComponent implements AfterViewInit {
   ngOnInit(): void {
     this.getCategoryData();
 
-    console.log(this.search_cat);
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +65,6 @@ export class CategoriesComponent implements AfterViewInit {
       .get(String(this.tokestorage.getToken()), 'category' + name + limit)
       .then((response: any) => {
         this.category_data = response.result.data;
-        console.log(this.category_data);
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.category_data
         );
@@ -76,12 +74,10 @@ export class CategoriesComponent implements AfterViewInit {
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
 
-    console.log(this.selectedPageSize);
     this.getCategoryData();
   }
 
   search(event: any) {
-    console.log(event.target.value);
     this.search_cat = event.target.value;
 
     this.getCategoryData();

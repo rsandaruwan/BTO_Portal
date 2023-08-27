@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AttributePopupComponent } from 'src/app/components/popups/attribute-popup/attribute-popup.component';
 import { AttributeIntarface } from 'src/app/modals/attributes.model';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
 ;
 
 @Component({
@@ -20,12 +22,23 @@ export class AttributesComponent  implements AfterViewInit{
   sort!: MatSort;
 
   selectedValue: string | undefined;
+  attribute_data:any
+  search_att: any = '';
+
 
   displayedColumns: string[] = ['attribute_id', 'attribute_name','action'];
   dataSource: MatTableDataSource<AttributeIntarface>;
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  constructor(
+    public dialog: MatDialog,
+    private tokestorage: StorageService,
+    private apiService: ApiService
+  ) {
+    this.dataSource = new MatTableDataSource();
+  }
+  ngOnInit(): void {
+    this.getAttributeData();
+
   }
 
   ngAfterViewInit(): void {
@@ -41,6 +54,33 @@ export class AttributesComponent  implements AfterViewInit{
     let dialogRef = this.dialog.open(AttributePopupComponent, {
       autoFocus: false,
     });
+  }
+
+  getAttributeData() {
+    var name = '';
+
+    if (this.search_att != undefined) {
+      name = '?attribute_id=' + this.search_att;
+    }
+
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'attributes/view'+name)
+      .then((response: any) => {
+        this.attribute_data = response.result;
+        this.dataSource = this.dataSource = new MatTableDataSource(
+          this.attribute_data
+        );
+
+        console.log('====================================');
+        console.log( this.attribute_data);
+        console.log('====================================');
+      });
+  }
+
+  search(event: any) {
+    this.search_att = event.target.value;
+
+    this.getAttributeData();
   }
 }
 

@@ -45,7 +45,7 @@ export class ImageUploadComponent implements OnInit {
         const reader = new FileReader();
 
         reader.readAsDataURL(element);
-        console.log(this.urls);
+
 
         reader.onload = (event) => {
           this.urls.push(event.target?.result as string); // Use optional chaining

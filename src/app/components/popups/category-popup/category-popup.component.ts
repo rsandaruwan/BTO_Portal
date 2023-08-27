@@ -59,12 +59,10 @@ export class CategoryPopupComponent {
         .post(data, String(this.tokestorage.getToken()), 'category/create')
         .then((response: any) => {
           this.category_data = response.result[0];
-          console.log(response.result[0].category_name);
           this.closebutton.nativeElement.click();
           this.done();
         })
         .catch((error: any) => {
-          console.log(error.error);
 
           // this.toste.error(error.error.detail.message);
         });

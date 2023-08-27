@@ -16,7 +16,7 @@
             alt=""
             class="mx-4"
           />
-          <input type="text" matInput placeholder="Search by Product Name" />
+          <input type="text" matInput placeholder="Search by Product Name"  (keyup)="search($event)" />
         </mat-form-field>
       </div>
     </div>
@@ -37,36 +37,41 @@
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
-        <ng-container matColumnDef="ing_id">
+        <ng-container matColumnDef="ingredient_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Attribute ID
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.ing_id }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.ingredient_id }}</td>
         </ng-container>
 
         <!-- Progress Column -->
-        <ng-container matColumnDef="ing_name">
+        <ng-container matColumnDef="ingredient_name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Attribute Name
           </th>
           <td mat-cell *matCellDef="let row">
             <div class="row">
+
+        
               <div
                 class="col-md-2 ratio ratio-1x1 w-25 p-0 round-image"
-                style="background-image: url(https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png);"
+                [ngStyle]="{
+                  'background-image':
+                    'url(' + row.ingredient_image+ ')'
+                }"
               ></div>
-              <div class="col-md-10 m-auto">{{row.ing_name}}</div>
+              <div class="col-md-10 m-auto">{{row.ingredient_name}}</div>
             </div>
           </td>
         </ng-container>
 
         <!-- Progress Column -->
-        <ng-container matColumnDef="description">
+        <ng-container matColumnDef="ingredient_description">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Attribute Name
+            Description
           </th>
           <td mat-cell *matCellDef="let row" class="w-50">
-            {{ row.description }}
+            {{ row.ingredient_description }}
           </td>
         </ng-container>
 

@@ -12,10 +12,9 @@ import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-sub-categories',
   templateUrl: './sub-categories.component.html',
-  styleUrls: ['./sub-categories.component.scss']
+  styleUrls: ['./sub-categories.component.scss'],
 })
-export class SubCategoriesComponent implements AfterViewInit{
-
+export class SubCategoriesComponent implements AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -24,13 +23,16 @@ export class SubCategoriesComponent implements AfterViewInit{
   search_sub_cat: any = '';
   selectedPageSize: number = 10;
   sub_category_data: any;
-  
-
-
 
   selectedValue: string | undefined;
 
-  displayedColumns: string[] = ['sub_category_id', 'sub_category_name','sub_category_has_category_details','attribute','action'];
+  displayedColumns: string[] = [
+    'sub_category_id',
+    'sub_category_name',
+    'sub_category_has_category_details',
+    'attribute',
+    'action',
+  ];
   dataSource: MatTableDataSource<SubCategoryIntarface>;
 
   constructor(
@@ -48,15 +50,11 @@ export class SubCategoriesComponent implements AfterViewInit{
 
   ngOnInit(): void {
     this.getSubCategoryData();
-
-  
   }
 
-  ELEMENT_DATA: SubCategoryIntarface[] = [
-  
-  ];
+  ELEMENT_DATA: SubCategoryIntarface[] = [];
 
-  openCategory(){
+  openCategory() {
     let dialogRef = this.dialog.open(SubCategoryPopupComponent, {
       autoFocus: false,
     });
@@ -77,10 +75,7 @@ export class SubCategoriesComponent implements AfterViewInit{
       .get(String(this.tokestorage.getToken()), 'sub-category' + name + limit)
       .then((response: any) => {
 
-        console.log(" sub cat", response);
-        
         this.sub_category_data = response.result.data;
-        console.log(this.sub_category_data);
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.sub_category_data
         );
@@ -90,7 +85,6 @@ export class SubCategoriesComponent implements AfterViewInit{
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
 
-    console.log(this.selectedPageSize);
     this.getSubCategoryData();
   }
 
@@ -101,12 +95,11 @@ export class SubCategoriesComponent implements AfterViewInit{
     this.getSubCategoryData();
   }
 
-  editclick(id: any, name: string) {
-    let dialogRef = this.dialog.open(CategoryPopupComponent, {
+  editclick(id: any) {
+    let dialogRef = this.dialog.open(SubCategoryPopupComponent, {
       autoFocus: false,
 
-      data: {id :id, categoryName: name }
+      data: { id: id },
     });
   }
 }
-

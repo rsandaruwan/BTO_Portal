@@ -71,9 +71,6 @@ export class AttributesComponent  implements AfterViewInit{
           this.attribute_data
         );
 
-        console.log('====================================');
-        console.log( this.attribute_data);
-        console.log('====================================');
       });
   }
 

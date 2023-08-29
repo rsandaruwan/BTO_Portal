@@ -75,10 +75,6 @@ export class ProductsComponent implements AfterViewInit {
         this.category_data =  this.product_data
 
 
-        console.log('====================================');
-        // console.log(this.product_data);
-        console.log(this.category_data);
-        console.log('====================================');
       });
   }
 }

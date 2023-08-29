@@ -19,7 +19,7 @@
     </div>
     <div class="col-5">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label class="body-2 gray-text">Search by Product Name1</mat-label>
+        <mat-label class="body-2 gray-text">Search by Product Name </mat-label>
         <input type="text" matInput placeholder="Spice" [formControl]="sub_category_nameformcontrol" />
       </mat-form-field>
     </div>
@@ -41,7 +41,7 @@
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
           >
-            <mat-option *ngFor="let categorie of categories" [value]="categorie.category_id">
+            <mat-option *ngFor="let categorie of categories" [value]="categorie.category_id" >
               {{ categorie.category_name }}
             </mat-option>
           </mat-select>
@@ -69,9 +69,9 @@
             [value]="selectedCategory[i]"
             name="attribute"
             placeholder="Select A Sub Category"
-            class="matSelectPlaceholder"
+            class="matSelectPlaceholder"  
             multiple
-            (selectionChange)="onSelectionChange()"
+            (selectionChange)="onSelectionChange(selectedCategory[i].attributes, i)"
           >
             <mat-option *ngFor="let attribute of attributes" [value]="attribute.attribute_id">
               {{ attribute.attribute_name }}
@@ -81,19 +81,9 @@
       </div>
 
       <div class=" col-12 d-flex " style="max-width: 40vw;">
-        <div
-          class="  d-flex seletted_attribute"
-          
-          *ngFor="let attribute of selectedCategory[i].attributes; let i = index"
-          
-        >
+        <div class="  d-flex seletted_attribute" *ngFor="let attribute of selectedCategory[i].attribue_names; let i = index">
           <p class="content mx-3 my-2 primary">{{attribute}}</p>
-          <mat-icon
-            ><img
-              src="../../../../assets/icons/close-red.png"
-              alt=""
-              (click)="closebtn(i)"
-          /></mat-icon>
+          <mat-icon><img src="../../../../assets/icons/close-red.png" alt="" (click)="closebtn(i)"/></mat-icon>
         </div>
       </div>
 

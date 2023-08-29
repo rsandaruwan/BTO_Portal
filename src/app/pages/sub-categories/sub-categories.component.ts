@@ -30,7 +30,6 @@ export class SubCategoriesComponent implements AfterViewInit {
     'sub_category_id',
     'sub_category_name',
     'sub_category_has_category_details',
-    'attribute',
     'action',
   ];
   dataSource: MatTableDataSource<SubCategoryIntarface>;
@@ -79,6 +78,7 @@ export class SubCategoriesComponent implements AfterViewInit {
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.sub_category_data
         );
+        
       });
   }
 
@@ -89,7 +89,7 @@ export class SubCategoriesComponent implements AfterViewInit {
   }
 
   search(event: any) {
-    console.log(event.target.value);
+  
     this.search_sub_cat = event.target.value;
 
     this.getSubCategoryData();

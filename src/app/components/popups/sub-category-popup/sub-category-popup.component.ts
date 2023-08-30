@@ -1,4 +1,4 @@
-import { Attribute, Component, Inject, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,16 +7,17 @@ import {
   AbstractControl,
   Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
 import { CategoryInterface } from 'src/app/modals/category.model';
 import { AttributeIntarface } from 'src/app/modals/attributes.model';
-import {
-  EditSubCategoryIntarface,
-  SubCategoryCategoryIntarface,
-} from 'src/app/modals/edit.category.model';
+import { EditSubCategoryIntarface } from 'src/app/modals/edit.category.model';
 
 @Component({
   selector: 'app-sub-category-popup',
@@ -32,15 +33,18 @@ export class SubCategoryPopupComponent {
   userForm: FormGroup;
   selectedValuesArray: string[] = [];
   subcategory_data: any[] = [];
-
   categoriesArray: any[] = [];
   att_name: any;
   category_details: any;
   attNameArray: any[] = [];
   objectArray: any[] = [];
+  setCategoryvalue:any
+  setAttribute:any[] =[]
+
+  category_array_length:any[]=[]
 
   sub_category_nameformcontrol = new FormControl('', [Validators.required]);
-
+  subCategoryData: any;
   categories: CategoryInterface[] = [];
   attributes: AttributeIntarface[] = [];
   sub_category: EditSubCategoryIntarface = {
@@ -64,6 +68,12 @@ export class SubCategoryPopupComponent {
   ngOnInit(): void {
     this.getCategoryData();
     this.getAttributeData();
+    this.getSubCategoryData();
+   
+
+
+    
+    
   }
 
   addAttribute(): void {
@@ -113,8 +123,6 @@ export class SubCategoryPopupComponent {
     return;
 
     this.objectArray.forEach((element) => {
-      console.log(element);
-
       this.apiService
         .get(
           String(this.tokestorage.getToken()),
@@ -124,7 +132,6 @@ export class SubCategoryPopupComponent {
           this.att_name = response.result[0].attribute_name;
 
           this.attNameArray.push(this.att_name);
-          console.log(this.attNameArray);
         });
     });
   }
@@ -134,42 +141,59 @@ export class SubCategoryPopupComponent {
 
     this.attNameArray.splice(id, 1);
   }
-  save(){
-    // if (this.cat_data != undefined) {
-    //   var update_data = {
-    //     category_id: this.cat_data.id,
-    //     category_name: this.category_nameformcontrol.value,
-    //   };
-  
-    //   this.apiService
-    //     .put(update_data, String(this.tokestorage.getToken()), 'category/edit')
-    //     .then((response: any) => {
-    //       this.closebutton.nativeElement.click();
-    //       this.updated();
-    //     })
-    //     .catch((error: any) => {});
-    // } else 
-    
-    {
+  save() {
+    if (this.sub_cat_data != undefined) {
+      var update_data = {
+        sub_category_id: this.subCategoryData.sub_category_id,
+        sub_category_name: this.subCategoryData.sub_category_name,
+        categories: new Array<any>(),
+      };
+
+      for (const categorie of this.selectedCategory) {
+        update_data.categories.push({
+          attribute_id: categorie.attributes,
+          category_id: categorie.category,
+        });
+      }
+
+      this.apiService
+        .put(
+          update_data,
+          String(this.tokestorage.getToken()),
+          'sub-category/edit'
+        )
+        .then((response: any) => {
+          this.closebutton.nativeElement.click();
+          this.updated();
+        })
+        .catch((error: any) => {});
+    } else {
       const data = {
         sub_category_name: this.sub_category_nameformcontrol.value,
         categories: new Array<any>(),
       };
-  
+
       for (const categorie of this.selectedCategory) {
         data.categories.push({
           attribute_id: categorie.attributes,
           category_id: categorie.category,
         });
       }
-  
+
       {
         this.apiService
-  
-          .post(data, String(this.tokestorage.getToken()), 'sub-category/create')
+
+          .post(
+            data,
+            String(this.tokestorage.getToken()),
+            'sub-category/create'
+          )
+
           .then((response: any) => {
             this.subcategory_data = response.result[0];
+
             this.closebutton.nativeElement.click();
+
             this.done();
           })
           .catch((error: any) => {
@@ -178,7 +202,6 @@ export class SubCategoryPopupComponent {
       }
     }
   }
-  
 
   done() {
     var data1 = {
@@ -214,6 +237,44 @@ export class SubCategoryPopupComponent {
       .get(String(this.tokestorage.getToken()), 'attributes/view')
       .then((response: any) => {
         this.attributes = response.result;
+      });
+  }
+  getSubCategoryData() {
+    this.apiService
+      .get(
+        String(this.tokestorage.getToken()),
+        'sub-category/' + this.sub_cat_data.id
+      )
+      .then((response: any) => {
+        this.subCategoryData = response.result;
+        console.log('==================cat==================');
+        console.log(this.subCategoryData
+          );
+       
+
+        if (this.subCategoryData) {
+          this.sub_category_nameformcontrol.setValue(this.subCategoryData.sub_category_name);
+       
+
+        }
+
+        for (let i = 0; i < this.subCategoryData.sub_category_has_category_details.length-1; i++) {
+          this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
+         
+
+          this.selectedCategory.push([{ category:this.category_array_length[0].category_name , attributes: [] }]);
+          (this.userForm.get('attribute') as FormArray).push(this.fb.control(null));
+
+         
+        }
+        for (let i = 1; i <= this.subCategoryData.sub_category_has_category_details.length; i++) {
+          this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
+         
+        
+          console.log(this.category_array_length[i]);
+        }
+      
+        
       });
   }
 }

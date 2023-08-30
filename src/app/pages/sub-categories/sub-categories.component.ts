@@ -74,7 +74,7 @@ export class SubCategoriesComponent implements AfterViewInit {
       .get(String(this.tokestorage.getToken()), 'sub-category' + name + limit)
       .then((response: any) => {
 
-        this.sub_category_data = response.result.data;
+        this.sub_category_data = response.result.data.reverse();
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.sub_category_data
         );

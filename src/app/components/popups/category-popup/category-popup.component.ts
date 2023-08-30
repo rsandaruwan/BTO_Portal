@@ -1,7 +1,7 @@
 import { Component, ViewChild, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { FormControl, Validators } from '@angular/forms';
@@ -59,6 +59,8 @@ export class CategoryPopupComponent {
         .post(data, String(this.tokestorage.getToken()), 'category/create')
         .then((response: any) => {
           this.category_data = response.result[0];
+
+      
           this.closebutton.nativeElement.click();
           this.done();
         })

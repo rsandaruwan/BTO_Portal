@@ -38,11 +38,12 @@
       <div class="col-3 my-auto">
         <p class="primary content">Select Category</p>
       </div>
-      <div class="col-5">
+      <div class="col-5" *ngIf="selectedCategory[i]">
         <mat-form-field appearance="outline" class="w-100">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
             [(ngModel)]="selectedCategory[i].category"
+            [value]="selectedCategory[i].category"
             name="categorie"
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
@@ -74,7 +75,7 @@
         <p class="primary content">Select Attribute</p>
       </div>
       <div class="col-5">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="selectedCategory[i]">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
             [(ngModel)]="selectedCategory[i].attributes"
@@ -97,7 +98,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-12 d-flex" style="max-width: 40vw">
+      <div class="col-12 d-flex" style="max-width: 40vw"  *ngIf="selectedCategory[i]">
         <div
           class="d-flex seletted_attribute"
           *ngFor="

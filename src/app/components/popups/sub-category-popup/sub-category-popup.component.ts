@@ -252,27 +252,45 @@ export class SubCategoryPopupComponent {
           );
        
 
-        if (this.subCategoryData) {
-          this.sub_category_nameformcontrol.setValue(this.subCategoryData.sub_category_name);
-       
-
+         if (this.subCategoryData) {
+          this.sub_category_nameformcontrol.setValue(
+            this.subCategoryData.sub_category_name
+          );
+          this.selectedCategory = [];
+        
+          this.subCategoryData.sub_category_has_category_details.forEach(
+            (element: any) => {
+              var attributes1: Array<any> = [];
+              var attribue_names1: Array<any>  = [];
+              element.attributes_details.forEach((att: any) => {
+                attributes1.push(att.attribute_id);
+                attribue_names1.push(att.attribute_name);
+              });
+              var ss = {
+                category: element.category_details.category_id,
+                 attributes: attributes1,
+                 attribue_names: attribue_names1,
+              };
+              this.selectedCategory.push(ss)
+            }
+          );
         }
 
-        for (let i = 0; i < this.subCategoryData.sub_category_has_category_details.length-1; i++) {
-          this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
+        // for (let i = 0; i < this.subCategoryData.sub_category_has_category_details.length-1; i++) {
+        //   this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
          
 
-          this.selectedCategory.push([{ category:this.category_array_length[0].category_name , attributes: [] }]);
-          (this.userForm.get('attribute') as FormArray).push(this.fb.control(null));
+        //   this.selectedCategory.push([{ category:this.category_array_length[0].category_name , attributes: [] }]);
+        //   (this.userForm.get('attribute') as FormArray).push(this.fb.control(null));
 
          
-        }
-        for (let i = 1; i <= this.subCategoryData.sub_category_has_category_details.length; i++) {
-          this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
+        // }
+        // for (let i = 1; i <= this.subCategoryData.sub_category_has_category_details.length; i++) {
+        //   this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
          
         
-          console.log(this.category_array_length[i]);
-        }
+        //   console.log(this.category_array_length[i]);
+        // }
       
         
       });

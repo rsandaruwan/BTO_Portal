@@ -20,13 +20,17 @@ export class IngredientsComponent implements AfterViewInit {
   sort!: MatSort;
 
   selectedValue: string | undefined;
-  ingredient_data:any
-  search_ing:any
+  ingredient_data: any;
+  search_ing: any;
 
-  displayedColumns: string[] = ['ingredient_id', 'ingredient_name', 'ingredient_description', 'action'];
+  displayedColumns: string[] = [
+    'ingredient_id',
+    'ingredient_name',
+    'ingredient_description',
+    'action',
+  ];
   dataSource: MatTableDataSource<IngredientIntarface>;
 
-  
   constructor(
     public dialog: MatDialog,
     private tokestorage: StorageService,
@@ -36,27 +40,22 @@ export class IngredientsComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.getIngredientData();
-
   }
-
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  ELEMENT_DATA: IngredientIntarface[] = [ ];
+  ELEMENT_DATA: IngredientIntarface[] = [];
 
   openAttribute() {
     let dialogRef = this.dialog.open(IngredientPopupComponent, {
       autoFocus: false,
     });
-
-    
   }
 
   getIngredientData() {
-
     var name = '';
 
     if (this.search_ing != undefined) {
@@ -78,5 +77,4 @@ export class IngredientsComponent implements AfterViewInit {
 
     this.getIngredientData();
   }
-
 }

@@ -1,10 +1,12 @@
+import { UserRoleIntarface } from "./user_role.model";
+
 export interface UserListIntarface {
-    user_name: string;
-    user_email: string;
-    contact: string;
-    user_role: string;
-    user_status: string;
-    action: string;
+  first_name: string;
+  email: string;
+  mobile: string;
+  user_role: UserRoleIntarface
+  user_status: string;
+  action: string;
 
   }
   

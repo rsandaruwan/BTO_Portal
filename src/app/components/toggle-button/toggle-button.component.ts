@@ -19,21 +19,30 @@ export class ToggleButtonComponent {
   @Input() leftText = 'Yes';
   @Input() width = 140;
   @Input() rightText = 'No';
-  @Input() type :number | undefined;
+  @Input() value: number | undefined;
+  @Input() type: number | undefined;
   @Output() changed = new EventEmitter<boolean>();
   @ViewChild('lable') lable: ElementRef | undefined;
   private on1: boolean | undefined;
 
+  constructor() {}
 
-
-  constructor() {
-
-
-  }
-
-  ngOnInit(){
+  ngOnInit() {}
+  ngAfterViewInit(): void {
    
+
+    if (this.value == 3) {
+
+      this.on = true
+    } else {
+    if (this.value == 2) {
+      this.on = false
+
+    } else {
+      
+    }
   }
+}
 
   Valchange(data: any) {
     if (this.on) {
@@ -47,9 +56,8 @@ export class ToggleButtonComponent {
         'left:' + (this.width - 26) + 'px !important'
       );
     }
-    
+
     this.on = data.checked;
-    this.changed.next(data.checked);
-    
+    this.changed.emit(data.checked);
   }
 }

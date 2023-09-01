@@ -15,8 +15,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { AttributesComponent } from './pages/attributes/attributes.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserRolesComponent } from './user-roles/user-roles.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 import { PermissionComponent } from './permission/permission.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
@@ -44,7 +43,6 @@ const routes: Routes = [
       { path: 'attributes', component: AttributesComponent },
       { path: 'ingredients', component: IngredientsComponent },
       { path: 'user_list', component: UserListComponent },
-      { path: 'user_roles', component: UserRolesComponent },
       { path: 'permission', component: PermissionComponent },
       { path: 'recipes', component: RecipesComponent },
       { path: 'add_recipes', component: AddRecipesComponent },

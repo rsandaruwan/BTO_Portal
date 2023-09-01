@@ -40,8 +40,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { AddProductsComponent } from './pages/add-products/add-products.component';
 import { AttributesComponent } from './pages/attributes/attributes.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
-import { UserRolesComponent } from './user-roles/user-roles.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 import { PermissionComponent } from './permission/permission.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
@@ -76,7 +75,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     IngredientsComponent,
     AttributePopupComponent,
     ImageUploadComponent,
-    UserRolesComponent,
     UserListComponent,
     PermissionComponent,
     IngredientPopupComponent,

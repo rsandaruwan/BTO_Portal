@@ -247,10 +247,7 @@ export class SubCategoryPopupComponent {
       )
       .then((response: any) => {
         this.subCategoryData = response.result;
-        console.log('==================cat==================');
-        console.log(this.subCategoryData
-          );
-       
+      
 
          if (this.subCategoryData) {
           this.sub_category_nameformcontrol.setValue(
@@ -289,7 +286,7 @@ export class SubCategoryPopupComponent {
         //   this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
          
         
-        //   console.log(this.category_array_length[i]);
+   
         // }
       
         

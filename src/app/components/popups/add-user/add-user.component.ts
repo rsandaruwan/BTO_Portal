@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
 import {
   trigger,
   state,
@@ -6,6 +6,17 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { RoleIntarface } from 'src/app/modals/get_roles.model';
+import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
+import { MatDialog } from '@angular/material/dialog';
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-add-user',
@@ -30,9 +41,8 @@ import {
     ]),
   ],
 })
-
 export class AddUserComponent {
-
+  @ViewChild('closebutton') closebutton: any;
   @ViewChild('fileUploader')
   fileUploader!: ElementRef;
   checked_delete = false;
@@ -41,10 +51,17 @@ export class AddUserComponent {
   imageState = 'showImage';
   base64String: string | undefined;
   imageError: string | undefined;
+  selectedRole!: string;
+  roles: RoleIntarface[] = [];
+  myGroup!: FormGroup;
+
+  foods: Food[] = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' },
+  ];
 
   fileChangeEvent(fileInput: any): any {
-
-
     this.imageError;
 
     if (fileInput.target.files && fileInput.target.files[0]) {
@@ -96,8 +113,78 @@ export class AddUserComponent {
   // ImageReset() {
   //   if (this.user.user_details) {
   //     this.image = this.user.user_details.user_image;
-    
+
   //   }
   // }
-}
 
+  constructor(
+    private tokestorage: StorageService,
+    private apiService: ApiService,
+    public dialog: MatDialog,
+
+  ) {}
+  ngOnInit(): void {
+    this.getRoleData();
+  }
+
+  first_nameformcontrol = new FormControl('', [Validators.required]);
+  secound_nameformcontrol = new FormControl('', [Validators.required]);
+  emialformcontrol = new FormControl('', [Validators.required]);
+  contactformcontrol = new FormControl('', [Validators.required]);
+   
+
+  getRoleData() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'user-role')
+      .then((response: any) => {
+        this.roles = response.result;
+
+        console.log(this.roles);
+      });
+  }
+
+  AddUser() {
+    
+
+   
+    
+    {
+      const data = {
+        first_name: this.first_nameformcontrol.value,
+        last_name: this.secound_nameformcontrol.value,
+        mobile: this.contactformcontrol.value,
+        email:  this.emialformcontrol.value,
+        user_role: this.selectedRole,
+        password: "123",
+        otp_request:  "email"
+
+      };
+
+      this.apiService
+
+        .post(data, String(this.tokestorage.getToken()), 'user/create')
+
+        .then((response: any) => {
+          this.getRoleData= response.result[0];
+
+          this.closebutton.nativeElement.click();
+
+          this.done();
+        })
+        .catch((error: any) => {
+          // this.toste.error(error.error.detail.message);
+        });
+    }
+  }
+  
+  done() {
+    var data1 = {
+      msg: 'sUb category added to the system Successfully!',
+    };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
+
+      data: data1,
+    });
+  }
+}

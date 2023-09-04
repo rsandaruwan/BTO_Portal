@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { RoleIntarface } from 'src/app/modals/get_roles.model';
 import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 interface Food {
   value: string;
@@ -54,6 +55,7 @@ export class AddUserComponent {
   selectedRole!: string;
   roles: RoleIntarface[] = [];
   myGroup!: FormGroup;
+  user_data_by_id: any;
 
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
@@ -121,9 +123,15 @@ export class AddUserComponent {
     private tokestorage: StorageService,
     private apiService: ApiService,
     public dialog: MatDialog,
-
+    @Inject(MAT_DIALOG_DATA) public user_data: any
   ) {}
   ngOnInit(): void {
+    if (this.user_data.id) {
+      this.getUserById();
+    }
+  }
+
+  ngAfterViewInit(): void {
     this.getRoleData();
   }
 
@@ -131,33 +139,42 @@ export class AddUserComponent {
   secound_nameformcontrol = new FormControl('', [Validators.required]);
   emialformcontrol = new FormControl('', [Validators.required]);
   contactformcontrol = new FormControl('', [Validators.required]);
-   
 
   getRoleData() {
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'user-role')
+      .get(String(this.tokestorage.getToken()), 'user-role/all')
       .then((response: any) => {
         this.roles = response.result;
-
-        console.log(this.roles);
       });
   }
 
   AddUser() {
-    
+    if (this.user_data_by_id) {
+      const data = {
+        user_id: this.user_data.id,
+        first_name: this.first_nameformcontrol.value,
+        last_name: this.secound_nameformcontrol.value,
+        mobile: this.contactformcontrol.value,
+        email: this.emialformcontrol.value,
+        user_role: this.selectedRole,
+      };
 
-   
-    
-    {
+      this.apiService
+        .put(data, String(this.tokestorage.getToken()), 'user/edit')
+        .then((response: any) => {
+          this.closebutton.nativeElement.click();
+          this.updated();
+        })
+        .catch((error: any) => {});
+    } else {
       const data = {
         first_name: this.first_nameformcontrol.value,
         last_name: this.secound_nameformcontrol.value,
         mobile: this.contactformcontrol.value,
-        email:  this.emialformcontrol.value,
+        email: this.emialformcontrol.value,
         user_role: this.selectedRole,
-        password: "123",
-        otp_request:  "email"
-
+        password: '123',
+        otp_request: 'email',
       };
 
       this.apiService
@@ -165,7 +182,7 @@ export class AddUserComponent {
         .post(data, String(this.tokestorage.getToken()), 'user/create')
 
         .then((response: any) => {
-          this.getRoleData= response.result[0];
+          this.getRoleData = response.result[0];
 
           this.closebutton.nativeElement.click();
 
@@ -176,10 +193,35 @@ export class AddUserComponent {
         });
     }
   }
-  
+
+  getUserById() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'user/' + this.user_data.id)
+      .then((response: any) => {
+        this.user_data_by_id = response.result;
+
+        this.first_nameformcontrol.setValue(this.user_data_by_id.first_name);
+        this.secound_nameformcontrol.setValue(this.user_data_by_id.last_name);
+        this.contactformcontrol.setValue(this.user_data_by_id.mobile);
+        this.emialformcontrol.setValue(this.user_data_by_id.email);
+        this.selectedRole = this.user_data_by_id.user_role.id;
+      });
+  }
+
   done() {
     var data1 = {
       msg: 'sUb category added to the system Successfully!',
+    };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
+
+      data: data1,
+    });
+  }
+
+  updated() {
+    var data1 = {
+      msg: 'Category updated to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',

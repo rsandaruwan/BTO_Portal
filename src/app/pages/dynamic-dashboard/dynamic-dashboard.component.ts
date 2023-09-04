@@ -11,6 +11,7 @@ import { routeNavGroupInterface } from 'src/app/modals/route-nav.modal';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDrawerMode } from '@angular/material/sidenav';
+import { NavItem } from 'src/app/modals/side_nav.model';
 @Component({
   selector: 'app-dynamic-dashboard',
   templateUrl: './dynamic-dashboard.component.html',
@@ -21,6 +22,96 @@ export class DynamicDashboardComponent {
   @ViewChild(MatSidenavContainer) sidenavContainer: MatSidenavContainer | undefined;
   @ViewChild('sidebarmenu') sidebarmenu: MatSidenav | undefined;
   @ViewChild('sidebarmenu') sidename_mod: MatDrawerMode | undefined;
+
+  
+  menu: NavItem [] = [
+         
+    {
+      displayName: 'Product categories',
+      iconName: '../../../assets/icons/p_category.png',          
+      children: [
+        {
+          displayName: 'Categories ',
+          iconName: '',
+          route: '/portal/categories'
+        },
+        { 
+          displayName: 'Todos',
+          iconName: 'waves',
+          route: '/todos'
+        }
+      ]
+    },
+    {
+      displayName: 'Escritorio',
+      iconName: 'desktop_windows',
+      route: 'escritorio',
+    },        
+    {
+      displayName: 'Entradas GADE',
+      iconName: 'ballot',
+      route: 'entradasGADE',
+    },
+    {
+      displayName: 'Escritorio',
+      iconName: 'desktop_windows',
+      route: 'escritorio',
+    },        
+    {
+      displayName: 'Entradas GADE',
+      iconName: 'ballot',
+      route: 'entradasGADE',
+    },
+    {
+      displayName: 'Expedientes',
+      iconName: 'description',          
+      children: [
+        {
+          displayName: 'Mis Expedientes',
+          iconName: 'how_to_reg',
+          route: '/misexpedientes'
+        },
+        { 
+          displayName: 'Todos',
+          iconName: 'waves',
+          route: '/todos'
+        }
+      ]
+    },
+    {
+      displayName: 'Expedientes',
+      iconName: 'description',          
+      children: [
+        {
+          displayName: 'Mis Expedientes',
+          iconName: 'how_to_reg',
+          route: '/misexpedientes'
+        },
+        { 
+          displayName: 'Todos',
+          iconName: 'waves',
+          route: '/todos'
+        },
+        { 
+          displayName: 'Todos',
+          iconName: 'waves',
+          route: '/todos'
+        },
+
+      ]
+    },
+    {
+      displayName: 'Escritorio',
+      iconName: 'desktop_windows',
+      route: 'escritorio',
+    },        
+    {
+      displayName: 'Entradas GADE',
+      iconName: 'ballot',
+      route: 'entradasGADE',
+    },
+  ];
+
 
   navRouteList: routeNavGroupInterface[] = [];
 
@@ -79,6 +170,8 @@ export class DynamicDashboardComponent {
       // this.sidebarmenu.mode = 'side';
     }
   }
+
+
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {

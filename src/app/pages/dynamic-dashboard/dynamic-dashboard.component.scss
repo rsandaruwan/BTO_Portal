@@ -1,29 +1,33 @@
+
+  
+//   .arrow_icon{
+//     position: absolute;
+//     left: 150px;
+//   }
+
 // .example-container {
 //     width: 100%;
 //     height: 100%;
 //     border: 1px solid rgba(0, 0, 0, 0.5);
 //   }
-  
+
 //   .example-sidenav-content {
 //     display: flex;
 //     height: 100%;
 //     align-items: center;
 //     justify-content: center;
 //   }
-  
+
 //   .example-sidenav {
 //     padding: 20px;
 //   }
 
-
-
-$main-color: #702f8b;
-$dark-color: #702f8b;
-
+// $main-color: #702f8b;
+// $dark-color: #702f8b;
 
 .mat-sidenav {
-    min-width: 280px !important;
-    max-width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
 }
 
 body {
@@ -65,9 +69,9 @@ main {
 }
 
 @media (max-width: 767.98px) {
-    .sidebar {
-        top: 5rem;
-    }
+  .sidebar {
+    top: 5rem;
+  }
 }
 
 .sidebar-sticky {
@@ -94,14 +98,14 @@ mat-icon {
     color: #727272;
 }
 
-.sidebar .nav-link.active {
-    color: $main-color;
-}
+// .sidebar .nav-link.active {
+//     color: $main-color;
+// }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-    color: inherit;
-}
+// .sidebar .nav-link:hover .feather,
+// .sidebar .nav-link.active .feather {
+//     color: inherit;
+// }
 
 /*
  * Navbar
@@ -154,7 +158,6 @@ mat-icon {
     z-index: 0;
 }
 
-
 .nav-item {
     padding: 5%;
     border-radius: 0 !important;
@@ -194,10 +197,9 @@ mat-icon {
     background: rgba(112, 47, 139, 1);
 }
 
-.active-list-item {
-    color: #3f51b5 !important;
-}
-
+// .active-list-item {
+//     color: #3f51b5 !important;
+// }
 
 .logo_div {
     width: 152px;
@@ -229,13 +231,13 @@ mat-icon {
     margin: 0 !important;
 }
 
-.active-color {
-    background: rgba(112, 47, 139, 0.24) !important;
-}
+// .active-color {
+//     background: rgba(112, 47, 139, 0.24) !important;
+// }
 
-.active-text-color {
-    color: #702F8B;
-}
+// .active-text-color {
+//     color: #702F8B;
+// }
 
 .sidenav-content {
     overflow-x: hidden;
@@ -327,4 +329,3 @@ mat-icon {
     width: 95%;
     height: 100px;
 }
-

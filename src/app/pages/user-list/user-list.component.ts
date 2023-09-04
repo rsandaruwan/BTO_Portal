@@ -8,6 +8,8 @@ import { UserListIntarface } from '../../modals/user_list.model';
 import { AddUserComponent } from '../../components/popups/add-user/add-user.component';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { DynamicConfirmationPopupComponent } from 'src/app/components/popups/dynamic-confirmation-popup/dynamic-confirmation-popup.component';
+import { DynamicDonePopupComponent } from 'src/app/components/popups/dynamic-done-popup/dynamic-done-popup.component';
 
 @Component({
   selector: 'app-user-list',
@@ -21,9 +23,10 @@ export class UserListComponent implements AfterViewInit {
   sort!: MatSort;
   search_user: any;
   user_data: any;
+  user_status_id: any;
 
   selectedValue: string | undefined;
-  checked3: boolean =false;
+  checked3: boolean = false;
 
   displayedColumns: string[] = [
     'first_name',
@@ -86,7 +89,74 @@ export class UserListComponent implements AfterViewInit {
 
     this.getUserData();
   }
-  toggleChanged(id:any,data:any){
-    alert(id+"___"+data)
+  toggleChanged(id: any, data: any) {
+    if (data == true) {
+      this.user_status_id = '3';
+    }
+    if (data == false) {
+      this.user_status_id = '2';
+    }
+
+    var update_data = { 
+      user_id: id,
+      user_status: this.user_status_id,
+    };
+
+    this.apiService
+      .put(
+        update_data,
+        String(this.tokestorage.getToken()),
+        'user/update/status'
+      )
+      .then((response: any) => {
+        this.suspend();
+       
+
+        // this.updated();
+      })
+      .catch((error: any) => {});
+  }
+
+  editclick(id: any) {
+    let dialogRef = this.dialog.open(AddUserComponent, {
+      autoFocus: false,
+
+      data: { id: id },
+    });
+  }
+
+  suspend() {
+   
+    var data = {
+      title: 'Suspend User',
+      text: 'Are you sure you want suspend this user?',
+      msg_type: 'warning',
+      msg: "By Suspending this user you won’t be able to revert. Please ensure you're absolutely certain before proceeding.",
+      positive_button: 'yes',
+      negative_button: 'cancel',
+    };
+    var dialogRef = this.dialog.open(DynamicConfirmationPopupComponent, {
+      width: '25vw',
+
+      data: data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == '1') {
+       
+    this.done();
+      }
+    });
+  }
+
+  done() {
+    var data1 = {
+      msg: 'sUb category added to the system Successfully!',
+    };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
+
+      data: data1,
+    });
   }
 }

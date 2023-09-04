@@ -60,13 +60,15 @@ export class AttributesComponent  implements AfterViewInit{
     var name = '';
 
     if (this.search_att != undefined) {
-      name = '?attribute_id=' + this.search_att;
+      name = '?attribute_name=' + this.search_att;
+
+  
     }
 
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/view'+name)
+      .get(String(this.tokestorage.getToken()), 'attributes/'+name)
       .then((response: any) => {
-        this.attribute_data = response.result;
+        this.attribute_data = response.result.data;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.attribute_data
         );
@@ -78,6 +80,15 @@ export class AttributesComponent  implements AfterViewInit{
     this.search_att = event.target.value;
 
     this.getAttributeData();
+  }
+
+  
+  editclick(id: any, name: string) {
+    let dialogRef = this.dialog.open(AttributePopupComponent, {
+      autoFocus: false,
+
+      data: {id :id , name:name}
+    });
   }
 }
 

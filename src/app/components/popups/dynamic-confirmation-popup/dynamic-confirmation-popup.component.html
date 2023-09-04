@@ -1,6 +1,6 @@
 <div class="row w-100 mx-0 p-4 px-5">
-  <p class="headline-7 col-12  text-center">{{data.title}}</p>
-  <p class="caption gray-color col-12 mx-auto mt-1 ">{{data.text}}</p>
+  <p class="headline_4 col-12  text-center primary">{{data.title}}</p>
+  <p class="caption  col-12 mx-auto mt-1 primary ">{{data.text}}</p>
   <ng-container *ngIf="data.msg_type=='warning'">
     <div class="col-12 warning_bg p-2">
       <div class="row">
@@ -8,8 +8,8 @@
           <mat-icon class=" yellow-color">warning_outline</mat-icon>
         </div>
         <div class="col-11">
-          <p class="caption yellow-color regular col-12 mx-auto mt-1 ">Warning!</p>
-          <p class="caption yellow-color col-12 mx-auto mt-1 ">{{data.msg}}</p>
+          <p class="caption  regular col-12 mx-auto mt-1 " style="color: #F6B749;">Warning!</p>
+          <p class="caption  col-12 mx-auto mt-1 " style="color: #F6B749;">{{data.msg}}</p>
         </div>
       </div>
     </div>
@@ -44,9 +44,9 @@
     xsx
   </ng-container>
   <div class="row mt-3">
-    <button class="col-4 mx-auto btn button-primary-1 white-color" [mat-dialog-close]="1">
+    <button class="col-4 mx-auto primary_btn white-color" [mat-dialog-close]="1">
       {{data.positive_button}}
     </button>
-    <button class=" col-4 mx-auto btn button-disable-1   "[mat-dialog-close]="0" >  {{data.negative_button}} </button>
+    <button class=" col-4 mx-auto btn-reset   "[mat-dialog-close]="0" >  {{data.negative_button}} </button>
   </div>
 </div>

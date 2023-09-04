@@ -24,6 +24,61 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
+      <!-- <mat-nav-list>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" >
+				<span  *ngIf="isExpanded || isShowing">Parent Menu</span>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+				<a mat-list-item href="...">Submenu Item 1</a>
+				<a mat-list-item href="...">Submenu Item 2</a>
+			
+		
+			</div>
+		</mat-nav-list> -->
+
+      <!-- <mat-nav-list>
+        <span *ngFor="let item of menu">
+          <span *ngIf="item.children && item.children.length > 0">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                   
+                      <img src="{{ item.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;" />
+                      <p class=" col-9 mx-2 mt-1 body-3 gray">{{ item.displayName }}</p>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <span *ngFor="let child of item.children">
+                  <mat-list-item routerLink="[child.route]">
+                   
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                      
+                      <img src="{{ child.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;"/>
+                  
+                      <p class=" col-9 mx-2 mt-1 body-3 gray"> {{ child.displayName }}</p>
+                    </div>
+                  </mat-list-item>
+                </span>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </span>
+          <span *ngIf="!item.children || item.children.length === 0">
+            <mat-list-item [routerLink]="item.route">
+     
+              <div fxLayout="row" fxLayoutAlign="space-between center" class="d-flex">
+           
+                <img src="{{ item.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;"/>
+                <p class=" col-9 mx-2 mt-1 body-3 gray">{{ item.displayName }}</p>
+              </div>
+            </mat-list-item>
+          </span>
+        </span>
+      </mat-nav-list> -->
+
       <mat-nav-list class="p-0">
         <mat-accordion>
           <div class="Body2_text p-0 white_back sticky-top" hideToggle>
@@ -60,7 +115,7 @@
               </div>
 
               <div class="col-md-10 mx-3 mt-3">
-                <div class="row pointer" >
+                <div class="row pointer">
                   <div class="col-2">
                     <img src="../../../assets/icons/p_category.png" alt="" />
                   </div>
@@ -69,8 +124,18 @@
                   </div>
                 </div>
                 <ul>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/categories']">Categories</li>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/sub_categories']">Sub Categories</li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/categories']"
+                  >
+                    Categories
+                  </li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/sub_categories']"
+                  >
+                    Sub Categories
+                  </li>
                 </ul>
               </div>
 
@@ -139,8 +204,15 @@
                   </div>
                 </div>
                 <ul>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/order']">Order</li>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/customer']">Customer</li>
+                  <li class="body-3 gray mt-2" [routerLink]="['/portal/order']">
+                    Order
+                  </li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/customer']"
+                  >
+                    Customer
+                  </li>
                 </ul>
               </div>
 
@@ -152,9 +224,24 @@
                   <div class="col-10 p-0"><p class="body-3 gray">Users</p></div>
                 </div>
                 <ul>
-                  <li class="body-3 gray mt-2" [routerLink]="['/portal/user_list']">User list</li>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/user_roles']">User Roles</li>
-                  <li class="body-3 gray mt-2"  [routerLink]="['/portal/permission']">Permissions</li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/user_list']"
+                  >
+                    User list
+                  </li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/user_roles']"
+                  >
+                    User Roles
+                  </li>
+                  <li
+                    class="body-3 gray mt-2"
+                    [routerLink]="['/portal/permission']"
+                  >
+                    Permissions
+                  </li>
                 </ul>
               </div>
               <div class="col-md-10 mx-3 mt-3">
@@ -163,7 +250,9 @@
                     <img src="../../../assets/icons/profile.png" alt="" />
                   </div>
                   <div class="col-10 p-0">
-                    <p class="body-3 gray"  [routerLink]="['/portal/profile']">Profile</p>
+                    <p class="body-3 gray" [routerLink]="['/portal/profile']">
+                      Profile
+                    </p>
                   </div>
                 </div>
               </div>

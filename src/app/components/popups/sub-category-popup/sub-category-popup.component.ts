@@ -38,10 +38,10 @@ export class SubCategoryPopupComponent {
   category_details: any;
   attNameArray: any[] = [];
   objectArray: any[] = [];
-  setCategoryvalue:any
-  setAttribute:any[] =[]
+  setCategoryvalue: any;
+  setAttribute: any[] = [];
 
-  category_array_length:any[]=[]
+  category_array_length: any[] = [];
 
   sub_category_nameformcontrol = new FormControl('', [Validators.required]);
   subCategoryData: any;
@@ -69,11 +69,6 @@ export class SubCategoryPopupComponent {
     this.getCategoryData();
     this.getAttributeData();
     this.getSubCategoryData();
-   
-
-
-    
-    
   }
 
   addAttribute(): void {
@@ -137,8 +132,6 @@ export class SubCategoryPopupComponent {
   }
 
   closebtn(id: any) {
-    alert(id);
-
     this.attNameArray.splice(id, 1);
   }
   save() {
@@ -247,49 +240,42 @@ export class SubCategoryPopupComponent {
       )
       .then((response: any) => {
         this.subCategoryData = response.result;
-      
 
-         if (this.subCategoryData) {
+        if (this.subCategoryData) {
           this.sub_category_nameformcontrol.setValue(
             this.subCategoryData.sub_category_name
           );
           this.selectedCategory = [];
-        
+
           this.subCategoryData.sub_category_has_category_details.forEach(
             (element: any) => {
               var attributes1: Array<any> = [];
-              var attribue_names1: Array<any>  = [];
+              var attribue_names1: Array<any> = [];
               element.attributes_details.forEach((att: any) => {
                 attributes1.push(att.attribute_id);
                 attribue_names1.push(att.attribute_name);
               });
               var ss = {
                 category: element.category_details.category_id,
-                 attributes: attributes1,
-                 attribue_names: attribue_names1,
+                attributes: attributes1,
+                attribue_names: attribue_names1,
               };
-              this.selectedCategory.push(ss)
+              this.selectedCategory.push(ss);
             }
           );
         }
 
         // for (let i = 0; i < this.subCategoryData.sub_category_has_category_details.length-1; i++) {
         //   this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
-         
 
         //   this.selectedCategory.push([{ category:this.category_array_length[0].category_name , attributes: [] }]);
         //   (this.userForm.get('attribute') as FormArray).push(this.fb.control(null));
 
-         
         // }
         // for (let i = 1; i <= this.subCategoryData.sub_category_has_category_details.length; i++) {
         //   this.category_array_length.push(this.subCategoryData.sub_category_has_category_details[i])
-         
-        
-   
+
         // }
-      
-        
       });
   }
 }

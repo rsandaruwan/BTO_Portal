@@ -6,6 +6,7 @@
         <img *ngIf="urls.length < 1" src="../../../assets/icons/imageBack.png" />
         <ng-container *ngFor="let url of urls" >
           <div class="position-relative ">
+            
           <img
             [src]="url ? url : '../../../assets/icons/imageBack.png'"
           
@@ -41,7 +42,9 @@
   <!-- single -->
 
   <label class="hoverable" for="uploadId_{{ id }}">
-    <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+    <div *ngIf="!value"> <img [src]="url ? url : '../../../assets/icons/imageBack.png'" /></div>
+    <div *ngIf="value"> <img [src]="url ? url : value" /></div>
+    
 
     <div class="hover-text"></div>
     <div class="background"></div>

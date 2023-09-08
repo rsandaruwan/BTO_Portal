@@ -1,7 +1,11 @@
 <div class="col-12 mt-4 body-table secound_back">
-  <div class="row py-3">
+  <div class="row mx-2 py-3">
     <div class="col-12 col-md-6 text_field my-auto">
       <div class="d-flex">
+        <p class="headline_4 f_400 my-auto">
+          User <span class="content f_400"> {{count}}</span>
+        </p>
+
         <mat-form-field appearance="outline" class="w-50 mx-4">
           <mat-label class="body-2 gray-text">Search User</mat-label>
           <img
@@ -100,7 +104,7 @@
                 [showLabels]="true"
                 leftText="Active"
                 rightText="Inactive  "
-                (changed)="toggleChanged( row.id,$event)"
+                (changed)="suspend(row.id,$event)"
                 [id]="row.id"
               ></app-toggle-button>
             </div>
@@ -142,11 +146,12 @@
                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
               </tr> -->
       </table>
-
-      <mat-paginator
-        [pageSizeOptions]="[10, 15, 25, 50]"
-        aria-label="Select page of users"
-      ></mat-paginator>
+      <mat-paginator #paginator
+      [pageSizeOptions]="[1, 2, 30]"
+      [length]="11"
+      (page)="onPageChange($event)"
+      aria-label="Select page of users"
+    ></mat-paginator>
     </div>
   </div>
 </div>

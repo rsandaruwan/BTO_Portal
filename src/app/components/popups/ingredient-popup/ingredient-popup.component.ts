@@ -1,54 +1,154 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, AbstractControl } from '@angular/forms';
+import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  FormArray,
+  AbstractControl,
+  Validators,
+} from '@angular/forms';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
 
 @Component({
   selector: 'app-ingredient-popup',
   templateUrl: './ingredient-popup.component.html',
-  styleUrls: ['./ingredient-popup.component.scss']
+  styleUrls: ['./ingredient-popup.component.scss'],
 })
 export class IngredientPopupComponent {
+  @ViewChild('closebutton') closebutton: any;
+
+  image_details: any;
+  ingredient_data: any;
 
   @ViewChild('autoHeightTextarea')
   autoHeightTextarea!: ElementRef;
-  
-  attribute_array:Array<string>=[''];
-  index: number | undefined; 
+
+  attribute_array: Array<string> = [''];
+  index: number | undefined;
   userForm: FormGroup;
   textareaContent = '';
+  ingredient_image:any
+
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private tokestorage: StorageService,
+    private apiService: ApiService,
+
+    @Inject(MAT_DIALOG_DATA) public ind_data: any
   ) {
     this.userForm = this.fb.group({
       name: [],
-      phones: this.fb.array([
-        this.fb.control(null)
-      ])
-    })
+      phones: this.fb.array([this.fb.control(null)]),
+    });
   }
 
-  addPhone(): void {
-    (this.userForm.get('phones') as FormArray).push(
-      this.fb.control(null)
-    );
-    this.attribute_array.push("")
-   
+  ngOnInit(): void {
+    
+
+    if (this.ind_data) {
+      this.getIngredientData();
+    }
   }
 
-  removePhone(index: any) {
-    (this.userForm.get('phones') as FormArray).removeAt(index);
+  image_data(data: any) {
+    this.image_details = data.fileName;
+    console.log('data', data);
   }
 
-  getPhonesFormControls(): AbstractControl[] {
-    return (<FormArray> this.userForm.get('phones')).controls
-  }
-  returnArray():Array<string> {
-    return (this.attribute_array);
-  }
+  ingredient_formcontrol = new FormControl('', [Validators.required]);
+  description_formcontrol = new FormControl('', [Validators.required]);
+
   adjustTextareaHeight(event: Event): void {
     const textarea: HTMLTextAreaElement = this.autoHeightTextarea.nativeElement;
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
   }
 
-}
+  save() {
+    if (this.ind_data) {
+      var update_data = {
+        ingredient_id: this.ind_data.id,
+        ingredient_name: this.ingredient_formcontrol.value,
+        ingredient_description: this.description_formcontrol.value,
+        ingredient_image: this.image_details,
+      };
 
+      this.apiService
+        .put(
+          update_data,
+          String(this.tokestorage.getToken()),
+          'ingredient/edit'
+        )
+        .then((response: any) => {
+          this.closebutton.nativeElement.click();
+          this.updated();
+        })
+        .catch((error: any) => {});
+    } else {
+      const data = {
+        ingredient_name: this.ingredient_formcontrol.value,
+        ingredient_description: this.description_formcontrol.value,
+        ingredient_image: this.image_details,
+      };
+      this.apiService
+
+        .post(data, String(this.tokestorage.getToken()), 'ingredient/create')
+        .then((response: any) => {
+          this.closebutton.nativeElement.click();
+
+          this.done();
+        })
+        .catch((error: any) => {
+          // this.toste.error(error.error.detail.message);
+        });
+    }
+  }
+
+  done() {
+    var data1 = {
+      msg: 'Category added to the system Successfully!',
+    };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
+
+      data: data1,
+    });
+  }
+
+  updated() {
+    var data1 = {
+      msg: 'Category updated to the system Successfully!',
+    };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
+
+      data: data1,
+    });
+  }
+
+  getIngredientData() {
+    this.apiService
+      .get(
+        String(this.tokestorage.getToken()),
+        'ingredient/' + this.ind_data.id
+      )
+      .then((response: any) => {
+        this.ingredient_data = response.result;
+        console.log(this.ingredient_data.ingredient_image);
+        
+
+        this.ingredient_image = this.ingredient_data.ingredient_image
+        this.ingredient_formcontrol.setValue(this.ingredient_data.ingredient_name);
+        this.description_formcontrol.setValue(this.ingredient_data.ingredient_description);
+        
+      });
+  }
+}

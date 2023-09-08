@@ -49,11 +49,20 @@ export class IngredientsComponent implements AfterViewInit {
 
   ELEMENT_DATA: IngredientIntarface[] = [];
 
-  openAttribute() {
+  openAttribute(id:any) {
     let dialogRef = this.dialog.open(IngredientPopupComponent, {
       autoFocus: false,
+      data: {id :id }
     });
   }
+  AddAttribute() {
+    let dialogRef = this.dialog.open(IngredientPopupComponent, {
+      autoFocus: false,
+    
+    });
+  }
+
+  
 
   getIngredientData() {
     var name = '';
@@ -63,12 +72,13 @@ export class IngredientsComponent implements AfterViewInit {
     }
 
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'ingredient/view')
+      .get(String(this.tokestorage.getToken()), 'ingredient')
       .then((response: any) => {
-        this.ingredient_data = response.result;
+        this.ingredient_data = response.result.data;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.ingredient_data
-        );
+        ); this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 

@@ -46,7 +46,7 @@ const routes: Routes = [
       { path: 'permission', component: PermissionComponent },
       { path: 'recipes', component: RecipesComponent },
       { path: 'add_recipes', component: AddRecipesComponent },
-      { path: 'single_order/:order_id', component: SingleOrderComponent },
+      { path: 'single_order', component: SingleOrderComponent },
       { path: 'customer', component: CustomerComponent },
       { path: 'profile', component: ProfileComponent },
     ],

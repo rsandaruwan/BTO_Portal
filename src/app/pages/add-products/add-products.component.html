@@ -6,7 +6,7 @@
       </p>
     </div>
     <div class="col-6 d-flex flex-row-reverse">
-      <button [routerLink]="['/add_product']" class="primary_btn content">
+      <button  class="primary_btn content">
         SAVE DETAILS
       </button>
     </div>
@@ -33,8 +33,8 @@
             placeholder="Select Category"
             class="matSelectPlaceholder"
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <mat-option *ngFor="let categorie of categories" [value]="categorie.category_id">
+              {{ categorie.category_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -53,8 +53,8 @@
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <mat-option *ngFor="let subcategorie of subcategories" [value]="subcategorie.sub_category_id">
+              {{ subcategorie.sub_category_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>

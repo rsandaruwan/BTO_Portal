@@ -6,6 +6,11 @@ import {
   FormArray,
   AbstractControl,
 } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { CategoryInterface } from 'src/app/modals/category.model';
+import { SubCategoryIntarface } from 'src/app/modals/sub_category.model';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 interface Food {
   value: string;
@@ -35,6 +40,9 @@ export class AddProductsComponent {
   checked1: boolean | undefined;
   selectedValuesArray: string[] = [];
 
+  categories: CategoryInterface[] = [];
+  subcategories: SubCategoryIntarface[] = [];
+
   inputcol_1: any[] = [[]];
   inputcol_2: any[] = [[]];
 
@@ -54,18 +62,24 @@ export class AddProductsComponent {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
   }
-  test(data: any) {
-   
-  }
+  test(data: any) {}
 
   userForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private tokestorage: StorageService,
+    private apiService: ApiService
+  ) {
     this.userForm = this.fb.group({
       name: [],
       rows: this.fb.array([this.fb.control(null)]),
       col2_2s: this.fb.array([this.fb.control(null)]),
       col2_3s: this.fb.array([this.fb.control(null)]),
     });
+  }
+
+  ngOnInit(): void {
+    this.getCategoryData();
   }
 
   addrow(): void {
@@ -98,25 +112,22 @@ export class AddProductsComponent {
       !this.selectedValuesArray.includes(this.selectedValue)
     ) {
       this.selectedValuesArray.push(this.selectedValue);
-
-
     }
   }
 
   removeinput2_2(index: number, id: any) {
-  
-    if (this.table_row[index].column2.length>1) {
+    if (this.table_row[index].column2.length > 1) {
       this.table_row[index].column2.splice(id, 1);
     }
   }
   removeinput2_3(index: number, id: any) {
-    if (this.table_row[index].column3.length>1) {
+    if (this.table_row[index].column3.length > 1) {
       this.table_row[index].column3.splice(id, 1);
     }
   }
   deleteRow(index: number) {
-    if(this.table_row.length > 1) {
-    this.table_row.splice(index, 1);
+    if (this.table_row.length > 1) {
+      this.table_row.splice(index, 1);
     }
   }
 
@@ -124,12 +135,26 @@ export class AddProductsComponent {
     let array_selected_value = this.selectedValuesArray[id];
     let array_selected_id = id;
 
-   
     if (
       array_selected_id >= 0 &&
       array_selected_id < this.selectedValuesArray.length
     ) {
       this.selectedValuesArray.splice(array_selected_id, 2);
     }
+  }
+
+  getCategoryData() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'category')
+      .then((response: any) => {
+        this.categories = response.result.data;
+      });
+  }
+  getSubCategoryData() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'sub-category')
+      .then((response: any) => {
+        this.subcategories = response.result.data;
+      });
   }
 }

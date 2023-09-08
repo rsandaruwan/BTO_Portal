@@ -168,7 +168,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item >
+              <button mat-menu-item  (click)="editclick(row.order_id)"  [routerLink]="['/portal/single_order']">
                 <mat-icon class="mat_icon material-symbols-outlined"
                   >visibility</mat-icon
                 >

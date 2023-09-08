@@ -24,6 +24,10 @@ export class SubCategoriesComponent implements AfterViewInit {
   selectedPageSize: number = 10;
   sub_category_data: any;
 
+  skip: any = 0;
+  count: number = 0;
+
+
   selectedValue: string | undefined;
 
   displayedColumns: string[] = [
@@ -60,30 +64,38 @@ export class SubCategoriesComponent implements AfterViewInit {
   }
 
   getSubCategoryData() {
-    var limit = '';
-    var name = '';
+
+    var parameter = '?';
 
     if (this.search_sub_cat != undefined) {
-      name = '?sub_category_name=' + this.search_sub_cat;
+      parameter += 'attribute_name=' + this.search_sub_cat + '&';
     }
     if (this.selectedPageSize != undefined) {
-      limit = '&limit=' + this.selectedPageSize;
+      parameter += 'limit=' + this.selectedPageSize + '&';
+    }
+    if (this.skip != undefined) {
+      parameter += 'skip=' + this.skip;
     }
 
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'sub-category' + name + limit)
+      .get(String(this.tokestorage.getToken()), 'sub-category' + parameter)
       .then((response: any) => {
 
-        this.sub_category_data = response.result.data.reverse();
+        this.sub_category_data = response.result.data;
+        this.count = response.result.page[0].count;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.sub_category_data
         );
+     
         
       });
   }
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
+    console.log(event);
+    this.skip = (event.pageIndex* this.selectedPageSize);
+    this.paginator.length = this.count;
 
     this.getSubCategoryData();
   }

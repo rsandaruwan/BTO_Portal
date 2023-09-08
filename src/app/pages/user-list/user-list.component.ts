@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AttributePopupComponent } from 'src/app/components/popups/attribute-popup/attribute-popup.component';
@@ -24,6 +24,10 @@ export class UserListComponent implements AfterViewInit {
   search_user: any;
   user_data: any;
   user_status_id: any;
+  selectedPageSize: number = 10;
+
+  skip: any = 0;
+  count: number = 0;
 
   selectedValue: string | undefined;
   checked3: boolean = false;
@@ -68,28 +72,49 @@ export class UserListComponent implements AfterViewInit {
   }
 
   getUserData() {
-    var name = '';
-    var page = '';
+    var parameter = '?';
 
     if (this.search_user != undefined) {
-      name = '?user_name=' + this.search_user;
+      parameter += 'user_name=' + this.search_user+'&';
+    }
+    if (this.selectedPageSize != undefined) {
+      parameter+= 'limit=' + this.selectedPageSize +'&';
+    }
+    if (this.skip != undefined) {
+      parameter += 'skip=' + this.skip;
     }
 
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'user')
+      .get(String(this.tokestorage.getToken()), 'user'+ parameter)
       .then((response: any) => {
+     
         this.user_data = response.result.data;
+        this.count = response.result.page[0].count;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.user_data
         );
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
   search(event: any) {
     this.search_user = event.target.value;
 
+    console.log( this.search_user);
+    
+
     this.getUserData();
   }
+  onPageChange(event: PageEvent) {
+    this.selectedPageSize = event.pageSize;
+    console.log(event);
+    this.skip = (event.pageIndex* this.selectedPageSize);
+    this.paginator.length = this.count;
+  }
   toggleChanged(id: any, data: any) {
+  
+
     if (data == true) {
       this.user_status_id = '3';
     }
@@ -109,8 +134,7 @@ export class UserListComponent implements AfterViewInit {
         'user/update/status'
       )
       .then((response: any) => {
-        this.suspend();
-       
+        this.done();
 
         // this.updated();
       })
@@ -125,7 +149,7 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  suspend() {
+  suspend(id: any, data1: any):boolean {
    
     var data = {
       title: 'Suspend User',
@@ -142,11 +166,15 @@ export class UserListComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result == '1') {
-       
-    this.done();
+    
+      if (result == 1) {
+     this.toggleChanged(id,data1);
+    
+      }else{
+        this.getUserData()
       }
     });
+    return true;
   }
 
   done() {
@@ -158,5 +186,6 @@ export class UserListComponent implements AfterViewInit {
 
       data: data1,
     });
+    this.getUserData()
   }
 }

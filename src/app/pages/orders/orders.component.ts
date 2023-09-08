@@ -16,12 +16,6 @@ interface Food {
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent {
-
-  
-
-
- 
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -100,7 +94,6 @@ export class OrdersComponent {
   ];
 
   getStatus(status_id: number): any {
-
     switch (status_id) {
       case 1:
         return {
@@ -132,14 +125,11 @@ export class OrdersComponent {
   }
 
   tableclick(id: any) {
-  
     this.router.navigate(['single_order', id]);
-  
-
-  
   }
-}
-function Output(): (target: OrdersComponent, propertyKey: "sendDataToParent") => void {
-  throw new Error('Function not implemented.');
+
+  editclick(id:any){
+    
+  }
 }
 

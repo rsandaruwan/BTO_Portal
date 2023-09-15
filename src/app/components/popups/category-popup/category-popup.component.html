@@ -19,15 +19,21 @@
       <p class="primary content">Category Name</p>
     </div>
     <div class="col-5">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label class="body-2 gray-text">Search by Product Name1</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Search by Product Name"
-          [formControl]="category_nameformcontrol"
-        />
-      </mat-form-field>
+      <form #myForm="ngForm" >
+        <mat-form-field appearance="outline" class="w-100" >
+          <mat-label class="body-2 gray-text">Search by Product Name1</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Search by Product Name"
+            [formControl]="category_nameformcontrol" />
+            <mat-hint>Hint</mat-hint>
+       
+         
+        </mat-form-field>
+         <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'category_name'">{{resultArray[0].msg}}</mat-hint>
+      </form>
+    
     </div>
   </div>
 

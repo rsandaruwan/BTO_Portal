@@ -104,6 +104,15 @@ body {
   font-weight: 300 !important;
 }
 
+.text-danger {
+  position: relative;
+  z-index: 1;
+  color: red;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-family: Poppins;
+}
+
 //colors
 
 .primary {
@@ -261,7 +270,7 @@ tr.ng-tns-c49-2.ng-star-inserted {
   height: 85% !important;
 }
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-  padding-top: 11px !important;
+  padding-top: 16px !important;
   padding-bottom: 16px !important;
 }
 input,

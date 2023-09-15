@@ -49,6 +49,7 @@ const routes: Routes = [
       { path: 'single_order', component: SingleOrderComponent },
       { path: 'customer', component: CustomerComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'logout', component: LoginComponent },
     ],
   },
 

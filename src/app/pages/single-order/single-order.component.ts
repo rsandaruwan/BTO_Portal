@@ -100,7 +100,7 @@ var order_status=3;
    this.oredr_status_array[index].image = this.oredr_status_array[index].image.split('_')[0]+'_green'
     
   }
-console.log(this.oredr_status_array)
+
 }
   
 

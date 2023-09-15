@@ -21,11 +21,14 @@ export class CategoryPopupComponent {
   @ViewChild('closebutton') closebutton: any;
   selectedSubcategory: string | undefined;
   category_data: any;
+  errors: any;
+  resultArray: { type: string; msg: string }[] = [];
 
   constructor(
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
+    public dialogRef: MatDialogRef<CategoryPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public cat_data: any
   ) {}
   ngOnInit(): void {
@@ -48,8 +51,19 @@ export class CategoryPopupComponent {
         .then((response: any) => {
           this.closebutton.nativeElement.click();
           this.updated();
+          this.cat_data.functionToCall()
+          
         })
-        .catch((error: any) => {});
+        .catch((error: any) => {
+             error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
+        });
     } else {
       const data = {
         category_name: this.category_nameformcontrol.value,
@@ -60,13 +74,19 @@ export class CategoryPopupComponent {
         .then((response: any) => {
           this.category_data = response.result[0];
 
-      
           this.closebutton.nativeElement.click();
+
           this.done();
         })
         .catch((error: any) => {
-
-          // this.toste.error(error.error.detail.message);
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
         });
     }
   }
@@ -91,4 +111,5 @@ export class CategoryPopupComponent {
       data: data1,
     });
   }
+  
 }

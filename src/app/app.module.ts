@@ -25,6 +25,7 @@ import { IngredientPopupComponent } from './components/popups/ingredient-popup/i
 import { DynamicConfirmationPopupComponent } from './components/popups/dynamic-confirmation-popup/dynamic-confirmation-popup.component';
 import { DynamicDonePopupComponent } from './components/popups/dynamic-done-popup/dynamic-done-popup.component';
 import { AddUserComponent } from './components/popups/add-user/add-user.component';
+import { LogoutComponent } from './components/popups/logout/logout.component';
 
 
 // pages
@@ -85,7 +86,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SingleOrderComponent,
     CustomerComponent,
     AddUserComponent,
-    ProfileComponent
+    ProfileComponent,
+    LogoutComponent
 
 
 

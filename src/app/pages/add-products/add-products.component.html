@@ -6,9 +6,7 @@
       </p>
     </div>
     <div class="col-6 d-flex flex-row-reverse">
-      <button  class="primary_btn content">
-        SAVE DETAILS
-      </button>
+      <button class="primary_btn content" (click)="save()">SAVE DETAILS</button>
     </div>
   </div>
 
@@ -28,12 +26,17 @@
         <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
-            [(ngModel)]="selectedValue"
+            [(ngModel)]="selectedCategory"
             name="food"
             placeholder="Select Category"
             class="matSelectPlaceholder"
+         
           >
-            <mat-option *ngFor="let categorie of categories" [value]="categorie.category_id">
+            <mat-option
+              *ngFor="let categorie of categories"
+              [value]="categorie.category_id"
+              (click)="get_category_id(categorie.category_id)"
+            >
               {{ categorie.category_name }}
             </mat-option>
           </mat-select>
@@ -48,14 +51,23 @@
         <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
-            [(ngModel)]="selectedValue"
-            name="food"
+            [(ngModel)]="selectedSubCategory"
+            name="subcategorie"
             placeholder="Select A Sub Category"
             class="matSelectPlaceholder"
+            multiple
           >
-            <mat-option *ngFor="let subcategorie of subcategories" [value]="subcategorie.sub_category_id">
-              {{ subcategorie.sub_category_name }}
-            </mat-option>
+            <ng-container *ngIf="subcategories.length == 0">
+              <mat-option class="content">No Sub category</mat-option>
+            </ng-container>
+            <ng-container *ngIf="subcategories.length != 0">
+              <mat-option
+                *ngFor="let subcategorie of subcategories"
+                [value]="subcategorie.id"
+              >
+                {{ subcategorie.name }}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </div>
@@ -67,7 +79,7 @@
       <div class="col-10">
         <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-          <input matInput placeholder="Search by Product Name" />
+          <input matInput placeholder="Product Name" [formControl]="product_nameformcontrol" />
         </mat-form-field>
       </div>
     </div>
@@ -76,7 +88,9 @@
         <p class="content mt-4 detail_text">Product Main Image</p>
       </div>
       <div class="col-10 w-75 my-3 mx-4">
-        <app-image-upload id="fileInput1"></app-image-upload>
+        <!-- <app-image-upload id="fileInput1"></app-image-upload> -->
+
+        <app-image-upload (fileout)="Product_image_data($event) " [value]="product_image"></app-image-upload>
       </div>
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
@@ -95,6 +109,7 @@
             [(ngModel)]="textareaContent"
             (input)="adjustTextareaHeight($event)"
             #autoHeightTextarea
+            [formControl]="description_formcontrol"
           ></textarea>
         </mat-form-field>
       </div>
@@ -107,13 +122,24 @@
         <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
-            [(ngModel)]="selectedValue"
-            name="food"
-            placeholder="Select A Sub Category"
+            [(ngModel)]="selectedIngredient"
+            name="ingredient"
+            placeholder="Select a Ingredients"
             class="matSelectPlaceholder"
+            multiple
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <option
+              class="selectAddNew mx-3 my-2 body-2 f_400"
+              (click)="AddIngrident()"
+            >
+              Add new Ingredients
+            </option>
+            <mat-option
+              *ngFor="let ingredient of ingredient_data"
+              [value]="ingredient.ingredient_id"
+              class="content"
+            >
+              {{ ingredient.ingredient_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -133,7 +159,7 @@
           [showLabels]="true"
           leftText="Available"
           rightText="Out of Stock  "
-          (changed)="checked = $event"
+          (changed)="chageStatus($event)"
           [id]="1"
         ></app-toggle-button>
       </div>
@@ -155,7 +181,7 @@
           [showLabels]="true"
           leftText="Yes"
           rightText="No  "
-          (changed)="checked1 = $event"
+          (changed)="chagePriviewStatus($event)"
           [id]="2"
         ></app-toggle-button>
       </div>
@@ -181,7 +207,7 @@
       <div class="col-10">
         <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-          <input matInput placeholder="Search by Product Name" />
+          <input matInput placeholder="Enter variant name"   [formControl]="varient_formcontrol" />
         </mat-form-field>
       </div>
     </div>
@@ -190,10 +216,12 @@
         <p class="content mt-4 detail_text">Variant Images</p>
       </div>
       <div class="col-10 w-75 my-3 mx-4">
-        <app-image-upload
+        <!-- <app-image-upload
           id="fileInput2"
           multiple="multiple"
-        ></app-image-upload>
+        ></app-image-upload> -->
+
+        <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2" multiple="multiple"></app-image-upload>
       </div>
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
@@ -212,6 +240,7 @@
             [(ngModel)]="textareaContent"
             (input)="adjustTextareaHeight($event)"
             #autoHeightTextarea
+            [formControl]="varientDescription_formcontrol"
           ></textarea>
         </mat-form-field>
       </div>
@@ -224,14 +253,23 @@
         <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
           <mat-select
-            [(ngModel)]="selectedValue"
-            name="food"
-            placeholder="Select A Sub Category"
+            [(ngModel)]="selectedAttribute"
+            name="attribute"
+            placeholder="Select Attributes"
             class="matSelectPlaceholder"
             (selectionChange)="onSelectionChange()"
           >
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{ food.viewValue }}
+            <option
+              class="selectAddNew mx-3 my-2 body-2 f_400"
+              (click)="AddAttribute()"
+            >
+              Add new Attributes
+            </option>
+            <mat-option
+              *ngFor="let attribute of attribute_data"
+              [value]="attribute"
+            >
+              {{ attribute.attribute_name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -242,7 +280,7 @@
         >
           <div class="row">
             <div class="col-4 m-auto">
-              <p class="content primary text-center m-0">{{ value }}</p>
+              <p class="content primary text-center m-0">{{ value.attribute_name }}</p>
             </div>
             <div class="col-8 position-relative">
               <mat-form-field
@@ -250,13 +288,13 @@
                 class="attribite_input mt-2 mx-3"
               >
                 <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-                <input matInput placeholder="Search by Product Name" />
+                <input matInput placeholder="Search by Product Name" [formControl]="varientAttribute_formcontrol"/>
               </mat-form-field>
               <mat-icon class="position-absolute red-close-btn">
                 <img
                   src="../../../assets/icons/close-red.png"
                   alt=""
-                  (click)="closebtn(i)"
+                  (click)="closebtn(value.attribute_id )"
               /></mat-icon>
             </div>
           </div>
@@ -278,17 +316,17 @@
               <tr class="border_bottom" style="background-color: #404040">
                 <th scope="col">
                   <mat-form-field appearance="outline" class="m-2">
-                    <input matInput placeholder="Enter a Value" />
+                    <input matInput placeholder="Enter a Value" value="Nutrition" disabled />
                   </mat-form-field>
                 </th>
                 <th class="borderRL">
                   <mat-form-field appearance="outline" class="m-2">
-                    <input matInput placeholder="Enter a Value" />
+                    <input matInput placeholder="Enter a Value" value="Per 100g" disabled />
                   </mat-form-field>
                 </th>
                 <th scope="col">
                   <mat-form-field appearance="outline" class="m-2">
-                    <input matInput placeholder="Enter a Value" />
+                    <input matInput placeholder="Enter a Value" value="In This Pack"  disabled/>
                   </mat-form-field>
                 </th>
                 <td class="p-0 btn_back d-none">
@@ -303,7 +341,8 @@
                     <input
                       matInput
                       placeholder="Enter a Value"
-                      [(ngModel)]="row.column1"
+                      [value]="row.nutrition_name"
+                      [(ngModel)]="table_row[i].nutrition_name"
                     />
                   </mat-form-field>
                 </td>
@@ -311,12 +350,13 @@
                   <mat-form-field
                     appearance="outline"
                     class="m-2 position-relative"
-                    *ngFor="let col2_2 of row.column2; let j = index"
+                    *ngFor="let col2_2 of row.nutrition_per_100_gram; let j = index"
                   >
                     <input
                       matInput
                       placeholder="Enter a Value"
-                      [value]="row.column2[j]"
+                      (change)="dataadd(i,2,j,$event)"
+                      [value]="table_row[i].nutrition_per_100_gram[j]"
                     />
                     <mat-icon matSuffix (click)="removeinput2_2(i, j)"
                       ><img
@@ -338,12 +378,14 @@
                   <mat-form-field
                     appearance="outline"
                     class="m-2 position-relative"
-                    *ngFor="let col2_3 of row.column3; let j = index"
+                    *ngFor="let col2_3 of row.nutrition_in_this_pack; let j = index"
                   >
+                
                     <input
                       matInput
                       placeholder="Enter a Value"
-                      [value]="row.column3[j]"
+                  (change)="dataadd(i,3,j,$event)"
+                  [value]="table_row[i].nutrition_in_this_pack[j]"
                     />
                     <mat-icon matSuffix (click)="removeinput2_3(i, j)"
                       ><img
@@ -383,40 +425,34 @@
         </button>
       </div>
     </div>
-    <div
-      class="row m-0 p-0 first_row border-bottom"
-      style="border-radius: 0pc 15px 15px 15px"
-    >
-      <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
         <p class="content mt-4 detail_text">Price</p>
       </div>
       <div class="col-10">
         <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
           <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-          <input matInput placeholder="Search by Product Name" />
+          <input matInput placeholder="Enter Price"  [formControl]="priceformcontrol" />
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="row m-0 p-0 first_row border-bottom"
-      style="border-radius: 0pc 15px 15px 15px"
-    >
-      <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
         <p class="content mt-4 detail_text">Product Status</p>
       </div>
       <div class="col-10">
         <app-toggle-button
-        [type]="0"
-        class="my-3 mx-4"
-        style="width: 140px"
-        [width]="140"
-        [on]="false"
-        [showLabels]="true"
-        leftText="Available"
-        rightText="Out of Stock  "
-        (changed)="checked = $event"
-        [id]="5"
-      ></app-toggle-button>
+          [type]="0"
+          class="my-3 mx-4"
+          style="width: 140px"
+          [width]="140"
+          [on]="false"
+          [showLabels]="true"
+          leftText="Available"
+          rightText="Out of Stock  "
+          (changed)="checked = $event"
+          [id]="5"
+        ></app-toggle-button>
       </div>
     </div>
     <div
@@ -428,18 +464,25 @@
       </div>
       <div class="col-10">
         <app-toggle-button
-        [type]="0"
-        class="my-3 mx-4"
-        style="width: 85px"
-        [width]="85"
-        [on]="false"
-        [showLabels]="true"
-        leftText="Yes"
-        rightText="No"
-        (changed)="checked = $event"
-        [id]="6"
-      ></app-toggle-button>
+          [type]="0"
+          class="my-3 mx-4"
+          style="width: 85px"
+          [width]="85"
+          [on]="false"
+          [showLabels]="true"
+          leftText="Yes"
+          rightText="No"
+          (changed)="checked = $event"
+          [id]="6"
+        ></app-toggle-button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="footer_btn mx-5 row my-5">
+  <div class="col-md-6 p-0"></div>
+  <div class="col-md-6 p-0 d-flex flex-row-reverse">
+    <button class="primary_btn content" (click)="save()">SAVE DETAILS</button>
   </div>
 </div>

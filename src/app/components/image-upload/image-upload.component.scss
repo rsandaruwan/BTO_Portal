@@ -51,10 +51,13 @@ img {
   bottom: 75px;
   left: 50px;
   color: red;
+
 }
 .closebtn1 {
   position: absolute;
   top: 0;
   right: 0;
   color: red;
+  z-index: 2;
+
 }

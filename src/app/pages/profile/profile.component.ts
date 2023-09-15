@@ -6,6 +6,11 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { FormControl, Validators } from '@angular/forms';
+import { DynamicDonePopupComponent } from 'src/app/components/popups/dynamic-done-popup/dynamic-done-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
@@ -41,6 +46,29 @@ export class ProfileComponent {
   hide = true;
   image = '../../../assets/image/image_background.png';
   active_color:any = "#97BE41"
+  userId: any = "64ec62ce38a10c1ec6c1ead4"
+  user_data_by_id:any
+
+
+  constructor(
+    public dialog: MatDialog,
+    private tokestorage: StorageService,
+    private apiService: ApiService,
+   
+  ) {}
+  ngOnInit(): void {
+    this.getUserById();
+  }
+
+  first_nameformcontrol = new FormControl('', [Validators.required]);
+  last_nameformcontrol = new FormControl('', [Validators.required]);
+  user_contactformcontrol = new FormControl('', [Validators.required]);
+  user_emailformcontrol = new FormControl('', [Validators.required]);
+
+  current_passwordformcontrol = new FormControl('', [Validators.required]);
+  new_passwordformcontrol = new FormControl('', [Validators.required]);
+  confirm_passwordformcontrol = new FormControl('', [Validators.required]);
+
 
   
   fileChangeEvent(fileInput: any): any {
@@ -96,6 +124,54 @@ export class ProfileComponent {
     // if (this.user.user_details) {
     //   this.image = this.user.user_details.user_image;
     
+    }
+
+    getUserById() {
+      this.apiService
+        .get(String(this.tokestorage.getToken()), 'user/' + this.userId)
+        .then((response: any) => {
+          this.user_data_by_id = response.result;
+          console.log(response);
+
+          this.first_nameformcontrol .setValue(this.user_data_by_id.first_name);
+          this.last_nameformcontrol .setValue(this.user_data_by_id.last_name);
+          this.user_contactformcontrol.setValue(this.user_data_by_id.mobile);
+          this.user_emailformcontrol .setValue(this.user_data_by_id.email);
+
+        });
+    }
+
+    editUser(){
+      var update_data = {
+        user_id:this.userId,
+        first_name:this.first_nameformcontrol.value, 
+        last_name:this.last_nameformcontrol.value,
+        mobile:this.user_contactformcontrol.value, 
+        email: this.user_emailformcontrol.value,
+        user_role:"63e4824cb3e51d4cc0860af1"
+      };
+
+      this.apiService
+        .put(
+          update_data,
+          String(this.tokestorage.getToken()),
+          'user/edit'
+        )
+        .then((response: any) => {
+          // this.closebutton.nativeElement.click();
+          this.updated();
+        })
+        .catch((error: any) => {});
+    }
+    updated() {
+      var data1 = {
+        msg: 'Category updated to the system Successfully!',
+      };
+      this.dialog.open(DynamicDonePopupComponent, {
+        width: '25vw',
+  
+        data: data1,
+      });
     }
   }
 

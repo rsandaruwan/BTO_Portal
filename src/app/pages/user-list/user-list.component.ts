@@ -101,14 +101,13 @@ export class UserListComponent implements AfterViewInit {
   search(event: any) {
     this.search_user = event.target.value;
 
-    console.log( this.search_user);
     
 
     this.getUserData();
   }
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
-    console.log(event);
+  
     this.skip = (event.pageIndex* this.selectedPageSize);
     this.paginator.length = this.count;
   }

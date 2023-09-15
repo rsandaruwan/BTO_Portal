@@ -12,6 +12,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { NavItem } from 'src/app/modals/side_nav.model';
+import { MatDialog } from '@angular/material/dialog';
+import { LogoutComponent } from 'src/app/components/popups/logout/logout.component';
 @Component({
   selector: 'app-dynamic-dashboard',
   templateUrl: './dynamic-dashboard.component.html',
@@ -135,6 +137,7 @@ export class DynamicDashboardComponent {
   mobileQuery: MediaQueryList;
   constructor(
     private router: Router,
+    public dialog: MatDialog,
     private applicationService: ApplicationService,
     public tokenStorage: tokestorageService,
     public commonStorage: CommonStorageService,
@@ -255,5 +258,15 @@ if(this.sidenavContainer && this.sidebarmenu)
     this.tokenStorage.signOut();
     localStorage.clear();
     this.router.navigate(['']);
+  }
+
+
+  logour_popup(){
+    const dialogRef = this.dialog.open(LogoutComponent);    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+
   }
 }

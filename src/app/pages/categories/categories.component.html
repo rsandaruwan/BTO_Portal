@@ -29,22 +29,22 @@
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
-        <ng-container matColumnDef="category_id">
+        <!-- <ng-container matColumnDef="category_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="mx-2 body-2" >|</span>
             CATEGORY ID</th>
           <td mat-cell *matCellDef="let row">{{ row.category_id }}</td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Progress Column -->
-        <ng-container matColumnDef="category_name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="mx-2 body-2" >|</span>NAME</th>
+        <ng-container matColumnDef="category_name" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-11"> <span class="mx-2 body-2" >|</span>NAME</th>
           <td mat-cell *matCellDef="let row" >{{ row.category_name }}</td>
         </ng-container>
 
         
 
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <span class="mx-2 body-2" >|</span>ACTION</th>
+        <ng-container matColumnDef="action" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1"> <span class="mx-2 body-2" >|</span>ACTION</th>
           <td mat-cell *matCellDef="let row">
             <button
               mat-icon-button
@@ -70,7 +70,7 @@
       </table>
 
       <mat-paginator #paginator
-      [pageSizeOptions]="[1, 2, 30]"
+      [pageSizeOptions]="[10, 20, 30]"
       [length]="11"
       (page)="onPageChange($event)"
       aria-label="Select page of users"

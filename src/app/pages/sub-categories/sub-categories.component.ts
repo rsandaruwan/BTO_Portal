@@ -93,7 +93,7 @@ export class SubCategoriesComponent implements AfterViewInit {
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
-    console.log(event);
+  
     this.skip = (event.pageIndex* this.selectedPageSize);
     this.paginator.length = this.count;
 

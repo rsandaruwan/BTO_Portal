@@ -25,6 +25,8 @@ export class AttributePopupComponent {
   attribute_array: Array<string> = [''];
   index: number | undefined;
   userForm: FormGroup;
+  resultArray: { type: string; msg: string }[] = [];
+
 
   attribute_data: any;
   constructor(
@@ -32,6 +34,7 @@ export class AttributePopupComponent {
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
+    private dialogRef: MatDialogRef<AttributePopupComponent>,
     @Inject(MAT_DIALOG_DATA) public att_data: any
   ) {
     this.userForm = this.fb.group({
@@ -80,7 +83,16 @@ export class AttributePopupComponent {
           this.closebutton.nativeElement.click();
           this.updated();
         })
-        .catch((error: any) => {});
+        .catch((error: any) => {
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
+        });
 
       }else{
           const data = {
@@ -92,11 +104,19 @@ export class AttributePopupComponent {
             .then((response: any) => {
               this.attribute_data = response.result[0];
       
-              this.closebutton.nativeElement.click();
-              this.done();
+              // this.closebutton.nativeElement.click();
+              // this.done();
+              this.dialogRef.close(1);
             })
             .catch((error: any) => {
-              // this.toste.error(error.error.detail.message);
+              error.error.detail.forEach((item: any) => {
+                if (item.loc && item.loc[1] && item.msg) {
+                  this.resultArray.push({
+                    type: item.loc[1],
+                    msg: item.msg,
+                  });
+                }
+              });
             });
         }
    

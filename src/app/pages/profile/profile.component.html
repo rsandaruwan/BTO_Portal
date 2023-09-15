@@ -77,13 +77,13 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">First Name</mat-label>
-                  <input matInput />
+                  <input matInput   [formControl]="first_nameformcontrol"/>
                 </mat-form-field>
               </div>
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Last Name</mat-label>
-                  <input matInput readonly type="email" />
+                  <input matInput   [formControl]="last_nameformcontrol"/>
                 </mat-form-field>
               </div>
             </div>
@@ -91,19 +91,19 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Contact Number</mat-label>
-                  <input matInput />
+                  <input matInput  [formControl]="user_contactformcontrol"/>
                 </mat-form-field>
               </div>
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Email</mat-label>
-                  <input matInput readonly type="email" disabled  />
+                  <input matInput readonly type="email" [formControl]="user_emailformcontrol" readonly  />
                 </mat-form-field>
               </div>
             </div>
             <div class="row my-3">
               <div class="col-6 d-flex gap-3">
-                <button class="primary_btn primary">SAVE CHANGES</button>
+                <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
                 <button class="reset_btn primary">RESET</button>
               </div>
               <div class="col-6"></div>
@@ -127,7 +127,7 @@
               <div class="col-6 mt-4">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Current Password</mat-label>
-                  <input matInput type="text" />
+                  <input matInput type="text"  [formControl]="current_passwordformcontrol"/>
                 </mat-form-field>
               </div>
             </div>
@@ -136,7 +136,7 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 p-0 my-3 body-2">
                   <mat-label class="content">New Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" />
+                  <input matInput [type]="hide ? 'password' : 'text'" [formControl]="new_passwordformcontrol"/>
                   <button
                     mat-icon-button
                     matSuffix
@@ -153,7 +153,7 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2 my-3">
                   <mat-label class="content">Confirm New Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" />
+                  <input matInput [type]="hide ? 'password' : 'text'"  [formControl]="confirm_passwordformcontrol"/>
                   <button
                     mat-icon-button
                     matSuffix
@@ -181,7 +181,7 @@
 
             <div class="row my-3">
               <div class="col-6 d-flex gap-3">
-                <button class="primary_btn primary">SAVE CHANGES</button>
+                <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
                 <button class="reset_btn primary">RESET</button>
               </div>
               <div class="col-6"></div>

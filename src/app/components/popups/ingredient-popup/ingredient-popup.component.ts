@@ -15,6 +15,7 @@ import {
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { DynamicDonePopupComponent } from '../dynamic-done-popup/dynamic-done-popup.component';
+import { AddProductsComponent } from 'src/app/pages/add-products/add-products.component';
 
 @Component({
   selector: 'app-ingredient-popup',
@@ -34,14 +35,15 @@ export class IngredientPopupComponent {
   index: number | undefined;
   userForm: FormGroup;
   textareaContent = '';
-  ingredient_image:any
+  ingredient_image: any;
+  resultArray: { type: string; msg: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
-
+    private dialogRef: MatDialogRef<IngredientPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public ind_data: any
   ) {
     this.userForm = this.fb.group({
@@ -51,8 +53,6 @@ export class IngredientPopupComponent {
   }
 
   ngOnInit(): void {
-    
-
     if (this.ind_data) {
       this.getIngredientData();
     }
@@ -60,7 +60,6 @@ export class IngredientPopupComponent {
 
   image_data(data: any) {
     this.image_details = data.fileName;
-    console.log('data', data);
   }
 
   ingredient_formcontrol = new FormControl('', [Validators.required]);
@@ -88,10 +87,18 @@ export class IngredientPopupComponent {
           'ingredient/edit'
         )
         .then((response: any) => {
-          this.closebutton.nativeElement.click();
           this.updated();
         })
-        .catch((error: any) => {});
+        .catch((error: any) => {
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
+        });
     } else {
       const data = {
         ingredient_name: this.ingredient_formcontrol.value,
@@ -102,12 +109,21 @@ export class IngredientPopupComponent {
 
         .post(data, String(this.tokestorage.getToken()), 'ingredient/create')
         .then((response: any) => {
-          this.closebutton.nativeElement.click();
+          alert();
 
-          this.done();
+          this.dialogRef.close(1);
         })
         .catch((error: any) => {
-          // this.toste.error(error.error.detail.message);
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
+          console.log("arr",this.resultArray);
+          
         });
     }
   }
@@ -142,13 +158,14 @@ export class IngredientPopupComponent {
       )
       .then((response: any) => {
         this.ingredient_data = response.result;
-        console.log(this.ingredient_data.ingredient_image);
-        
 
-        this.ingredient_image = this.ingredient_data.ingredient_image
-        this.ingredient_formcontrol.setValue(this.ingredient_data.ingredient_name);
-        this.description_formcontrol.setValue(this.ingredient_data.ingredient_description);
-        
+        this.ingredient_image = this.ingredient_data.ingredient_image;
+        this.ingredient_formcontrol.setValue(
+          this.ingredient_data.ingredient_name
+        );
+        this.description_formcontrol.setValue(
+          this.ingredient_data.ingredient_description
+        );
       });
   }
 }

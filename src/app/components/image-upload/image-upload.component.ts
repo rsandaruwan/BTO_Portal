@@ -1,4 +1,11 @@
-import { Component, Input, Output, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -9,12 +16,11 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./image-upload.component.scss'],
 })
 export class ImageUploadComponent implements OnInit, AfterViewInit {
-  
   @Input() id: string | undefined;
   @Input()
   multiple!: string;
   @Output() fileout = new EventEmitter<any>();
-  @Input() value: string |undefined;
+  @Input() value: string | undefined;
 
   uploadId: any;
   imageType: any;
@@ -22,39 +28,25 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   url: string | null = null; // Initialize url as null
   urls: Array<string> = [];
 
-  fileName:any;
-  fileUrl:any;
+  fileName: any;
+  fileUrl: any;
 
-  ngOnInit(): void {
-
-    
-   
-  }
+  ngOnInit(): void {}
 
   constructor(
     private tokestorage: StorageService,
     private apiService: ApiService
-  ) {
-   
-    
-  }
-  ngAfterViewInit(): void {
-
-  }
+  ) {}
+  ngAfterViewInit(): void {}
 
   onSelectFile(event: any) {
- 
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]);
 
-      // console.log(event.target.files[0]);
-
       reader.onload = (event) => {
         this.url = event.target?.result as string; // Use optional chaining
-
-        // console.log(this.url);
       };
     }
     this.uploadId = this.id;
@@ -65,18 +57,18 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
     formData.append('files', event.target.files[0]);
 
     this.apiService
-      .post_file( formData, String(this.tokestorage.getToken()), 'general/upload' )
+      .post_file(
+        formData,
+        String(this.tokestorage.getToken()),
+        'general/upload'
+      )
       .then((response: any) => {
+        this.fileName = response.result[0].filename;
+        this.fileUrl = response.result[0].temp_url;
 
-        this.fileName = response.result[0].filename
-        this.fileUrl = response.result[0].temp_url
-
-        this.addNewItem()
-        // console.log(response);
+        this.addNewItem();
       })
-      .catch((error: any) => {
-        // console.log(error);
-      });
+      .catch((error: any) => {});
   }
 
   onSelectFiles(event: any) {
@@ -97,17 +89,43 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
     this.uploadId = this.id;
     this.imageType = this.multiple;
+    const formData = new FormData();
+    var muti_img_arr: Array<any> = [];
+    for (let index = 0; index < event.target.files.length; index++) {
+      const element = event.target.files[index];
+      
+      formData.append('files', element);
+    }
+      this.apiService
+        .post_file(
+          formData,
+          String(this.tokestorage.getToken()),
+          'general/upload'
+        )
+        .then((response: any) => {
+          muti_img_arr.push(response.result);
+          this.addNewItems(muti_img_arr);
+        })
+        .catch((error: any) => {});
+
+      // if (index == event.target.files.length) {
+
+      //   this.addNewItems(muti_img_arr);
+      // }
+  
+   
   }
 
   addNewItem() {
-
-    console.log( "image url ", this.value);
-
     var value = {
-      fileName:this.fileName,
-      fileUrl:this.fileUrl
-    }
+      fileName: this.fileName,
+      fileUrl: this.fileUrl,
+    };
     this.fileout.emit(value);
+  }
+
+  addNewItems(arr: Array<any>) {
+    this.fileout.emit(arr);
   }
 
   public delete() {
@@ -117,7 +135,7 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   }
   public delete1(id: any) {
     if (this.urls) {
-      this.urls.reverse().splice(id, 1);
+      this.urls.splice(id, 1);
     }
   }
 }

@@ -25,6 +25,10 @@
                   >Search by Product Name1</mat-label> -->
           <input type="text" matInput placeholder="Enter a Name"   [formControl]="ingredient_formcontrol"/>
         </mat-form-field>
+      
+        <ng-container *ngFor="let error of resultArray">
+          <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_name'">{{error.msg}}</mat-hint>
+         </ng-container>
         <br /><br />
       </div>
       <div class="col-4"></div>
@@ -37,9 +41,15 @@
 
       <div class="col-5" *ngIf=" !ind_data || !ingredient_data">
         <app-image-upload (fileout)="image_data($event) " ></app-image-upload>
+        <ng-container *ngFor="let error of resultArray">
+          <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_image'">{{error.msg}}</mat-hint>
+         </ng-container>
       </div>
       <div class="col-5" *ngIf="  ingredient_data">
         <app-image-upload (fileout)="image_data($event) " [value]="ingredient_image"></app-image-upload>
+        <ng-container *ngFor="let error of resultArray">
+          <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_image'">{{error.msg}}</mat-hint>
+         </ng-container>
       
 
       </div>
@@ -67,7 +77,13 @@
             [formControl]="description_formcontrol"
           ></textarea>
         </mat-form-field>
+        <br>
+       
+        <ng-container *ngFor="let error of resultArray">
+          <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_description'">{{error.msg}}</mat-hint>
+         </ng-container>
       </div>
+      
     </div>
   </div>
 

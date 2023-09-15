@@ -42,6 +42,7 @@ export class SubCategoryPopupComponent {
   setAttribute: any[] = [];
 
   category_array_length: any[] = [];
+  resultArray: { type: string; msg: string }[] = [];
 
   sub_category_nameformcontrol = new FormControl('', [Validators.required]);
   subCategoryData: any;
@@ -190,8 +191,18 @@ export class SubCategoryPopupComponent {
             this.done();
           })
           .catch((error: any) => {
-            // this.toste.error(error.error.detail.message);
+            error.error.detail.forEach((item: any) => {
+              if (item.loc && item.loc[1] && item.msg) {
+                this.resultArray.push({
+                  type: item.loc[1],
+                  msg: item.msg,
+                });
+              }
+            });
           });
+
+          console.log("arr",  this.resultArray);
+          
       }
     }
   }
@@ -227,7 +238,7 @@ export class SubCategoryPopupComponent {
 
   getAttributeData() {
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/view')
+      .get(String(this.tokestorage.getToken()), 'attributes/all')
       .then((response: any) => {
         this.attributes = response.result;
       });

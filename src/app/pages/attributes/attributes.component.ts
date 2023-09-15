@@ -86,13 +86,13 @@ export class AttributesComponent implements AfterViewInit {
         this.paginator.length = this.count;
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
-        console.log();
+       
       });
   }
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
-    console.log(event);
+
     this.skip = (event.pageIndex* this.selectedPageSize);
     this.paginator.length = this.count;
 

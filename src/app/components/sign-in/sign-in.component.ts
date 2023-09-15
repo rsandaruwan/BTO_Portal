@@ -16,6 +16,7 @@ export class SignInComponent {
   remember_email = '';
   remember_password = '';
   errors: any = [];
+  resultArray: { type: string; msg: string }[] = [];
 
 
 
@@ -102,7 +103,14 @@ export class SignInComponent {
       })
       .catch((error: any) => {
         
-        // this.toste.error(error.error.detail.message);
+        error.error.detail.forEach((item: any) => {
+          if (item.loc && item.loc[1] && item.msg) {
+            this.resultArray.push({
+              type: item.loc[1],
+              msg: item.msg,
+            });
+          }
+        });
       });
   }
 

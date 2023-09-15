@@ -9,7 +9,7 @@
         <p class="headline_4 primary f_400">Welcome to Back To Origins!</p>
 
         <p class="content primary">
-          Please sign-in to your account to Lorem Ipsum
+          Please sign-in to your account
         </p>
 
         <form>
@@ -21,6 +21,9 @@
                 placeholder="Email"
                 [formControl]="emailFormControl"
               />
+              <ng-container *ngFor="let error of resultArray">
+                <mat-hint class="text-danger" *ngIf="error?.type == 'username'">{{error.msg}}</mat-hint>
+               </ng-container>
             </div>
             <div class="col">
               <input
@@ -29,6 +32,9 @@
                 placeholder="Password"
                 [formControl]="passwordFormControl"
               />
+              <ng-container *ngFor="let error of resultArray">
+                <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_image'">{{error.msg}}</mat-hint>
+               </ng-container>
             </div>
 
             <div class="row">

@@ -26,7 +26,7 @@ export class CategoriesComponent implements AfterViewInit {
 
   selectedValue: string | undefined;
   category_data: any;
-  displayedColumns: string[] = ['category_id', 'category_name', 'action'];
+  displayedColumns: string[] = [ 'category_name', 'action'];
   dataSource: MatTableDataSource<CategoryInterface>;
 
   constructor(
@@ -48,6 +48,7 @@ export class CategoriesComponent implements AfterViewInit {
   openCategory() {
     let dialogRef = this.dialog.open(CategoryPopupComponent, {
       autoFocus: false,
+      
     });
   }
 
@@ -80,7 +81,7 @@ export class CategoriesComponent implements AfterViewInit {
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
-    console.log(event);
+
     this.skip = (event.pageIndex* this.selectedPageSize);
     this.paginator.length = this.count;
 
@@ -97,7 +98,7 @@ export class CategoriesComponent implements AfterViewInit {
     let dialogRef = this.dialog.open(CategoryPopupComponent, {
       autoFocus: false,
 
-      data: {id :id, categoryName: name }
+      data: {id :id, categoryName: name, functionToCall: this.getCategoryData}
     });
   }
 }

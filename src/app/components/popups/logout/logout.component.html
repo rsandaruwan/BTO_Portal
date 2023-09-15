@@ -1,0 +1,15 @@
+<div class="col-12 popup p-4 overflow-auto">
+  <p class="headline_4 text-center my-2 primary">Log Out</p>
+  <p class="content text-center primary mt-3">
+    Are you sure you want to logout from the system?
+  </p>
+
+  <div class="row">
+    <div class="col-md-6 my-3 d-flex flex-row-reverse">
+      <button class="primary_btn content" (click)="logout()"  mat-dialog-close cdkFocusInitial >YES</button>
+    </div>
+    <div class="col-md-6 my-3">
+      <button class="btn-reset primary py-3 px-2 content" mat-dialog-close>CANCEL</button>
+    </div>
+  </div>
+</div>

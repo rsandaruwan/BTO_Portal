@@ -34,6 +34,7 @@
                   [formControl]="attribute_nameformcontrol"
                 />
               </mat-form-field>
+              <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'attribute_name'">{{resultArray[0].msg}}</mat-hint>
               <br /><br />
             </div>
           </div>

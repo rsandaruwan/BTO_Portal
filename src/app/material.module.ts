@@ -45,6 +45,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -98,8 +100,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    
   
   ],
+  imports:[
+    ToastrModule.forRoot({
+      closeButton: true,
+      timeOut: 15000, // 15 seconds
+      progressBar: true,
+    }),
+  ],
+  
+
 })
 
 export class MaterialModule {}

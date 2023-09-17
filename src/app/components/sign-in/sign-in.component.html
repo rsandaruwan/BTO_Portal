@@ -22,7 +22,7 @@
                 [formControl]="emailFormControl"
               />
               <ng-container *ngFor="let error of resultArray">
-                <mat-hint class="text-danger" *ngIf="error?.type == 'username'">{{error.msg}}</mat-hint>
+         
                </ng-container>
             </div>
             <div class="col">
@@ -33,7 +33,7 @@
                 [formControl]="passwordFormControl"
               />
               <ng-container *ngFor="let error of resultArray">
-                <mat-hint class="text-danger" *ngIf="error?.type == 'ingredient_image'">{{error.msg}}</mat-hint>
+         
                </ng-container>
             </div>
 
@@ -54,6 +54,14 @@
               <button type="button" class="btn w-100 save_btn my-4" (click)="login()">
                 Sign In
               </button>
+
+              <div class="d-grid gap-2 col-4 mx-auto">
+                <!-- <button type="button" class="btn btn-sm btn-success" (click)="showSuccess()">Success</button>
+                <button type="button" class="btn btn-sm btn-info" (click)="showInfo()">Info</button>
+                <button type="button" class="btn btn-sm btn-warning" (click)="showWarning()">Warning</button>
+                <button type="button" class="btn btn-sm btn-danger" (click)="showError()">Error</button> -->
+              </div>
+           
             </div>
           </div>
         </form>

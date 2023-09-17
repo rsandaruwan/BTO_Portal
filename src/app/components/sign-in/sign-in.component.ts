@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,23 +12,18 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
-
   remember_me_checked = false;
   remember_email = '';
   remember_password = '';
   errors: any = [];
   resultArray: { type: string; msg: string }[] = [];
-
-
-
+  error_title :any
 
   constructor(
     private apiService: ApiService,
     private storageService: StorageService,
     private router: Router,
-
-
-   
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -37,17 +33,17 @@ export class SignInComponent {
 
       this.remember_email = data.email;
       this.remember_password = data.password;
-  
     } else {
       this.remember_me_checked = false;
     }
   }
 
-  emailFormControl = new FormControl('', [ Validators.required, Validators.email, ]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   passwordFormControl = new FormControl('', [Validators.required]);
 
-
- 
   login() {
     const data = {
       username: this.emailFormControl.value,
@@ -57,22 +53,20 @@ export class SignInComponent {
 
       .post(data, '', 'user/login')
       .then((response: any) => {
-    
-      
-        
+       
+        this.toastrService.success('Login Success!');
         this.storageService.saveToken(response.result.token);
         this.storageService.saveUser(response.result);
         this.storageService.saveSelectedSection(0);
 
         this.router.navigate(['portal/dashboard']);
-        
-   
+
         if (this.remember_me_checked) {
           this.storageService.saveRememberMe(data);
         } else {
           this.storageService.removeRememberMe();
         }
-     /*
+        /*
         if (response.data[0].role_info) {
           var has_access = false;
           var has_details = false;
@@ -98,21 +92,46 @@ export class SignInComponent {
             // this.toste.error(this.errors);
           }
         } */
-
-
       })
       .catch((error: any) => {
-        
+      
+
+        if (error.error.message) {
+          this.toastrService.error( error.error.message);
+        }
         error.error.detail.forEach((item: any) => {
           if (item.loc && item.loc[1] && item.msg) {
             this.resultArray.push({
               type: item.loc[1],
               msg: item.msg,
             });
+        
+
+
+            for (let index = 0; index < this.resultArray.length; index++) {
+                this.error_title =  this.resultArray[index].msg
+            }
+           
+            this.toastrService.error( this.error_title);
           }
         });
       });
   }
+  // public showSuccess(): void {
+  //   this.toastrService.success('Message Success!', 'Title Success!');
+  // }
+
+  // public showInfo(): void {
+  //   this.toastrService.info('Message Info!', 'Title Info!');
+  // }
+
+  // public showWarning(): void {
+  //   this.toastrService.warning('Message Warning!', 'Title Warning!');
+  // }
+
+  // public showError(): void {
+  //   this.toastrService.error('Message Error!', 'Title Error!');
+  // }
 
   getMainRoute(userToken: string) {
     this.apiService
@@ -120,10 +139,8 @@ export class SignInComponent {
       .then((response: any): any => {
         if (response.data.length > 0) {
           this.storageService.saveRoutes(response.data);
-     
-          
+
           this.router.navigate(['/portal/dashboard']);
-          
         }
       })
       .catch((error: any) => {});

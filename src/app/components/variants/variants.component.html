@@ -1,0 +1,306 @@
+<div class="col-12 mt-5 body-table secound_back">
+    <div class="row mx-2 py-3">
+      <div class="col-12">
+        <p class="headline_4 f_400">
+          Variants<span class="content f_400"> 254</span>
+        </p>
+      </div>
+    </div>
+  
+    <!-- Product table -->
+    <div class="col-md-12">
+      <div class="row m-0 p-0 first_row border-bottom border-top">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Variant Name</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+            <input matInput placeholder="Enter variant name"   [formControl]="varient_formcontrol" />
+          </mat-form-field>
+          <mat-hint class="text-danger primary" *ngIf="varient_error.product_variant_name" >{{varient_error['product_variant_name']}}</mat-hint>
+  
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Variant Images</p>
+        </div>
+        <div class="col-10 w-75 my-3 mx-4">
+          <!-- <app-image-upload
+            id="fileInput2"
+            multiple="multiple"
+          ></app-image-upload> -->
+  
+          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2" multiple="multiple"></app-image-upload>
+          <mat-hint class="text-danger primary" *ngIf="varient_error.product_images" >{{varient_error['product_images']}}</mat-hint>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Description</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field
+            floatLabel="always"
+            appearance="outline"
+            class="text-area my-3 mx-4"
+          >
+            <textarea
+              placeholder="Description"
+              matInput
+              [(ngModel)]="textareaContent"
+              (input)="adjustTextareaHeight($event)"
+              #autoHeightTextarea
+              [formControl]="varientDescription_formcontrol"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Attributes</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+            <mat-select
+              [(ngModel)]="selectedAttribute"
+              name="attribute"
+              placeholder="Select Attributes"
+              class="matSelectPlaceholder"
+              (selectionChange)="onSelectionChange()"
+            >
+              <option
+                class="selectAddNew mx-3 my-2 body-2 f_400"
+                (click)="AddAttribute()"
+              >
+                Add new Attributes
+              </option>
+              <mat-option
+                *ngFor="let attribute of attribute_data"
+                [value]="attribute"
+              >
+                {{ attribute.attribute_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-hint class="text-danger primary" *ngIf="nutrition_error.attribute_value" >{{nutrition_error['attribute_value']}}</mat-hint>
+  
+          <div
+            class="col-4 my-2 mx-4"
+            *ngFor="let value of selectedValuesArray; let i = index"
+            style="background-color: #232528; border-radius: 15px"
+          >
+            <div class="row">
+              <div class="col-4 m-auto">
+                <p class="content primary text-center m-0">{{ selectedValuesNameArray[i].attribute_name }}</p>
+              </div>
+              <div class="col-8 position-relative">
+                <mat-form-field
+                  appearance="outline"
+                  class="attribite_input mt-2 mx-3"
+                >
+                <div  let i = index >
+                  <input matInput placeholder="Enter Value" [(ngModel)]="selectedValuesArray[i].attribute_value"/>
+  
+                </div>
+                  <!-- <input matInput placeholder="Search by Product Name" [formControl]="varientAttribute_formcontrol"  [(ngModel)]="attribute_name[i]"/> -->
+                </mat-form-field>
+                <mat-icon class="position-absolute red-close-btn">
+                  <img
+                    src="../../../assets/icons/close-red.png"
+                    alt=""
+                    (click)=" (value.attribute_id )" b
+                /></mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Nutrition</p>
+        </div>
+        <div class="col-10 overflow-auto">
+          <div class="d-flex">
+            <table
+              class="table w-25 my-3 mx-4 show-image"
+              style="background-color: #191b1e"
+            >
+              <thead>
+                <tr class="border_bottom" style="background-color: #404040">
+                  <th scope="col">
+                    <mat-form-field appearance="outline" class="m-2">
+                      <input matInput placeholder="Enter a Value" value="Nutrition" disabled />
+                    </mat-form-field>
+                  </th>
+                  <th class="borderRL">
+                    <mat-form-field appearance="outline" class="m-2">
+                      <input matInput placeholder="Enter a Value" value="Per 100g" disabled />
+                    </mat-form-field>
+                  </th>
+                  <th scope="col">
+                    <mat-form-field appearance="outline" class="m-2">
+                      <input matInput placeholder="Enter a Value" value="In This Pack"  disabled/>
+                    </mat-form-field>
+                  </th>
+                  <td class="p-0 btn_back d-none">
+                    <input class="row-del-btn" type="button" value=" Delete " />
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of table_row; let i = index">
+                  <td scope="row" class="border_bottom">
+                    <mat-form-field appearance="outline" class="m-2">
+                      <input
+                        matInput
+                        placeholder="Enter a Value"
+                        [value]="row.nutrition_name"
+                        [(ngModel)]="table_row[i].nutrition_name"
+                      />
+                    </mat-form-field>
+                    <mat-hint class="text-danger primary" *ngIf="nutrition_error.nutrition_name" >{{nutrition_error['nutrition_name']}}</mat-hint>
+                  </td>
+                  <td class="borderRL border_bottom">
+                    <mat-form-field
+                      appearance="outline"
+                      class="m-2 position-relative"
+                      *ngFor="let col2_2 of row.nutrition_per_100_gram; let j = index"
+                    >
+                      <input
+                        matInput
+                        placeholder="Enter a Value"
+                        (change)="dataadd(i,2,j,$event)"
+                        [value]="table_row[i].nutrition_per_100_gram[j]"
+                      />
+                      <mat-icon matSuffix (click)="removeinput2_2(i, j)"
+                        ><img
+                          src="../../../assets/icons/close-red.png"
+                          alt=""
+                          class="position-absolute"
+                      /></mat-icon>
+                    </mat-form-field>
+                    <mat-hint class="text-danger primary" *ngIf="nutrition_error.nutrition_per_100_gram" >{{nutrition_error['nutrition_per_100_gram']}}</mat-hint>
+  
+  
+                    <div class="d-flex" (click)="addcell2_2(i)">
+                      <p
+                        class="content my-auto mx-2 primary text-decoration-underline"
+                      >
+                        Add another Value
+                      </p>
+                    </div>
+                  </td>
+                  <td class="border_bottom">
+                    <mat-form-field
+                      appearance="outline"
+                      class="m-2 position-relative"
+                      *ngFor="let col2_3 of row.nutrition_in_this_pack; let j = index"
+                    >
+                  
+                      <input
+                        matInput
+                        placeholder="Enter a Value"
+                    (change)="dataadd(i,3,j,$event)"
+                    [value]="table_row[i].nutrition_in_this_pack[j]"
+                      />
+                      <mat-icon matSuffix (click)="removeinput2_3(i, j)"
+                        ><img
+                          src="../../../assets/icons/close-red.png"
+                          alt=""
+                          class="position-absolute"
+                      /></mat-icon>
+                    </mat-form-field>
+  
+                    <mat-hint class="text-danger primary" *ngIf="nutrition_error.nutrition_in_this_pack" >{{nutrition_error['nutrition_in_this_pack']}}</mat-hint>
+  
+                    <div class="d-flex" (click)="addcell2_3(i)">
+                      <p
+                        class="content my-auto mx-2 primary text-decoration-underline"
+                      >
+                        Add another Value
+                      </p>
+                    </div>
+                  </td>
+                  <td
+                    class="p-0 btn_back position-relative"
+                    (click)="deleteRow(i)"
+                  >
+                    <!-- <input class="row-del-btn  h-100  position-absolute " style=""   type="button" value="delete"> -->
+                    <button class="row-del-btn h-100 position-absolute">
+                      <span class="content">Delete Row</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <button
+            (click)="addrow()"
+            type="button "
+            class="btn my-3 mx-4 add_row_btn"
+          >
+            Add Row
+          </button>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Price</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+            <input matInput placeholder="Enter Price"  [formControl]="priceformcontrol" />
+          </mat-form-field>
+  
+          <mat-hint class="text-danger primary" *ngIf="varient_error.product_price" >{{varient_error['product_price']}}</mat-hint>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Product Status</p>
+        </div>
+        <div class="col-10">
+          <app-toggle-button
+            [type]="0"
+            class="my-3 mx-4"
+            style="width: 140px"
+            [width]="140"
+            [on]="false"
+            [showLabels]="true"
+            leftText="Available"
+            rightText="Out of Stock  "
+            (changed)="checked = $event"
+            [id]="5"
+          ></app-toggle-button>
+        </div>
+      </div>
+      <div
+        class="row m-0 p-0 first_row border-bottom"
+        style="border-radius: 0pc 15px 15px 15px"
+      >
+        <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+          <p class="content mt-4 detail_text">Preview Status</p>
+        </div>
+        <div class="col-10">
+          <app-toggle-button
+            [type]="0"
+            class="my-3 mx-4"
+            style="width: 85px"
+            [width]="85"
+            [on]="false"
+            [showLabels]="true"
+            leftText="Yes"
+            rightText="No"
+            (changed)="checked = $event"
+            [id]="6"
+          ></app-toggle-button>
+        </div>
+      </div>
+    </div>
+  </div>

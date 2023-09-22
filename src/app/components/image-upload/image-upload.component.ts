@@ -17,8 +17,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ImageUploadComponent implements OnInit, AfterViewInit {
   @Input() id: string | undefined;
-  @Input()
-  multiple!: string;
+  @Input() multiple!: string;
   @Output() fileout = new EventEmitter<any>();
   @Input() value: string | undefined;
 

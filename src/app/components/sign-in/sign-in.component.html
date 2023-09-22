@@ -8,9 +8,7 @@
       <div class="form text-start">
         <p class="headline_4 primary f_400">Welcome to Back To Origins!</p>
 
-        <p class="content primary">
-          Please sign-in to your account
-        </p>
+        <p class="content primary">Please sign-in to your account</p>
 
         <form>
           <div class="form-row">
@@ -21,9 +19,14 @@
                 placeholder="Email"
                 [formControl]="emailFormControl"
               />
+
               <ng-container *ngFor="let error of resultArray">
-         
-               </ng-container>
+                <mat-hint
+                  class="text-danger"
+                  *ngIf="error.type == 'username'"
+                  ><b>{{ error.msg }}</b></mat-hint
+                >
+              </ng-container>
             </div>
             <div class="col">
               <input
@@ -32,14 +35,15 @@
                 placeholder="Password"
                 [formControl]="passwordFormControl"
               />
-              <ng-container *ngFor="let error of resultArray">
-         
-               </ng-container>
             </div>
+
+            <mat-hint class="text-danger" *ngIf="final_massage" > <b>{{final_massage}}</b></mat-hint>
 
             <div class="row">
               <div class="col-6">
-                <mat-checkbox class="content"  [(ngModel)]="remember_me_checked"> Remember Me</mat-checkbox>
+                <mat-checkbox class="content" [(ngModel)]="remember_me_checked">
+                  Remember Me</mat-checkbox
+                >
               </div>
               <div class="col-6 my-auto">
                 <p
@@ -51,7 +55,11 @@
               </div>
             </div>
             <div class="col-md-12">
-              <button type="button" class="btn w-100 save_btn my-4" (click)="login()">
+              <button
+                type="button"
+                class="btn w-100 save_btn my-4"
+                (click)="login()"
+              >
                 Sign In
               </button>
 
@@ -61,7 +69,6 @@
                 <button type="button" class="btn btn-sm btn-warning" (click)="showWarning()">Warning</button>
                 <button type="button" class="btn btn-sm btn-danger" (click)="showError()">Error</button> -->
               </div>
-           
             </div>
           </div>
         </form>

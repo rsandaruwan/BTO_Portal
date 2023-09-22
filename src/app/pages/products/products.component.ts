@@ -2,9 +2,12 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NavigationExtras, Router } from '@angular/router';
+
 import { ProductsInterface } from 'src/app/modals/product.model';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { AddProductsComponent } from '../add-products/add-products.component';
 
 interface Food {
   value: string;
@@ -23,9 +26,10 @@ export class ProductsComponent implements AfterViewInit {
   sort!: MatSort;
 
   product_data: any;
-  varient_data : any[ ] = []
-  category_data : any[ ] = []
+  varient_data: any[] = [];
+  category_data: any[] = [];
   selectedValue: string | undefined;
+  product_id: any;
 
   displayedColumns: string[] = [
     'product_id',
@@ -40,7 +44,9 @@ export class ProductsComponent implements AfterViewInit {
 
   constructor(
     private tokestorage: StorageService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router,
+ 
   ) {
     this.dataSource = new MatTableDataSource();
   }
@@ -71,10 +77,22 @@ export class ProductsComponent implements AfterViewInit {
           this.product_data
         );
 
-        this.varient_data = this.product_data.product_variants
-        this.category_data =  this.product_data
-
-
+        this.varient_data = this.product_data.product_variants;
+        this.category_data = this.product_data;
       });
   }
+  editclick(id: any) {
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+       id
+
+      }
+  };
+  this.router.navigate(['portal/add_product'], navigationExtras);
+
+   
+  
+  }
 }
+

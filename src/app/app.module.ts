@@ -26,6 +26,7 @@ import { DynamicConfirmationPopupComponent } from './components/popups/dynamic-c
 import { DynamicDonePopupComponent } from './components/popups/dynamic-done-popup/dynamic-done-popup.component';
 import { AddUserComponent } from './components/popups/add-user/add-user.component';
 import { LogoutComponent } from './components/popups/logout/logout.component';
+import { VariantsComponent } from './components/variants/variants.component';
 
 
 // pages
@@ -50,7 +51,7 @@ import { CustomerComponent } from './pages/customer/customer.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 
-
+import { AddProductResultData } from './modals/product_data';
 
 
 @NgModule({
@@ -88,8 +89,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CustomerComponent,
     AddUserComponent,
     ProfileComponent,
-    LogoutComponent
-
+    LogoutComponent,
+    VariantsComponent,
 
 
   ],
@@ -99,8 +100,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
-   
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

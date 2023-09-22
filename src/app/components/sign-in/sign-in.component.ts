@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -17,13 +17,14 @@ export class SignInComponent {
   remember_password = '';
   errors: any = [];
   resultArray: { type: string; msg: string }[] = [];
-  error_title :any
+  error_title: any;
+  final_massage: any;
 
   constructor(
     private apiService: ApiService,
     private storageService: StorageService,
     private router: Router,
-    private toastrService: ToastrService
+
   ) {}
 
   ngOnInit(): void {
@@ -45,16 +46,16 @@ export class SignInComponent {
   passwordFormControl = new FormControl('', [Validators.required]);
 
   login() {
+    this.resultArray=[]
     const data = {
       username: this.emailFormControl.value,
       password: this.passwordFormControl.value,
     };
     this.apiService
 
-      .post(data, '', 'user/login')
+      .Login(data, '', 'user/login')
       .then((response: any) => {
-       
-        this.toastrService.success('Login Success!');
+  
         this.storageService.saveToken(response.result.token);
         this.storageService.saveUser(response.result);
         this.storageService.saveSelectedSection(0);
@@ -94,44 +95,22 @@ export class SignInComponent {
         } */
       })
       .catch((error: any) => {
-      
+        console.log('Error', error.error.message);
 
         if (error.error.message) {
-          this.toastrService.error( error.error.message);
-        }
-        error.error.detail.forEach((item: any) => {
-          if (item.loc && item.loc[1] && item.msg) {
-            this.resultArray.push({
-              type: item.loc[1],
-              msg: item.msg,
-            });
-        
-
-
-            for (let index = 0; index < this.resultArray.length; index++) {
-                this.error_title =  this.resultArray[index].msg
+          this.final_massage = error.error.message;
+        } else {
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
             }
-           
-            this.toastrService.error( this.error_title);
-          }
-        });
+          });
+        }
       });
   }
-  // public showSuccess(): void {
-  //   this.toastrService.success('Message Success!', 'Title Success!');
-  // }
-
-  // public showInfo(): void {
-  //   this.toastrService.info('Message Info!', 'Title Info!');
-  // }
-
-  // public showWarning(): void {
-  //   this.toastrService.warning('Message Warning!', 'Title Warning!');
-  // }
-
-  // public showError(): void {
-  //   this.toastrService.error('Message Error!', 'Title Error!');
-  // }
 
   getMainRoute(userToken: string) {
     this.apiService

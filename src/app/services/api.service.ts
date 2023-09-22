@@ -18,6 +18,33 @@ export class ApiService {
    * Method: POST
    * Params: data, token, endpoint,
    */
+  async Login(data: any, token: string, endpoint: string) {
+    const custom = {
+      headers: new HttpHeaders({
+        Accept: 'application/json charset=utf-8',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    };
+    return await new Promise((resolve, rejects) => {
+      this.http.post(environment.baseURL + endpoint, data, custom).subscribe(
+        (data: any) => {
+          resolve(data);
+        },
+        (error) => {
+         if (error.status == 403) {
+            this.tokestorage.signOut();
+            this.router.navigate(['']);
+            rejects(error);
+          } else if (error.status == 0) {
+            this.router.navigate(['unknown-error']);
+          } else {
+            rejects(error);
+          }
+        }
+      );
+    });
+  }
   async post(data: any, token: string, endpoint: string) {
     const custom = {
       headers: new HttpHeaders({

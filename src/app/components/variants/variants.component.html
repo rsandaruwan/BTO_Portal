@@ -32,7 +32,7 @@
             multiple="multiple"
           ></app-image-upload> -->
   
-          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2" multiple="multiple"></app-image-upload>
+          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2" multiple="multiple" [shareParent] = varient_image_details ></app-image-upload>
           <mat-hint class="text-danger primary" *ngIf="varient_error.product_images" >{{varient_error['product_images']}}</mat-hint>
         </div>
       </div>
@@ -93,7 +93,7 @@
             style="background-color: #232528; border-radius: 15px"
           >
             <div class="row">
-              <div class="col-4 m-auto">
+              <div class="col-4 m-auto" *ngIf = "selectedValuesNameArray[i]">
                 <p class="content primary text-center m-0">{{ selectedValuesNameArray[i].attribute_name }}</p>
               </div>
               <div class="col-8 position-relative">

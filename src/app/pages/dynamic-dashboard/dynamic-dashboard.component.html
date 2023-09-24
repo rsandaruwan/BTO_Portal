@@ -37,29 +37,76 @@
 			</div>
 		</mat-nav-list> -->
 
-      <!-- <mat-nav-list>
+      <mat-nav-list>
+
+        
+        <div class="h-100 py-1">
+          <div class="nav-link py-3">
+            <div class="col-md-11 m-3">
+              <img
+                src="../../../assets/image/bto_logo.png"
+                class="logo"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10 mx-3 mt-3">
+          <div class="row pointer" [routerLink]="['/portal/dashboard']">
+            <div class="col-2">
+              <img src="../../../assets/icons/dashboard.png" alt="" />
+            </div>
+            <div class="col-10 p-0">
+              <p class="body-3 gray">Dashboard</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 mx-3 mt-4">
+          <div class="row pointer">
+            <div class="col-2">
+              <img src="../../../assets/icons/page.png" alt="" />
+            </div>
+            <div class="col-10 p-0"><p class="caption gray">Page</p></div>
+          </div>
+        </div>
         <span *ngFor="let item of menu">
           <span *ngIf="item.children && item.children.length > 0">
             <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
-                   
-                      <img src="{{ item.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;" />
-                      <p class=" col-9 mx-2 mt-1 body-3 gray">{{ item.displayName }}</p>
+                    <div
+                      class="row"
+                      fxLayout="row"
+                      fxLayoutAlign="space-between center"
+                    >
+                      <div class="col-md-2">
+                        <img src="{{ item.iconName }}" alt="" />
+                      </div>
+                      <div class="col-md-10">
+                        <p class="body-3 gray">{{ item.displayName }}</p>
+                      </div>
                     </div>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <span *ngFor="let child of item.children">
                   <mat-list-item routerLink="[child.route]">
-                   
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
-                      
-                      <img src="{{ child.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;"/>
-                  
-                      <p class=" col-9 mx-2 mt-1 body-3 gray"> {{ child.displayName }}</p>
+                    <div  class="row"  fxLayout="row" fxLayoutAlign="space-between center">
+                      <div class="col-md-2">
+                      <img src="{{ child.iconName }}" alt="" />
+                      </div>
+                      <div class="col-md-10">
+                        <ul>
+                          <li>
+                      <p class=" body-3 gray">   {{ child.displayName }} </p>
+
+                          </li>
+                        </ul>
+
+                      </div>
+
+
                     </div>
                   </mat-list-item>
                 </span>
@@ -68,16 +115,25 @@
           </span>
           <span *ngIf="!item.children || item.children.length === 0">
             <mat-list-item [routerLink]="item.route">
-     
-              <div fxLayout="row" fxLayoutAlign="space-between center" class="d-flex">
-           
-                <img src="{{ item.iconName }}" alt=""  class="col-2" style="width: 25px ; height: 25px;"/>
-                <p class=" col-9 mx-2 mt-1 body-3 gray">{{ item.displayName }}</p>
+              <div
+                fxLayout="row"
+                fxLayoutAlign="space-between center"
+                class="d-flex"
+              >
+                <img
+                  src="{{ item.iconName }}"
+                  alt=""
+                  class="col-2"
+                  style="width: 25px; height: 25px"
+                />
+                <p class="col-9 mx-2 mt-1 body-3 gray">
+                  {{ item.displayName }}
+                </p>
               </div>
             </mat-list-item>
           </span>
         </span>
-      </mat-nav-list> -->
+      </mat-nav-list>
 
       <mat-nav-list class="p-0">
         <mat-accordion>

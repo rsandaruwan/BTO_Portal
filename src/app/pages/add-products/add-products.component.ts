@@ -367,7 +367,6 @@ export class AddProductsComponent {
       this.proId = params['id'];
     });
 
-    console.log(this.proId);
 
     this.userForm = this.fb.group({
       name: [],
@@ -378,26 +377,27 @@ export class AddProductsComponent {
   }
 
   ngOnInit(): void {
-    console.log('result_data',this.result_data);
+   
     
     this.getCategoryData();
 
     this.getIngredient();
     this.getAttribute();
 //edit
-    if (this.proId) {
-      
-      this.getProductData();
 
-    } else{
-      this.variant_array.push({});
-    }
+this.getProductData();
+    // if (this.proId) {
+      
+    //   this.getProductData();
+
+    // } else{
+    //   this.variant_array.push({});
+    // }
   }
 
   addNewItem(value: string) {}
   dataToPayLoad(data: any) {
     this.variant_submit_data.push(data);
-    console.log(this.variant_submit_data);
   }
   addrow(): void {
     this.table_row.push({
@@ -406,6 +406,7 @@ export class AddProductsComponent {
       nutrition_in_this_pack: [''],
     });
     (this.userForm.get('rows') as FormArray).push(this.fb.control(null));
+    
   }
   getrowFormControls(): AbstractControl[] {
     return this.table_row;
@@ -537,9 +538,11 @@ export class AddProductsComponent {
     });
   }
 
+
+  // change view to All
   public getAttribute() {
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/all')
+      .get(String(this.tokestorage.getToken()), 'attributes/view')
       .then((response: any) => {
         this.attribute_data = response.result;
       });
@@ -574,16 +577,15 @@ export class AddProductsComponent {
     if (this.show % 2 == 0 || this.show % 2 == 1) {
       this.variant_array.push({});
     }
-    console.log(this.variant_array);
   }
 
   getProductData() {
-    this.apiService
-      .get(String(this.tokestorage.getToken()), 'products/' + this.proId)
-      .then((response: any) => {
-        this.productData = response.result;
+    // this.apiService
+    //   .get(String(this.tokestorage.getToken()), 'products/' + this.proId)
+    //   .then((response: any) => {
+        // this.productData = response.result;
+         this.productData = this.result_data.result;
 
-        console.log('Data', this.productData.product_variant);
 
         this.selectedSubCategory = this.productData.product;
         this.product_nameformcontrol.setValue(
@@ -603,7 +605,7 @@ export class AddProductsComponent {
         this.changePreviewStatus();
 
         this.variant_array=this.productData.product_variant;
-      });
+      // });
   }
 
   changeProductStatus() {

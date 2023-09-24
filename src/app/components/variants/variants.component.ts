@@ -49,7 +49,9 @@ export class VariantsComponent implements OnInit {
   variant_array: any[] = [];
   imageLoop: any;
   imageIndex: any;
-  getVarientObj:any
+  getVarientObj: any;
+
+
 
   table_row: Array<any> = [
     {
@@ -57,7 +59,6 @@ export class VariantsComponent implements OnInit {
       nutrition_per_100_gram: [''],
       nutrition_in_this_pack: [''],
     },
- 
   ];
 
   userForm: FormGroup;
@@ -81,10 +82,10 @@ export class VariantsComponent implements OnInit {
   ngOnInit(): void {
     this.getAttribute();
 
-    console.log(this.changing);
+   
 
     this.changing?.subscribe((v) => {
-      alert(v);
+
 
       for (let index = 0; index < this.varient_image_details.length; index++) {
         const element = this.varient_image_details[index];
@@ -106,30 +107,30 @@ export class VariantsComponent implements OnInit {
       };
       this.variant_array.push(this.variant_data);
 
-      console.log(this.variant_array);
+   
       this.varient_obj.emit(this.variant_data);
     });
 
-
-    console.log('child', this.VarientData);
-  
-
+    console.log('child', this.VarientData    );
   }
 
   ngAfterViewInit(): void {
-
-        this.varient_formcontrol.setValue(this.VarientData.product_variant_name)
-        this.priceformcontrol.setValue(this.VarientData.product_price)
-        this.varient_image_details = this.VarientData.product_images
-
-      
-      
-        
+    this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
+    this.priceformcontrol.setValue(this.VarientData.product_price);
+    this.varient_image_details = this.VarientData.product_images;
   
-       
-     
-   
-   
+
+    for (let index = 0; index < this.VarientData.product_attributes.length; index++) {
+      var att_data = {
+        attribute_id: this.VarientData.product_attributes[index].attribute_id,
+        attribute_value: this.VarientData.product_attributes[index].attribute_value,
+      };
+
+      this.selectedValuesArray.push(att_data);
+      
+    }
+
+    this.table_row = this.VarientData.product_nutrition
   }
 
   varient_image_data(data: Array<any>) {
@@ -157,6 +158,9 @@ export class VariantsComponent implements OnInit {
       };
       this.selectedValuesArray.push(data);
       this.selectedValuesNameArray.push(this.selectedAttribute);
+   
+      console.log("select",this.selectedValuesArray);
+   
     }
   }
   AddAttribute() {
@@ -185,7 +189,7 @@ export class VariantsComponent implements OnInit {
 
   public getAttribute() {
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/all')
+      .get(String(this.tokestorage.getToken()), 'attributes/view')
       .then((response: any) => {
         this.attribute_data = response.result;
       });
@@ -232,5 +236,4 @@ export class VariantsComponent implements OnInit {
     });
     (this.userForm.get('rows') as FormArray).push(this.fb.control(null));
   }
-
 }

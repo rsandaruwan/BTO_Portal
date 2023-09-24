@@ -131,7 +131,7 @@ export class ProfileComponent {
         .get(String(this.tokestorage.getToken()), 'user/' + this.userId)
         .then((response: any) => {
           this.user_data_by_id = response.result;
-          console.log(response);
+      
 
           this.first_nameformcontrol .setValue(this.user_data_by_id.first_name);
           this.last_nameformcontrol .setValue(this.user_data_by_id.last_name);

@@ -201,7 +201,7 @@ export class SubCategoryPopupComponent {
             });
           });
 
-          console.log("arr",  this.resultArray);
+       
           
       }
     }

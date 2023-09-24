@@ -35,82 +35,82 @@ export class DynamicDashboardComponent {
         {
           displayName: 'Categories ',
           iconName: '',
-          route: '/portal/categories'
+          route: '/portal/categories',
         },
         { 
-          displayName: 'Todos',
-          iconName: 'waves',
-          route: '/todos'
+          displayName: 'Sub Categories',
+          iconName: '',
+          route: '/portal/sub_categories'
         }
       ]
     },
     {
-      displayName: 'Escritorio',
-      iconName: 'desktop_windows',
-      route: 'escritorio',
+      displayName: 'Products',
+      iconName: '../../../assets/icons/product.png ',
+      route: '/portal/product',
     },        
     {
-      displayName: 'Entradas GADE',
-      iconName: 'ballot',
-      route: 'entradasGADE',
+      displayName: 'Attributes',
+      iconName: '../../../assets/icons/attribute.png',
+      route: '/portal/attributes',
     },
     {
-      displayName: 'Escritorio',
-      iconName: 'desktop_windows',
-      route: 'escritorio',
+      displayName: 'Ingredients',
+      iconName: '../../../assets/icons/recipes.png',
+      route: '/portal/recipes',
     },        
     {
-      displayName: 'Entradas GADE',
-      iconName: 'ballot',
-      route: 'entradasGADE',
+      displayName: 'Recipes',
+      iconName: '../../../assets/icons/recipes.png',
+      route: '/portal/recipes',
     },
     {
-      displayName: 'Expedientes',
-      iconName: 'description',          
+      displayName: 'Orders',
+      iconName: '../../../assets/icons/orders.png',          
       children: [
         {
-          displayName: 'Mis Expedientes',
-          iconName: 'how_to_reg',
-          route: '/misexpedientes'
+          displayName: 'Order',
+          iconName: '',
+          route: '/portal/order'
         },
         { 
-          displayName: 'Todos',
-          iconName: 'waves',
-          route: '/todos'
+          displayName: 'Customer',
+          iconName: '',
+          route: '/portal/customer'
         }
       ]
     },
     {
-      displayName: 'Expedientes',
-      iconName: 'description',          
+      displayName: 'Users',
+      iconName: '../../../assets/icons/users.png',          
       children: [
         {
-          displayName: 'Mis Expedientes',
-          iconName: 'how_to_reg',
-          route: '/misexpedientes'
+          displayName: '  User list',
+          iconName: '',
+          route: '/portal/user_list'
         },
         { 
-          displayName: 'Todos',
-          iconName: 'waves',
-          route: '/todos'
+          displayName: 'User Roles',
+          iconName: '',
+          route: '/portal/user_roles'
         },
         { 
-          displayName: 'Todos',
-          iconName: 'waves',
-          route: '/todos'
+          displayName: 'Permissions',
+          iconName: '',
+          route: '/portal/permission'
         },
 
       ]
     },
     {
-      displayName: 'Escritorio',
-      iconName: 'desktop_windows',
-      route: 'escritorio',
+      displayName: 'Profile',
+      iconName: '../../../assets/icons/profile.png',
+      route: '/portal/profile',
     },        
     {
-      displayName: 'Entradas GADE',
-      iconName: 'ballot',
-      route: 'entradasGADE',
+      displayName: 'Logout',
+      iconName: '../../../assets/icons/logout.png',
+      route: 'logour_popup()',
     },
   ];
 
@@ -264,7 +264,7 @@ if(this.sidenavContainer && this.sidebarmenu)
   logour_popup(){
     const dialogRef = this.dialog.open(LogoutComponent);    
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    
       
     });
 

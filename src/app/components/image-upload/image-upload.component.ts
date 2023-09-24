@@ -20,9 +20,11 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   @Input() multiple!: string;
   @Output() fileout = new EventEmitter<any>();
   @Input() value: string | undefined;
+  @Input() shareParent: any[] = [];
 
   uploadId: any;
   imageType: any;
+  multiple_image_parent:any[] = []
 
   url: string | null = null; // Initialize url as null
   urls: Array<string> = [];
@@ -30,13 +32,27 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   fileName: any;
   fileUrl: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    setTimeout(()=>{                       
+      // console.log("image", this.shareParent);
+      
+
+
+  }, 1000);
+    
+    
+
+  }
 
   constructor(
     private tokestorage: StorageService,
     private apiService: ApiService
   ) {}
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+
+   
+  }
 
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {

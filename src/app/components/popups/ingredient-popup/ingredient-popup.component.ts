@@ -122,7 +122,7 @@ export class IngredientPopupComponent {
               });
             }
           });
-          console.log("arr",this.resultArray);
+    
           
         });
     }

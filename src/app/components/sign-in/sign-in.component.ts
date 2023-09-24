@@ -95,7 +95,7 @@ export class SignInComponent {
         } */
       })
       .catch((error: any) => {
-        console.log('Error', error.error.message);
+      
 
         if (error.error.message) {
           this.final_massage = error.error.message;

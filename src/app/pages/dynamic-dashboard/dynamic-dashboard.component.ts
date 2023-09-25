@@ -56,8 +56,8 @@ export class DynamicDashboardComponent {
     },
     {
       displayName: 'Ingredients',
-      iconName: '../../../assets/icons/recipes.png',
-      route: '/portal/recipes',
+      iconName: '../../../assets/icons/ingredience.png',
+      route: '/portal/ingredients',
     },        
     {
       displayName: 'Recipes',
@@ -107,11 +107,7 @@ export class DynamicDashboardComponent {
       iconName: '../../../assets/icons/profile.png',
       route: '/portal/profile',
     },        
-    {
-      displayName: 'Logout',
-      iconName: '../../../assets/icons/logout.png',
-      route: 'logour_popup()',
-    },
+  
   ];
 
 

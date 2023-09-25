@@ -24,22 +24,7 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
-      <!-- <mat-nav-list>
-			<mat-list-item (click)="showSubmenu = !showSubmenu" >
-				<span  *ngIf="isExpanded || isShowing">Parent Menu</span>
-				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-			</mat-list-item>
-			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-				<a mat-list-item href="...">Submenu Item 1</a>
-				<a mat-list-item href="...">Submenu Item 2</a>
-			
-		
-			</div>
-		</mat-nav-list> -->
-
       <mat-nav-list>
-
-        
         <div class="h-100 py-1">
           <div class="nav-link py-3">
             <div class="col-md-11 m-3">
@@ -52,13 +37,13 @@
           </div>
         </div>
 
-        <div class="col-md-10 mx-3 mt-3">
-          <div class="row pointer" [routerLink]="['/portal/dashboard']">
-            <div class="col-2">
+        <div class="col-md-10 mx-3 mt-3"routerLinkActive="active">
+          <div class="row pointer" [routerLink]="['/portal/dashboard']" >
+            <div class="col-2 m-auto">
               <img src="../../../assets/icons/dashboard.png" alt="" />
             </div>
             <div class="col-10 p-0">
-              <p class="body-3 gray">Dashboard</p>
+              <p class="body-3 gray m-auto my-2" >Dashboard</p>
             </div>
           </div>
         </div>
@@ -80,33 +65,43 @@
                       class="row"
                       fxLayout="row"
                       fxLayoutAlign="space-between center"
+                      routerLinkActive="active"
                     >
-                      <div class="col-md-2">
-                        <img src="{{ item.iconName }}" alt="" />
+                      <div class="col-md-2 m-auto">
+                        <img
+                          src="{{ item.iconName }}"
+                          alt=""
+                         
+                        />
                       </div>
                       <div class="col-md-10">
-                        <p class="body-3 gray">{{ item.displayName }}</p>
+                        <p class="body-3 gray m-auto my-2 " style="min-width: 130px">
+                          {{ item.displayName }}
+                        </p>
                       </div>
                     </div>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <span *ngFor="let child of item.children">
-                  <mat-list-item routerLink="[child.route]">
-                    <div  class="row"  fxLayout="row" fxLayoutAlign="space-between center">
-                      <div class="col-md-2">
-                      <img src="{{ child.iconName }}" alt="" />
-                      </div>
-                      <div class="col-md-10">
+                  <mat-list-item [routerLink]="child.route">
+
+                 
+                    <div
+                      class="row sub_menu"
+                      fxLayout="row"
+                      fxLayoutAlign="space-between center"
+                      routerLinkActive="active"
+                    >
+                      <!-- <div class="col-md-2">
+                        <img src="{{ child.iconName }}" alt="" />
+                      </div> -->
+                      <div class="col-md-12">
                         <ul>
                           <li>
-                      <p class=" body-3 gray">   {{ child.displayName }} </p>
-
+                            <p class="body-3 gray m-auto  my-2">{{ child.displayName }}</p>
                           </li>
                         </ul>
-
                       </div>
-
-
                     </div>
                   </mat-list-item>
                 </span>
@@ -119,14 +114,15 @@
                 fxLayout="row"
                 fxLayoutAlign="space-between center"
                 class="d-flex"
+                routerLinkActive="active"
               >
                 <img
                   src="{{ item.iconName }}"
                   alt=""
-                  class="col-2"
-                  style="width: 25px; height: 25px"
+                  class="col-2 my-auto "
+                  style="width: 20px; height: 20px"
                 />
-                <p class="col-9 mx-2 mt-1 body-3 gray">
+                <p class="col-9 mx-2 my-2  body-3 gray">
                   {{ item.displayName }}
                 </p>
               </div>
@@ -135,9 +131,20 @@
         </span>
       </mat-nav-list>
 
+      <div class="col-md-10 mx-3">
+        <div class="row pointer" routerLinkActive="active">
+          <div class="col-2">
+            <img src="../../../assets/icons/logout.png" alt="" />
+          </div>
+          <div class="col-10 p-0" (click)="logour_popup()">
+            <p class="body-3 gray">Logout</p>
+          </div>
+        </div>
+      </div>
+
       <mat-nav-list class="p-0">
         <mat-accordion>
-          <div class="Body2_text p-0 white_back sticky-top" hideToggle>
+          <!-- <div class="Body2_text p-0 white_back sticky-top" hideToggle>
             <div class="h-100 py-1">
               <div class="nav-link py-3">
                 <div class="col-md-11 m-3">
@@ -323,7 +330,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- <div class=" Body2_text p-0 bg-gray" hideToggle id="admin">
                             <div class="h-100 py-1">
@@ -368,7 +375,7 @@
                                 </mat-panel-title>
                             </div>
                         </div> -->
-          </div>
+          <!-- </div> -->
           <div
             class="d-none d-md-none d-lg-block"
             *ngFor="let navItem of navRouteList; let i = index"
@@ -394,7 +401,7 @@
                 "
               >
                 <mat-panel-title
-                  class="nav-link py-3"
+                  class="nav-link py-3"falselogout
                   [ngClass]="{ 'active-text-color': i == selectedNavItem }"
                 >
                   {{ navItem.group_name }}

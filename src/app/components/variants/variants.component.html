@@ -93,9 +93,12 @@
             style="background-color: #232528; border-radius: 15px"
           >
             <div class="row">
-              <div class="col-4 m-auto" *ngIf = "selectedValuesNameArray[i]">
+              <div class="col-4 m-auto" *ngIf="selectedValuesNameArray[i]">
                 <p class="content primary text-center m-0">{{ selectedValuesNameArray[i].attribute_name }}</p>
               </div>
+              <!-- <div class="col-4 m-auto" *ngIf="!selectedValuesNameArray[i]">
+                <p class="content primary text-center m-0">sddf</p>
+              </div> -->
               <div class="col-8 position-relative">
                 <mat-form-field
                   appearance="outline"

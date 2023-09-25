@@ -158,9 +158,6 @@ export class VariantsComponent implements OnInit {
       };
       this.selectedValuesArray.push(data);
       this.selectedValuesNameArray.push(this.selectedAttribute);
-   
-      console.log("select",this.selectedValuesArray);
-   
     }
   }
   AddAttribute() {
@@ -189,7 +186,7 @@ export class VariantsComponent implements OnInit {
 
   public getAttribute() {
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/view')
+      .get(String(this.tokestorage.getToken()), 'attributes/all')
       .then((response: any) => {
         this.attribute_data = response.result;
       });

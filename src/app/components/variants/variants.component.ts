@@ -29,10 +29,11 @@ import { Subject } from 'rxjs';
 })
 export class VariantsComponent implements OnInit {
   @Input() changing: Subject<boolean> | undefined;
+  @Input() indexID: number | undefined;
   @Input() VarientData: any;
   @Output() varient_obj = new EventEmitter<string>();
   varient_error: any = [];
-  varient_image_details: any[] = [];
+  varient_image_details: Array<any> = [];
   varient_image: any;
   textareaContent = '';
   autoHeightTextarea!: ElementRef;
@@ -50,8 +51,7 @@ export class VariantsComponent implements OnInit {
   imageLoop: any;
   imageIndex: any;
   getVarientObj: any;
-
-
+  varient_id: any;
 
   table_row: Array<any> = [
     {
@@ -82,60 +82,76 @@ export class VariantsComponent implements OnInit {
   ngOnInit(): void {
     this.getAttribute();
 
-   
-
     this.changing?.subscribe((v) => {
-
-
+      
+      console.log(this.varient_image_details);
+   
+      var mul_image = [];
       for (let index = 0; index < this.varient_image_details.length; index++) {
-        const element = this.varient_image_details[index];
-        this.imageLoop = this.varient_image_details[index];
-        this.imageIndex = index;
+        var mul_data = {
+          product_image: this.varient_image_details[index],
+          product_image_order: index + 1,
+        };
+        mul_image.push(mul_data);
+      console.log('mul data', mul_image);
+
+
       }
 
       this.variant_data = {
+        product_variant_id: this.varient_id,
         product_variant_name: this.varient_formcontrol.value,
-        product_images: [
-          {
-            product_image: this.imageLoop,
-            product_image_order: this.imageIndex,
-          },
-        ],
+        product_images: mul_image,
         product_price: this.priceformcontrol.value,
         product_attribute_list: this.selectedValuesArray,
         product_variant_nutrition_list: this.table_row,
       };
+
       this.variant_array.push(this.variant_data);
 
-   
+      console.log('====================================');
+      console.log(this.variant_data);
+      console.log('====================================');
+
       this.varient_obj.emit(this.variant_data);
     });
-
-    console.log('child', this.VarientData    );
   }
 
   ngAfterViewInit(): void {
-    this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
-    this.priceformcontrol.setValue(this.VarientData.product_price);
-    this.varient_image_details = this.VarientData.product_images;
-  
+    if (this.VarientData) {
+      if (this.VarientData.product_variant_id) {
+        this.varient_id = this.VarientData.product_variant_id;
+      } else {
+        this.varient_id = '';
+      }
 
-    for (let index = 0; index < this.VarientData.product_attributes.length; index++) {
-      var att_data = {
-        attribute_id: this.VarientData.product_attributes[index].attribute_id,
-        attribute_value: this.VarientData.product_attributes[index].attribute_value,
-      };
+      this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
+      this.priceformcontrol.setValue(this.VarientData.product_price);
 
-      this.selectedValuesArray.push(att_data);
-      
+      this.varient_image_details = this.VarientData.product_images;
+
+      for (
+        let index = 0;
+        index < this.VarientData.product_attributes.length;
+        index++
+      ) {
+        var att_data = {
+          attribute_id: this.VarientData.product_attributes[index].attribute_id,
+          attribute_value:
+            this.VarientData.product_attributes[index].attribute_value,
+        };
+
+        this.selectedValuesArray.push(att_data);
+      }
+
+      this.table_row = this.VarientData.product_nutrition;
     }
-
-    this.table_row = this.VarientData.product_nutrition
   }
 
   varient_image_data(data: Array<any>) {
     data = data[0];
 
+    this.varient_image_details = [];
     for (var i = 0; i < data.length; i++) {
       this.varient_image_details.push(data[i].filename);
     }

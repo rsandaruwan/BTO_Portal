@@ -206,7 +206,7 @@
 
 
 <div *ngFor="let variant of variant_array; let i = index">
-  <app-variants *ngIf="show" [changing]="changingValue" [VarientData]="variant"></app-variants>
+  <app-variants *ngIf="show" (varient_obj) = "dataToPayLoad($event)" [changing]="changingValue" [VarientData]="variant"  [indexID] = "i"></app-variants>
 </div>
 
 <div class="footer_btn mx-5 row my-5">

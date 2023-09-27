@@ -16,7 +16,7 @@
         <div class="col-10">
           <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
             <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-            <input matInput placeholder="Enter variant name"   [formControl]="varient_formcontrol" />
+            <input matInput placeholder="Enter variant name"    [formControl]="varient_formcontrol" />
           </mat-form-field>
           <mat-hint class="text-danger primary" *ngIf="varient_error.product_variant_name" >{{varient_error['product_variant_name']}}</mat-hint>
   
@@ -32,7 +32,7 @@
             multiple="multiple"
           ></app-image-upload> -->
   
-          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2" multiple="multiple" [shareParent] = varient_image_details ></app-image-upload>
+          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2{{indexID}}" multiple="multiple" [shareParent] = varient_image_details ></app-image-upload>
           <mat-hint class="text-danger primary" *ngIf="varient_error.product_images" >{{varient_error['product_images']}}</mat-hint>
         </div>
       </div>
@@ -114,7 +114,7 @@
                   <img
                     src="../../../assets/icons/close-red.png"
                     alt=""
-                    (click)=" (value.attribute_id )" b
+                    (click)=" (value.attribute_id )" 
                 /></mat-icon>
               </div>
             </div>

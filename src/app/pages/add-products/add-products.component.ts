@@ -41,250 +41,6 @@ interface ROWDATA {
 })
 export class AddProductsComponent {
   @ViewChild('autoHeightTextarea')
-
-//   public result_data={
-//     "status": 1,
-//     "message": "Product",
-//     "result": {
-//         "product": {
-//             "product_id": "63e61b62c433d152ad0750fc",
-//             "category_has_sub_category_id": [
-//                 "63e4e8b9850cd70826747f65"
-//             ],
-//             "product_name": "Pure Ceylon Cinnamon Powder",
-//             "product_description": "Ceylon Cinnamon (Cinnamomum zeylanicum), extracted from the bark of a plant indigenous to Sri Lanka, is pleasantly aromatic, presenting lighter and brighter citreous tones. Pure Ceylon Cinnamon is an ingredient much sought after for use in kitchens worldwide as an aromatic condiment in a wide variety of dishes, breakfast cereals, snack-foods, beverages and desserts. Ceylon Cinnamon considered the finest Cinnamon in the world is recommended for daily use.",
-//             "product_main_image": "public/images/products/7167560BCB1F466C8B77.png",
-//             "ingredient": [
-//                 "63e4e869ce2dc7dc87ee8cf4"
-//             ],
-//             "product_status": 1,
-//             "product_in_stock": 1,
-//             "product_featured": 1,
-//             "product_rating": 5,
-//             "created_at": "2023-02-10 15:54:34.658000",
-//             "created_by": "639abd8ef76d3aebb98dfe40"
-//         },
-//         "product_variant": [
-//             {
-//                 "product_variant_id": "63e61b62c433d152ad0750fd",
-//                 "product_id": "63e61b62c433d152ad0750fc",
-//                 "product_variant_name": "Pure Ceylon Cinnamon Powde - Regular Range",
-//                 "product_variant_seo_title": "pure-ceylon-cinnamon-powde-regular-range",
-//                 "product_images": [
-//                     {
-//                         "image_path": "public/images/products/27C890F95CD14F199DAD.png",
-//                         "image_order": 1
-//                     },
-//                     {
-//                         "image_path": "public/images/products/7446AE3FDEE346929B08.png",
-//                         "image_order": 2
-//                     }
-//                 ],
-//                 "product_attributes": [
-//                     {
-//                         "attribute_id": "63e61972c433d152ad0750fb",
-//                         "attribute_value": "82g"
-//                     },
-//                     {
-//                         "attribute_id": "63e4e7aece2dc7dc87ee8cf2",
-//                         "attribute_value": "Pouch"
-//                     },
-//                     {
-//                         "attribute_id": "63e4e7a6ce2dc7dc87ee8cf1",
-//                         "attribute_value": "Powder/ Dry"
-//                     }
-//                 ],
-//                 "product_nutrition": [
-//                     {
-//                         "nutrition_name": "Energy",
-//                         "nutrition_per_100_gram": [
-//                             "246.43kJ",
-//                             "58.90kcal"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "24.64kJ",
-//                             "5.89kcal"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Fat",
-//                         "nutrition_per_100_gram": [
-//                             "0.90g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.09g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Of which saturates",
-//                         "nutrition_per_100_gram": [
-//                             "0.48g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.048g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Carbohydrates",
-//                         "nutrition_per_100_gram": [
-//                             "84.10g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "8.41g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Of which sugars",
-//                         "nutrition_per_100_gram": [
-//                             "0.0g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.0g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Dietary Fiber",
-//                         "nutrition_per_100_gram": [
-//                             "74.50g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "7.45g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Protein",
-//                         "nutrition_per_100_gram": [
-//                             "3.10g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.31g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Sodium",
-//                         "nutrition_per_100_gram": [
-//                             "0.003g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.000g"
-//                         ]
-//                     }
-//                 ],
-//                 "product_price": 5.0
-//             },
-//             {
-//                 "product_variant_id": "63e61b63c433d152ad0750fe",
-//                 "product_id": "63e61b62c433d152ad0750fc",
-//                 "product_variant_name": "Pure Ceylon Cinnamon Powde - Epic Bottle",
-//                 "product_variant_seo_title": "pure-ceylon-cinnamon-powde-epic-bottle",
-//                 "product_images": [
-//                     {
-//                         "image_path": "public/images/products/7055E18284F447F2A25B.png",
-//                         "image_order": 1
-//                     },
-//                     {
-//                         "image_path": "public/images/products/2D79C6E198EA41A7BBA7.png",
-//                         "image_order": 2
-//                     }
-//                 ],
-//                 "product_attributes": [
-//                     {
-//                         "attribute_id": "63e61972c433d152ad0750fb",
-//                         "attribute_value": "83g"
-//                     },
-//                     {
-//                         "attribute_id": "63e4e7aece2dc7dc87ee8cf2",
-//                         "attribute_value": "Bottle"
-//                     },
-//                     {
-//                         "attribute_id": "63e4e7a6ce2dc7dc87ee8cf1",
-//                         "attribute_value": "Powder/ Dry"
-//                     }
-//                 ],
-//                 "product_nutrition": [
-//                     {
-//                         "nutrition_name": "Energy",
-//                         "nutrition_per_100_gram": [
-//                             "246.43kJ",
-//                             "58.90kcal"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "24.64kJ",
-//                             "5.89kcal"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Fat",
-//                         "nutrition_per_100_gram": [
-//                             "0.90g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.09g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Of which saturates",
-//                         "nutrition_per_100_gram": [
-//                             "0.48g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.048g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Carbohydrates",
-//                         "nutrition_per_100_gram": [
-//                             "84.10g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "8.41g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Of which sugars",
-//                         "nutrition_per_100_gram": [
-//                             "0.0g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.0g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Dietary Fiber",
-//                         "nutrition_per_100_gram": [
-//                             "74.50g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "7.45g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Protein",
-//                         "nutrition_per_100_gram": [
-//                             "3.10g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.31g"
-//                         ]
-//                     },
-//                     {
-//                         "nutrition_name": "Sodium",
-//                         "nutrition_per_100_gram": [
-//                             "0.003g"
-//                         ],
-//                         "nutrition_in_this_pack": [
-//                             "0.000g"
-//                         ]
-//                     }
-//                 ],
-//                 "product_price": 5.5
-//             }
-//         ]
-//     }
-// }
-
-
-
   autoHeightTextarea!: ElementRef;
 
   imageState = 'showImage';
@@ -333,7 +89,10 @@ export class AddProductsComponent {
   product_status_value: any;
   pro_status: any;
   prv_status: any;
-  get_varient_data : Array<string> = [];
+  get_varient_data: Array<string> = [];
+  resultArray: { type: string; msg: string }[] = [];
+  get_image: any;
+  update_img:any
 
   table_row: Array<any> = [
     {
@@ -361,12 +120,11 @@ export class AddProductsComponent {
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.route.queryParams.subscribe((params) => {
       this.proId = params['id'];
     });
-
 
     this.userForm = this.fb.group({
       name: [],
@@ -377,20 +135,16 @@ export class AddProductsComponent {
   }
 
   ngOnInit(): void {
-   
-    
     this.getCategoryData();
 
     this.getIngredient();
     this.getAttribute();
-//edit
+    //edit
 
-this.getProductData();
+    this.getProductData();
     if (this.proId) {
-      
       this.getProductData();
-
-    } else{
+    } else {
       this.variant_array.push({});
     }
   }
@@ -406,7 +160,6 @@ this.getProductData();
       nutrition_in_this_pack: [''],
     });
     (this.userForm.get('rows') as FormArray).push(this.fb.control(null));
-    
   }
   getrowFormControls(): AbstractControl[] {
     return this.table_row;
@@ -538,7 +291,6 @@ this.getProductData();
     });
   }
 
-
   // change view to All
   public getAttribute() {
     this.apiService
@@ -550,6 +302,7 @@ this.getProductData();
 
   Product_image_data(data: any) {
     this.product_image_details = data.fileName;
+
   }
   varient_image_data(data: Array<any>) {
     data = data[0];
@@ -584,8 +337,6 @@ this.getProductData();
       .get(String(this.tokestorage.getToken()), 'products/' + this.proId)
       .then((response: any) => {
         this.productData = response.result;
-        //  this.productData = this.result_data.result;
-
 
         this.selectedSubCategory = this.productData.product;
         this.product_nameformcontrol.setValue(
@@ -599,20 +350,20 @@ this.getProductData();
         this.product_status = this.productData.product.product_status;
         this.chage_priview_status = this.productData.product.product_in_stock;
 
-        this.get_varient_data = this.productData.product_variant
+        this.get_varient_data = this.productData.product_variant;
 
         this.changeProductStatus();
         this.changePreviewStatus();
 
-        this.variant_array=this.productData.product_variant;
+        this.variant_array = this.productData.product_variant;
+        this.get_image = this.productData.product.product_main_image_name;
       });
   }
 
   changeProductStatus() {
     if (this.product_status == 1) {
       this.pro_status = true;
-    }
-    else {
+    } else {
       this.pro_status = false;
     }
   }
@@ -620,8 +371,7 @@ this.getProductData();
   changePreviewStatus() {
     if (this.chage_priview_status == 1) {
       this.prv_status = true;
-    }
-    else {
+    } else {
       this.prv_status = false;
     }
   }
@@ -633,53 +383,116 @@ this.getProductData();
   priceformcontrol = new FormControl('', [Validators.required]);
 
   save() {
-    this.changingValue.next(true);
-    for (let index = 0; index < this.varient_image_details.length; index++) {
-      const element = this.varient_image_details[index];
-      this.imageLoop = this.varient_image_details[index];
-      this.imageIndex = index;
+    if (this.proId) {
+      if (this.product_image_details) {
+       this.update_img = this.product_image_details
+      } else{
+        this.update_img = this.get_image
+      }
+
+      
+
+
+      // this.Product_image_data()
+
+      this.changingValue.next(true);
+      for (let index = 0; index < this.varient_image_details.length; index++) {
+        const element = this.varient_image_details[index];
+        this.imageLoop = this.varient_image_details[index];
+        this.imageIndex = index;
+      }
+      const update_data = {
+        product: {
+          product_id: this.proId,
+          category_has_sub_category_id: this.selectedSubCategory,
+          product_name: this.product_nameformcontrol.value,
+          product_main_image: this.update_img,
+          product_description: this.description_formcontrol.value,
+          product_ingredients: this.selectedIngredient,
+          product_in_stock: this.product_status,
+
+          product_rating: 5,
+          product_status: this.chage_priview_status,
+        },
+        product_variant: this.variant_submit_data,
+      };
+
+      this.apiService
+        .put(update_data, String(this.tokestorage.getToken()), 'products/edit')
+        .then((response: any) => {
+          this.updated();
+        })
+        .catch((error: any) => {
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+              });
+            }
+          });
+        });
+    } else {
+      this.changingValue.next(true);
+      for (let index = 0; index < this.varient_image_details.length; index++) {
+        const element = this.varient_image_details[index];
+        this.imageLoop = this.varient_image_details[index];
+        this.imageIndex = index;
+      }
+
+      const data = {
+        product: {
+          product_id: this.proId,
+          category_has_sub_category_id: this.selectedSubCategory,
+          product_name: this.product_nameformcontrol.value,
+          product_main_image: this.product_image_details,
+          product_description: this.description_formcontrol.value,
+          product_ingredients: this.selectedIngredient,
+          product_in_stock: this.product_status,
+
+          product_rating: 5,
+          product_status: this.chage_priview_status,
+        },
+        product_variant: this.variant_submit_data,
+      };
+
+      // };
+
+      this.apiService
+
+        .post(data, String(this.tokestorage.getToken()), 'products/create')
+        .then((response: any) => {
+          this.product_data = response.result[0];
+
+          this.done();
+        })
+        .catch((error: any) => {
+          this.errors = [];
+          this.varient_error = [];
+          this.nutrition_error = [];
+
+          error.error.detail.map((errorData: any) => {
+            this.errors[errorData.loc[1]] = errorData.msg;
+          });
+          error.error.detail.map((errorData: any) => {
+            this.varient_error[errorData.loc[3]] = errorData.msg;
+          });
+          error.error.detail.map((errorData: any) => {
+            this.nutrition_error[errorData.loc[5]] = errorData.msg;
+          });
+        });
     }
+  }
 
-    const data = {
-      product: {
-        category_has_sub_category_id: this.selectedSubCategory,
-        product_name: this.product_nameformcontrol.value,
-        product_main_image: this.product_image_details,
-        product_description: this.description_formcontrol.value,
-        product_ingredients: this.selectedIngredient,
-        product_in_stock: this.product_status,
-
-        product_rating: 5,
-        product_status: this.chage_priview_status,
-      },
-      product_variant: this.variant_submit_data,
+  updated() {
+    var data1 = {
+      msg: 'Category updated to the system Successfully!',
     };
+    this.dialog.open(DynamicDonePopupComponent, {
+      width: '25vw',
 
-    // };
-
-    this.apiService
-
-      .post(data, String(this.tokestorage.getToken()), 'products/create')
-      .then((response: any) => {
-        this.product_data = response.result[0];
-
-        this.done();
-      })
-      .catch((error: any) => {
-        this.errors = [];
-        this.varient_error = [];
-        this.nutrition_error = [];
-
-        error.error.detail.map((errorData: any) => {
-          this.errors[errorData.loc[1]] = errorData.msg;
-        });
-        error.error.detail.map((errorData: any) => {
-          this.varient_error[errorData.loc[3]] = errorData.msg;
-        });
-        error.error.detail.map((errorData: any) => {
-          this.nutrition_error[errorData.loc[5]] = errorData.msg;
-        });
-      });
+      data: data1,
+    });
   }
 
   dataadd(row: number, i: number, col: number, event: any) {

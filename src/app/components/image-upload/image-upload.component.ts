@@ -24,34 +24,51 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
   uploadId: any;
   imageType: any;
-  multiple_image_parent:any[] = []
 
   url: string | null = null; // Initialize url as null
   urls: Array<string> = [];
-
+  image_arr: [] = [];
+  images: any;
   fileName: any;
   fileUrl: any;
+  mul_image_path: any;
+  mul_image_name: any;
+  mul_image_obj: any;
+  muti_img_arr: Array<any> = [];
+  targetData: any;
 
-  ngOnInit(): void {
-
-    setTimeout(()=>{                       
-      // console.log("image", this.shareParent);
-      
-
-
-  }, 1000);
-    
-    
-
-  }
+  ngOnInit(): void {}
 
   constructor(
     private tokestorage: StorageService,
     private apiService: ApiService
   ) {}
   ngAfterViewInit(): void {
+    this.getMultipleImages();
+  }
 
-   
+  getMultipleImages() {
+    setTimeout(() => {
+      for (let index = 0; index < this.shareParent.length; index++) {
+        this.urls.push(this.shareParent[index].image_path);
+
+        this.targetData = this.shareParent.find(
+          (item) => item.image_path === this.urls[index]
+        );
+        if (this.targetData) {
+          this.mul_image_path = this.targetData.image_path;
+          this.mul_image_name = this.targetData.image_name;
+
+          this.mul_image_obj = {
+            filename: this.mul_image_name,
+            temp_url: this.mul_image_path,
+          };
+
+          this.muti_img_arr.push(this.mul_image_obj);
+        } else {
+        }
+      }
+    }, 3000);
   }
 
   onSelectFile(event: any) {
@@ -105,30 +122,35 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
     this.uploadId = this.id;
     this.imageType = this.multiple;
     const formData = new FormData();
-    var muti_img_arr: Array<any> = [];
+
     for (let index = 0; index < event.target.files.length; index++) {
       const element = event.target.files[index];
-      
+
       formData.append('files', element);
     }
-      this.apiService
-        .post_file(
-          formData,
-          String(this.tokestorage.getToken()),
-          'general/upload'
-        )
-        .then((response: any) => {
-          muti_img_arr.push(response.result);
-          this.addNewItems(muti_img_arr);
-        })
-        .catch((error: any) => {});
+    this.apiService
+      .post_file(
+        formData,
+        String(this.tokestorage.getToken()),
+        'general/upload'
+      )
+      .then((response: any) => {
+        this.muti_img_arr.push(response.result);
 
-      // if (index == event.target.files.length) {
+       
 
-      //   this.addNewItems(muti_img_arr);
-      // }
-  
-   
+        // if (this.shareParent.length) {
+        //   this.getMultipleImages();
+        // }
+
+        this.addNewItems(this.muti_img_arr);
+      })
+      .catch((error: any) => {});
+
+    // if (index == event.target.files.length) {
+
+    //   this.addNewItems(muti_img_arr);
+    // }
   }
 
   addNewItem() {

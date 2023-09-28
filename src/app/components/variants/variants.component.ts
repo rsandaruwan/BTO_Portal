@@ -51,7 +51,10 @@ export class VariantsComponent implements OnInit {
   imageLoop: any;
   imageIndex: any;
   getVarientObj: any;
-  varient_id: any;
+  varient_id: any = '';
+  mulimageName:any
+  mulImageIndex:any
+
 
   table_row: Array<any> = [
     {
@@ -81,40 +84,6 @@ export class VariantsComponent implements OnInit {
   priceformcontrol = new FormControl('', [Validators.required]);
   ngOnInit(): void {
     this.getAttribute();
-
-    this.changing?.subscribe((v) => {
-      
-      console.log(this.varient_image_details);
-   
-      var mul_image = [];
-      for (let index = 0; index < this.varient_image_details.length; index++) {
-        var mul_data = {
-          product_image: this.varient_image_details[index],
-          product_image_order: index + 1,
-        };
-        mul_image.push(mul_data);
-      console.log('mul data', mul_image);
-
-
-      }
-
-      this.variant_data = {
-        product_variant_id: this.varient_id,
-        product_variant_name: this.varient_formcontrol.value,
-        product_images: mul_image,
-        product_price: this.priceformcontrol.value,
-        product_attribute_list: this.selectedValuesArray,
-        product_variant_nutrition_list: this.table_row,
-      };
-
-      this.variant_array.push(this.variant_data);
-
-      console.log('====================================');
-      console.log(this.variant_data);
-      console.log('====================================');
-
-      this.varient_obj.emit(this.variant_data);
-    });
   }
 
   ngAfterViewInit(): void {
@@ -124,6 +93,85 @@ export class VariantsComponent implements OnInit {
       } else {
         this.varient_id = '';
       }
+
+      if (this.VarientData.product_variant_id) {
+        // alert("yes")
+        this.changing?.subscribe((v) => {
+          // console.log("var image details",this.varient_image_details);
+
+          var mul_image = [];
+          for (
+            let index = 0;
+            index < this.varient_image_details.length;
+            index++
+          ) {
+            var mul_data = {
+              product_image: this.varient_image_details[index].image_name,
+              product_image_order: index + 1,
+
+             
+              
+            };
+
+            console.log("mul n data", this.varient_image_details[index]);
+
+            mul_image.push(mul_data);
+            console.log('mul data', mul_image);
+          }
+
+          for (let index = 0; index < mul_image.length; index++) {
+           
+           
+          }
+
+          this.variant_data = {
+            product_variant_id: this.varient_id,
+            product_variant_name: this.varient_formcontrol.value,
+            product_images: mul_image,
+            product_price: this.priceformcontrol.value,
+            product_attribute_list: this.selectedValuesArray,
+            product_variant_nutrition_list: this.table_row,
+          };
+       
+          this.variant_array.push(this.variant_data);
+
+          this.varient_obj.emit(this.variant_data);
+        });
+      } else
+        this.changing?.subscribe((v) => {
+        alert("no")
+
+          // console.log("var image details",this.varient_image_details);
+
+          var mul_image = [];
+          for (
+            let index = 0;
+            index < this.varient_image_details.length;
+            index++
+          ) {
+            var mul_data = {
+              product_image: this.varient_image_details[index],
+              product_image_order: index + 1,
+            };
+            mul_image.push(mul_data);
+            // console.log('mul data', mul_image);
+          }
+
+          this.variant_data = {
+            product_variant_id: this.varient_id,
+            product_variant_name: this.varient_formcontrol.value,
+            product_images: mul_image,
+            product_price: this.priceformcontrol.value,
+            product_attribute_list: this.selectedValuesArray,
+            product_variant_nutrition_list: this.table_row,
+          };
+
+          this.variant_array.push(this.variant_data);
+
+          this.varient_obj.emit(this.variant_data);
+        });
+
+      // End
 
       this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
       this.priceformcontrol.setValue(this.VarientData.product_price);

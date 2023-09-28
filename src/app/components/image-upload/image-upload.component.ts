@@ -52,19 +52,23 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
       for (let index = 0; index < this.shareParent.length; index++) {
         this.urls.push(this.shareParent[index].image_path);
 
+       console.log("urls", this.urls);
+       
+
         this.targetData = this.shareParent.find(
           (item) => item.image_path === this.urls[index]
         );
         if (this.targetData) {
           this.mul_image_path = this.targetData.image_path;
           this.mul_image_name = this.targetData.image_name;
+         
+         
 
-          this.mul_image_obj = {
-            filename: this.mul_image_name,
-            temp_url: this.mul_image_path,
-          };
+          // this.muti_img_arr.push(this.mul_image_name);
 
-          this.muti_img_arr.push(this.mul_image_obj);
+          // console.log('====================================');
+          // console.log(this.muti_img_arr);
+          // console.log('====================================');
         } else {
         }
       }
@@ -72,10 +76,11 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   }
 
   onSelectFile(event: any) {
-    if (event.target.files && event.target.files[0]) {
+ 
+    if (event.target?.files && event.target.files[0]) {
       const reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target?.files[0]);
 
       reader.onload = (event) => {
         this.url = event.target?.result as string; // Use optional chaining
@@ -86,7 +91,7 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
     const formData = new FormData();
 
-    formData.append('files', event.target.files[0]);
+    formData.append('files', event.target?.files[0]);
 
     this.apiService
       .post_file(

@@ -337,8 +337,11 @@ export class AddProductsComponent {
       .get(String(this.tokestorage.getToken()), 'products/' + this.proId)
       .then((response: any) => {
         this.productData = response.result;
+        this.selectedCategory = this.productData.product.category_id;
+        
+       
+        this.selectedSubCategory = this.productData.product.category_has_sub_category_id
 
-        this.selectedSubCategory = this.productData.product;
         this.product_nameformcontrol.setValue(
           this.productData.product.product_name
         );

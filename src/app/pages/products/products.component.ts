@@ -8,6 +8,8 @@ import { ProductsInterface } from 'src/app/modals/product.model';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AddProductsComponent } from '../add-products/add-products.component';
+import { CategoryInterface } from 'src/app/modals/category.model';
+import { SubCategoryIntarface } from 'src/app/modals/sub_category.model';
 
 interface Food {
   value: string;
@@ -30,6 +32,18 @@ export class ProductsComponent implements AfterViewInit {
   category_data: any[] = [];
   selectedValue: string | undefined;
   product_id: any;
+  categoryName:any;
+  categoryid:any;
+
+  getCategory:any
+  getsubCategory:any
+  categories: CategoryInterface[] = [];
+  Subcategories: SubCategoryIntarface[] = [];
+  search_cat: any = '';
+  searchProName: any = '';
+  searchsubcat: any = '';
+
+
 
   displayedColumns: string[] = [
     'product_id',
@@ -45,14 +59,15 @@ export class ProductsComponent implements AfterViewInit {
   constructor(
     private tokestorage: StorageService,
     private apiService: ApiService,
-    private router: Router,
- 
+    private router: Router
   ) {
     this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
     this.getProductData();
+    this.getCategoryData();
+    this.getSubCategoryData();
   }
 
   ngAfterViewInit(): void {
@@ -60,17 +75,26 @@ export class ProductsComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
+
 
   ELEMENT_DATA: ProductsInterface[] = [];
 
   getProductData() {
+
+    var parameter = '?';
+
+    if (this.search_cat != undefined) {
+      parameter += 'category_id=' + this.search_cat + '&';
+    }
+    if (this.searchsubcat != undefined) {
+      parameter += 'sub_category_id=' + this.searchsubcat + '&';
+    }
+    if (this.searchProName != undefined) {
+      parameter += 'product_name=' + this.searchProName;
+    }
+
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'products/view')
+      .get(String(this.tokestorage.getToken()), 'products/search'+ parameter)
       .then((response: any) => {
         this.product_data = response.result;
         this.dataSource = this.dataSource = new MatTableDataSource(
@@ -79,20 +103,52 @@ export class ProductsComponent implements AfterViewInit {
 
         this.varient_data = this.product_data.product_variants;
         this.category_data = this.product_data;
+      
+
+        for (let index = 0; index < this.product_data.length; index++) {
+      this.categoryid  = this.product_data[index].category_details[0].category_id
+      // this.getCategoryData(this.categoryid) 
+        }
       });
   }
-  editclick(id: any) {
 
+  search(event: any) {
+    this.searchProName = event.target.value;
+console.log( this.searchProName);
+
+    this.getProductData();
+  }
+  editclick(id: any) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-       id
-
-      }
-  };
-  this.router.navigate(['portal/add_product'], navigationExtras);
-
-   
-  
+        id,
+      },
+    };
+    this.router.navigate(['portal/add_product'], navigationExtras);
   }
-}
 
+
+  // getCategoryData(id:any) {
+  //   this.apiService
+  //     .get(String(this.tokestorage.getToken()), 'category/' +id)
+  //     .then((response: any) => {
+  //      console.log(response);
+       
+  //     });
+  // }
+  getCategoryData() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'category/view')
+      .then((response: any) => {
+        this.categories = response.result;
+      });
+  }
+  getSubCategoryData() {
+    this.apiService
+      .get(String(this.tokestorage.getToken()), 'sub-category/view')
+      .then((response: any) => {
+        this.Subcategories = response.result;
+      });
+  }
+
+}

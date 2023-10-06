@@ -134,7 +134,7 @@ export class AttributePopupComponent {
   }
   updated() {
     var data1 = {
-      msg: 'Category updated to the system Successfully!',
+      msg: 'Attribute updated to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',

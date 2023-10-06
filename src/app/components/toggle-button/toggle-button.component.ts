@@ -27,7 +27,9 @@ export class ToggleButtonComponent {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.on = false
+  }
   ngAfterViewInit(): void {
    
 

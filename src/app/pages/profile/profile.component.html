@@ -79,12 +79,15 @@
                   <mat-label class="content">First Name</mat-label>
                   <input matInput   [formControl]="first_nameformcontrol"/>
                 </mat-form-field>
+                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'first_name'">{{resultArray[0].msg}}</mat-hint>
               </div>
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Last Name</mat-label>
                   <input matInput   [formControl]="last_nameformcontrol"/>
                 </mat-form-field>
+                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'last_name'">{{resultArray[0].msg}}</mat-hint>
+
               </div>
             </div>
             <div class="row my-3">
@@ -93,18 +96,23 @@
                   <mat-label class="content">Contact Number</mat-label>
                   <input matInput  [formControl]="user_contactformcontrol"/>
                 </mat-form-field>
+                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'mobile'">{{resultArray[0].msg}}</mat-hint>
+
               </div>
               <div class="col-6">
+
+              
+                
                 <mat-form-field appearance="outline" class="w-100 body-2">
                   <mat-label class="content">Email</mat-label>
-                  <input matInput readonly type="email" [formControl]="user_emailformcontrol" readonly  />
+                  <input matInput  type="email" [formControl]="user_emailformcontrol" readonly  />
                 </mat-form-field>
               </div>
             </div>
             <div class="row my-3">
               <div class="col-6 d-flex gap-3">
                 <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
-                <button class="reset_btn primary">RESET</button>
+                <button class="reset_btn primary" (click)="resetData()">RESET</button>
               </div>
               <div class="col-6"></div>
             </div>
@@ -182,7 +190,7 @@
             <div class="row my-3">
               <div class="col-6 d-flex gap-3">
                 <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
-                <button class="reset_btn primary">RESET</button>
+                <button class="reset_btn primary" >RESET</button>
               </div>
               <div class="col-6"></div>
             </div>

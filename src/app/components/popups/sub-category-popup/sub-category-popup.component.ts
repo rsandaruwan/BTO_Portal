@@ -209,7 +209,7 @@ export class SubCategoryPopupComponent {
 
   done() {
     var data1 = {
-      msg: 'sUb category added to the system Successfully!',
+      msg: 'Sub category added to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',
@@ -219,7 +219,7 @@ export class SubCategoryPopupComponent {
   }
   updated() {
     var data1 = {
-      msg: 'Category updated to the system Successfully!',
+      msg: 'Sub category updated to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',

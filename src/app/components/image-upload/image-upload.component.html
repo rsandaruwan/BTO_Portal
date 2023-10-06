@@ -1,30 +1,26 @@
 <ng-container *ngIf="multiple">
-
-  
   <!-- multiple -->
   <div class="position-relative">
-    <div class="d-flex gap-2  position-absolute top-0">
-      
+    <div class="d-flex gap-2 position-absolute top-0">
       <img *ngIf="urls.length < 1" src="../../../assets/icons/imageBack.png" />
-   
+
       <ng-container *ngFor="let url of urls; let i = index">
-        <div class="position-relative ">
+        <div class="position-relative">
+          <div *ngIf="!shareParent">
+            <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+          </div>
+          <div *ngIf="shareParent"><img [src]="url ? url : shareParent" /></div>
 
-          <div *ngIf="!shareParent"> <img [src]="url ? url : '../../../assets/icons/imageBack.png'" /></div>
-          <div *ngIf="shareParent"> <img [src]="url ? url : shareParent" /></div>
-
-        <mat-icon class="closebtn1" *ngIf="urls" (click)="delete1(i)">cancel</mat-icon>
-       </div>
+          <mat-icon class="closebtn1" *ngIf="urls" (click)="delete1(i)"
+            >cancel</mat-icon
+          >
+        </div>
       </ng-container>
-    
-   
-  </div>
+    </div>
     <label class="hoverable" for="uploadId_{{ id }}">
-     
-
       <div class="hover-text"></div>
       <div class="background"></div>
-  
+
       <input
         id="uploadId_{{ id }}"
         multiple="multiple"
@@ -35,23 +31,17 @@
     </label>
   </div>
 
- 
   <br />
-
-  <!-- <mat-icon class="closebtn" *ngIf="urls" (click)="delete1(id)"
-    >cancel</mat-icon
-  > -->
 </ng-container>
 
 <ng-container *ngIf="!multiple">
   <!-- single -->
 
   <label class="hoverable" for="uploadId_{{ id }}">
-    <div *ngIf="!value"> <img [src]="url ? url : '../../../assets/icons/imageBack.png'" /></div>
-    <div *ngIf="value"> <img [src]="url ? url : value" /></div>
-
-    {{value}}
-    
+    <div *ngIf="!value">
+      <img [src]="url ? url : '../../../assets/icons/imageBack.png'" />
+    </div>
+    <div *ngIf="value"><img [src]="url ? url : value" /></div>
 
     <div class="hover-text"></div>
     <div class="background"></div>

@@ -46,17 +46,24 @@ export class ProfileComponent {
   hide = true;
   image = '../../../assets/image/image_background.png';
   active_color:any = "#97BE41"
-  userId: any = "64ec62ce38a10c1ec6c1ead4"
-  user_data_by_id:any
+  userId: any ;
+  user_data_by_id:any;
+  resultArray: { type: string; msg: string }[] = []; 
+
 
 
   constructor(
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
+    
    
   ) {}
   ngOnInit(): void {
+
+    console.log(this.tokestorage.getUser().id);
+    this.userId = this.tokestorage.getUser().id
+    
     this.getUserById();
   }
 
@@ -126,6 +133,14 @@ export class ProfileComponent {
     
     }
 
+    resetData(){
+      
+      this.first_nameformcontrol .setValue(this.user_data_by_id.first_name);
+      this.last_nameformcontrol .setValue(this.user_data_by_id.last_name);
+      this.user_contactformcontrol.setValue(this.user_data_by_id.mobile);
+      this.user_emailformcontrol .setValue(this.user_data_by_id.email);
+    }
+
     getUserById() {
       this.apiService
         .get(String(this.tokestorage.getToken()), 'user/' + this.userId)
@@ -161,11 +176,26 @@ export class ProfileComponent {
           // this.closebutton.nativeElement.click();
           this.updated();
         })
-        .catch((error: any) => {});
+        .catch((error: any) => {
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[1],
+                msg: item.msg,
+
+                
+              });
+              
+
+            }
+          });
+
+          console.log(this.resultArray);
+        });
     }
     updated() {
       var data1 = {
-        msg: 'Category updated to the system Successfully!',
+        msg: 'Profile updated to the system Successfully!',
       };
       this.dialog.open(DynamicDonePopupComponent, {
         width: '25vw',

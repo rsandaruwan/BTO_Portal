@@ -1,3 +1,5 @@
+
+
 <div class="col-12 mt-4 body-table secound_back">
   <div class="row mx-2 py-3">
     <div class="col-6">
@@ -7,211 +9,233 @@
     </div>
     <div class="col-6 d-flex flex-row-reverse">
       <button class="primary_btn content" (click)="save()">SAVE DETAILS</button>
+      <!-- <button (click)="resetInputValue()">reset</button> -->
     </div>
   </div>
 
   <!-- Product table -->
-  <div class="col-md-12">
-    <div class="row m-0 p-0 first_row border-bottom border-top">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">| Basic Details</p>
+ 
+    <div class="col-md-12">
+      <div class="row m-0 p-0 first_row border-bottom border-top">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">| Basic Details</p>
+        </div>
+        <div class="col-10"></div>
       </div>
-      <div class="col-10"></div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Category</p>
-      </div>
-      <div class="col-10">
-        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
-          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
-          <mat-select
-            [(ngModel)]="selectedCategory"
-            name="food"
-            placeholder="Select Category"
-            class="matSelectPlaceholder"
-          
-            
-         
-          >
-            <mat-option
-              *ngFor="let categorie of categories"
-              [value]="categorie.category_id"
-              (click)="get_category_id(categorie.category_id)"
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Category</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+            <mat-select
+              [(ngModel)]="selectedCategory"
+              name="categorie"
+              placeholder="Select Category"
+              class="matSelectPlaceholder"
+           
+              
             >
-              {{ categorie.category_name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-       
-      </div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Sub Category</p>
-      </div>
-      <div class="col-10">
-        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
-          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
-          <mat-select
-            [(ngModel)]="selectedSubCategory"
-            name="subcategorie"
-            placeholder="Select A Sub Category"
-            class="matSelectPlaceholder"
-            multiple
-          >
-
-        
-            <ng-container *ngIf="subcategories.length == 0">
-              <mat-option class="content" disabled>No Sub category</mat-option>
-            </ng-container>
-            <ng-container *ngIf="subcategories.length != 0">
               <mat-option
-                *ngFor="let subcategorie of subcategories"
-                [value]="subcategorie.id"
+                *ngFor="let categorie of categories"
+                [value]="categorie.category_id"
+                (click)="get_category_id(categorie.category_id)"
               >
-                {{ subcategorie.name }}
+                {{ categorie.category_name }}
               </mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
-      
-        <mat-hint class="text-danger primary" *ngIf="errors.category_has_sub_category_id" >{{errors['category_has_sub_category_id']}}</mat-hint>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Product Name</p>
-      </div>
-      <div class="col-10">
-        <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
-          <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-          <input matInput placeholder="Product Name" [formControl]="product_nameformcontrol" />
-        </mat-form-field>
-       
-          <!-- <mat-hint class="text-danger primary" *ngIf="errors.product_name" >{{errors['product_name']}}</mat-hint> -->
-       
-      </div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Product Main Image</p>
-      </div>
-      <div class="col-10 w-75 my-3 mx-4">
-        <!-- <app-image-upload id="fileInput1"></app-image-upload> -->
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Sub Category</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+            <mat-select
+              [(ngModel)]="selectedSubCategory"
+              name="subcategorie"
+              placeholder="Select A Sub Category"
+              class="matSelectPlaceholder"
+              multiple
+            >
+              <ng-container *ngIf="subcategories.length == 0">
+                <mat-option class="content" disabled
+                  >No Sub category</mat-option
+                >
+              </ng-container>
+              <ng-container *ngIf="subcategories.length != 0">
+                <mat-option
+                  *ngFor="let subcategorie of subcategories"
+                  [value]="subcategorie.id"
+                >
+                  {{ subcategorie.name }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
 
-        <app-image-upload (fileout)="Product_image_data($event) " [value]="product_image"></app-image-upload>
-        <mat-hint class="text-danger primary" *ngIf="errors.product_main_image" >{{errors['product_main_image']}}</mat-hint>
-
-      </div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Description</p>
-      </div>
-      <div class="col-10">
-        <mat-form-field
-          floatLabel="always"
-          appearance="outline"
-          class="text-area my-3 mx-4"
-        >
-          <textarea
-            placeholder="Description"
-            matInput
-            [(ngModel)]="textareaContent"
-            (input)="adjustTextareaHeight($event)"
-            #autoHeightTextarea
-            [formControl]="description_formcontrol"
-          ></textarea>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Ingredients</p>
-      </div>
-      <div class="col-10">
-        <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
-          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
-          <mat-select
-            [(ngModel)]="selectedIngredient"
-            name="ingredient"
-            placeholder="Select a Ingredients"
-            class="matSelectPlaceholder"
-            multiple
+          <mat-hint
+            class="text-danger primary"
+            *ngIf="errors.category_has_sub_category_id"
+            >{{ errors["category_has_sub_category_id"] }}</mat-hint
           >
-            <option
-              class="selectAddNew mx-3 my-2 body-2 f_400"
-              (click)="AddIngrident()"
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Product Name</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
+            <input
+              matInput
+              placeholder="Product Name"
+              [formControl]="product_nameformcontrol"
+           style="font-size: 12px;"
+            />
+          </mat-form-field>
+
+          <!-- <mat-hint class="text-danger primary" *ngIf="errors.product_name" >{{errors['product_name']}}</mat-hint> -->
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Product Main Image</p>
+        </div>
+        <div class="col-10 w-75 my-3 mx-4">
+          <!-- <app-image-upload id="fileInput1"></app-image-upload> -->
+
+          <app-image-upload
+            (fileout)="Product_image_data($event)"
+            [value]="product_image"
+            #removeImage
+          ></app-image-upload>
+          <mat-hint
+            class="text-danger primary"
+            *ngIf="errors.product_main_image"
+            >{{ errors["product_main_image"] }}</mat-hint
+          >
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Description</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field
+            floatLabel="always"
+            appearance="outline"
+            class="text-area my-3 mx-4"
+          >
+            <textarea
+              placeholder="Description"
+              matInput
+              [(ngModel)]="textareaContent"
+              (input)="adjustTextareaHeight($event)"
+              #autoHeightTextarea
+              [formControl]="description_formcontrol"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Ingredients</p>
+        </div>
+        <div class="col-10">
+          <mat-form-field appearance="outline" class="w-25 my-3 mx-4">
+            <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+            <mat-select
+              [(ngModel)]="selectedIngredient"
+              name="ingredient"
+              placeholder="Select a Ingredients"
+              class="matSelectPlaceholder"
+              multiple
             >
-              Add new Ingredients
-            </option>
-            <mat-option
-              *ngFor="let ingredient of ingredient_data"
-              [value]="ingredient.ingredient_id"
-              class="content"
-            >
-              {{ ingredient.ingredient_name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <option
+                class="selectAddNew mx-3 my-2 body-2 f_400"
+                (click)="AddIngrident()"
+              >
+                Add new Ingredients
+              </option>
+              <mat-option
+                *ngFor="let ingredient of ingredient_data"
+                [value]="ingredient.ingredient_id"
+                class="content"
+              >
+                {{ ingredient.ingredient_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row m-0 p-0 first_row border-bottom">
+        <div class="col-2 gray-bg">
+          <p class="content mt-4 detail_text">Product Status</p>
+        </div>
+        <div class="col-10">
+          <app-toggle-button
+            [type]="0"
+            class="my-3 mx-4"
+            style="width: 140px"
+            [width]="140"
+            [on]="pro_status"
+            [showLabels]="true"
+            leftText="Available"
+            [value]="product_status_value"
+            rightText="Out of Stock  "
+            (changed)="chageStatus($event)"
+            [id]="1"
+          ></app-toggle-button>
+        </div>
+      </div>
+      <div
+        class="row m-0 p-0 first_row border-bottom"
+        style="border-radius: 0pc 15px 15px 15px"
+      >
+        <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
+          <p class="content mt-4 detail_text">Preview Status</p>
+        </div>
+        <div class="col-10">
+          <app-toggle-button
+            [type]="0"
+            class="my-3 mx-4"
+            style="width: 85px"
+            [width]="85"
+            [on]="prv_status"
+            [showLabels]="true"
+            leftText="Yes"
+            rightText="No  "
+            (changed)="chagePriviewStatus($event)"
+            [id]="2"
+          ></app-toggle-button>
+        </div>
       </div>
     </div>
-    <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Product Status</p>
-      </div>
-      <div class="col-10">
-        <app-toggle-button
-          [type]="0"
-          class="my-3 mx-4"
-          style="width: 140px"
-          [width]="140"
-          [on]="pro_status"
-          [showLabels]="true"
-          leftText="Available"
-          [value]="product_status_value"
-          rightText="Out of Stock  "
-          (changed)="chageStatus($event)"
-          [id]="1"
-        ></app-toggle-button>
-      </div>
-    </div>
-    <div
-      class="row m-0 p-0 first_row border-bottom"
-      style="border-radius: 0pc 15px 15px 15px"
-    >
-      <div class="col-2 gray-bg" style="border-radius: 0px 0px 0px 15px">
-        <p class="content mt-4 detail_text">Preview Status</p>
-      </div>
-      <div class="col-10">
-        <app-toggle-button
-          [type]="0"
-          class="my-3 mx-4"
-          style="width: 85px"
-          [width]="85"
-          [on]="prv_status"
-          [showLabels]="true"
-          leftText="Yes"
-          rightText="No  "
-          (changed)="chagePriviewStatus($event)"
-          [id]="2"
-        ></app-toggle-button>
-      </div>
-    </div>
-  </div>
+
 </div>
 
-
-
 <div *ngFor="let variant of variant_array; let i = index">
-  <app-variants *ngIf="show" (varient_obj) = "dataToPayLoad($event)" [changing]="changingValue" [VarientData]="variant"  [indexID] = "i"></app-variants>
+  <app-variants
+    *ngIf="show"
+    (varient_obj)="dataToPayLoad($event)"
+    [changing]="changingValue"
+    [VarientData]="variant"
+    [indexID]="i"
+    #varientReset
+  ></app-variants>
 </div>
 
 <div class="footer_btn mx-5 row my-5">
   <div class="col-md-6 p-0 d-flex flex-row">
-    <button class="varient_btn content" (click)="AddVarient()">ADD VARIANT</button>
+    <button class="varient_btn content" (click)="AddVarient()">
+      ADD VARIANT
+    </button>
   </div>
   <div class="col-md-6 p-0 d-flex flex-row-reverse">
     <button class="primary_btn content" (click)="save()">SAVE DETAILS</button>

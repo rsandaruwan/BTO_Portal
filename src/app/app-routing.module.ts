@@ -38,7 +38,7 @@ const routes: Routes = [
       { path: 'product', component: ProductsComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'sub_categories', component: SubCategoriesComponent },
-      { path: 'add_product', component: AddProductsComponent },
+      { path: 'product/add_product', component: AddProductsComponent },
       { path: 'order', component: OrdersComponent },
       { path: 'attributes', component: AttributesComponent },
       { path: 'ingredients', component: IngredientsComponent },

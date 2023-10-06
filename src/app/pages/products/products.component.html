@@ -24,8 +24,8 @@
           <div class="col-md-4 mb-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label class="body-2 gray-text">Select Category</mat-label>
-              <mat-select [(ngModel)]="selectedValue" name="food">
-                <mat-option  *ngFor="let categorie of categories"
+              <mat-select [(ngModel)]="selectedcategory" name="food">
+                <mat-option  *ngFor="let categorie of categories" (click)="editlist()"
                 [value]="categorie.category_id">
                 {{ categorie.category_name }}
                 </mat-option>
@@ -37,8 +37,8 @@
               <mat-label class="body-2 gray-text"
                 >Select Sub Category</mat-label
               >
-              <mat-select [(ngModel)]="selectedValue" name="Subcategorie">
-                <mat-option *ngFor="let Subcategorie of Subcategories" [value]="Subcategorie.sub_category_id">
+              <mat-select [(ngModel)]="selectedSubCategory" name="Subcategorie">
+                <mat-option *ngFor="let Subcategorie of Subcategories" [value]="Subcategorie.sub_category_id" (click)="editlist()">
                   {{ Subcategorie.sub_category_name }}
                 </mat-option>
               </mat-select>
@@ -59,7 +59,7 @@
       </p>
     </div>
     <div class="col-6 d-flex flex-row-reverse">
-      <button [routerLink]="['/portal/add_product']" class="primary_btn content">
+      <button [routerLink]="['/portal/product/add_product']" class="primary_btn content">
         ADD A PRODUCT
       </button>
     </div>
@@ -75,24 +75,19 @@
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
-        <ng-container matColumnDef="product_id">
+        <!-- <ng-container matColumnDef="product_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <span class="mx-2 body-2">|</span>PRODUCT ID
           </th>
           <td mat-cell *matCellDef="let row">{{ row.product_id }}</td>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="vaproduct_variant_name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <span class="mx-2 body-2">|</span> VARIENT NAME
           </th>
           <td mat-cell *matCellDef="let row">
-            <ng-container *ngFor="let item of row.product_variants">
-              <ul>
-                <li>{{ item.product_variant_name }}</li>
-              </ul>
-              <br
-            /></ng-container>
+           {{row.product_variant_name}}
           </td>
         </ng-container>
 
@@ -110,20 +105,20 @@
             <span class="mx-2 body-2">|</span>CATEGORY
           </th>
           <td mat-cell *matCellDef="let row">
-            <ng-container *ngFor="let item of row.category_details">
-              {{ item.category_id }}
-            </ng-container>
+         
+              {{ row.category_name }}
+           
           </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="product_rating">
+        <!-- <ng-container matColumnDef="product_rating">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <span class="mx-2 body-2">|</span>STOCK
           </th>
           <td mat-cell *matCellDef="let row" style="width: 50px !important">
             {{ row.product_rating }}
           </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Fruit Column -->
 
@@ -137,7 +132,7 @@
               class="col-7 status_btn background_green px-3 py-2"
             >
               <p class="content primary_green text-center m-0">
-                {{ row.product_in_stock_word }}
+                 In stock
               </p>
             </div>
             <div
@@ -145,7 +140,7 @@
               class="col-10 status_btn background_red px-3 py-2"
             >
               <p class="content primary_red text-center m-0">
-                {{ row.product_in_stock_word }}
+               Out of Stock
               </p>
             </div>
           </td>
@@ -185,8 +180,10 @@
           </tr> -->
       </table>
 
-      <mat-paginator
-        [pageSizeOptions]="[10, 15, 25, 50]"
+      <mat-paginator #paginator
+        [pageSizeOptions]="[10, 20, 30]"
+        [length]="11"
+        (page)="onPageChange($event)"
         aria-label="Select page of users"
       ></mat-paginator>
     </div>

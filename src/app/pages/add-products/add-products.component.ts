@@ -1,10 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,19 +6,20 @@ import {
   FormArray,
   AbstractControl,
   Validators,
+  FormGroupDirective,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { MatSelect } from '@angular/material/select';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ImageUploadComponent } from 'src/app/components/image-upload/image-upload.component';
 import { AttributePopupComponent } from 'src/app/components/popups/attribute-popup/attribute-popup.component';
 import { DynamicDonePopupComponent } from 'src/app/components/popups/dynamic-done-popup/dynamic-done-popup.component';
 import { IngredientPopupComponent } from 'src/app/components/popups/ingredient-popup/ingredient-popup.component';
+import { VariantsComponent } from 'src/app/components/variants/variants.component';
 import { AttributeIntarface } from 'src/app/modals/attributes.model';
 import { CategoryInterface } from 'src/app/modals/category.model';
 import { IngredientIntarface } from 'src/app/modals/ingredient.model';
-import { AddProductResultData } from 'src/app/modals/product_data';
-import { SubCategoryIntarface } from 'src/app/modals/sub_category.model';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -43,8 +38,16 @@ export class AddProductsComponent {
   @ViewChild('autoHeightTextarea')
   autoHeightTextarea!: ElementRef;
 
+  @ViewChild('removeImage', { static: false }) imageUploadComponent:
+    | ImageUploadComponent
+    | undefined;
+
+  @ViewChild('varientReset', { static: false }) variantsComponent:
+    | VariantsComponent
+    | undefined;
+
   imageState = 'showImage';
-  selectedCategory: string | undefined;
+  selectedCategory: any | undefined;
   selectedAttribute: any | undefined;
   selectedValue: string | undefined;
   imageError: string | undefined;
@@ -92,8 +95,7 @@ export class AddProductsComponent {
   get_varient_data: Array<string> = [];
   resultArray: { type: string; msg: string }[] = [];
   get_image: any;
-  update_img:any
-
+  update_img: any;
   table_row: Array<any> = [
     {
       nutrition_name: '',
@@ -101,11 +103,11 @@ export class AddProductsComponent {
       nutrition_in_this_pack: [''],
     },
   ];
-
+  transactionForm: any;
   proId: string | undefined;
 
-  name = 'Angular 4';
-  url: string | ArrayBuffer | null = null;
+  // name = 'Angular 4';
+  // url: string | ArrayBuffer | null = null;
 
   adjustTextareaHeight(event: Event): void {
     const textarea: HTMLTextAreaElement = this.autoHeightTextarea.nativeElement;
@@ -120,7 +122,8 @@ export class AddProductsComponent {
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.route.queryParams.subscribe((params) => {
       this.proId = params['id'];
@@ -136,7 +139,6 @@ export class AddProductsComponent {
 
   ngOnInit(): void {
     this.getCategoryData();
-
     this.getIngredient();
     this.getAttribute();
     //edit
@@ -268,13 +270,15 @@ export class AddProductsComponent {
   }
   done() {
     var data1 = {
-      msg: 'Category added to the system Successfully!',
+      msg: 'Product added to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',
 
       data: data1,
     });
+    this.resetInputValue();
+
   }
 
   AddAttribute() {
@@ -302,7 +306,6 @@ export class AddProductsComponent {
 
   Product_image_data(data: any) {
     this.product_image_details = data.fileName;
-
   }
   varient_image_data(data: Array<any>) {
     data = data[0];
@@ -337,10 +340,12 @@ export class AddProductsComponent {
       .get(String(this.tokestorage.getToken()), 'products/' + this.proId)
       .then((response: any) => {
         this.productData = response.result;
+
         this.selectedCategory = this.productData.product.category_id;
-        
-       
-        this.selectedSubCategory = this.productData.product.category_has_sub_category_id
+        this.get_category_id(this.productData.product.category_id);
+
+        this.selectedSubCategory =
+          this.productData.product.category_has_sub_category_id;
 
         this.product_nameformcontrol.setValue(
           this.productData.product.product_name
@@ -385,16 +390,37 @@ export class AddProductsComponent {
   varientDescription_formcontrol = new FormControl('', [Validators.required]);
   priceformcontrol = new FormControl('', [Validators.required]);
 
+  resetInputValue() {
+    if (this.proId) {
+      this.getProductData();
+    } else {
+      this.getCategoryData();
+      this.getIngredient();
+      this.getAttribute();
+      this.getSubCategoryData();
+
+      this.selectedCategory = '';
+      this.selectedSubCategory = [];
+      this.product_nameformcontrol.setValue('');
+      if (this.imageUploadComponent) {
+        this.imageUploadComponent.delete();
+      }
+      this.description_formcontrol.setValue('');
+      this.pro_status = false;
+
+      if (this.variantsComponent) {
+        this.variantsComponent.resetVarient();
+      }
+    }
+  }
+
   save() {
     if (this.proId) {
       if (this.product_image_details) {
-       this.update_img = this.product_image_details
-      } else{
-        this.update_img = this.get_image
+        this.update_img = this.product_image_details;
+      } else {
+        this.update_img = this.get_image;
       }
-
-      
-
 
       // this.Product_image_data()
 
@@ -468,6 +494,8 @@ export class AddProductsComponent {
           this.product_data = response.result[0];
 
           this.done();
+         
+
         })
         .catch((error: any) => {
           this.errors = [];
@@ -489,13 +517,15 @@ export class AddProductsComponent {
 
   updated() {
     var data1 = {
-      msg: 'Category updated to the system Successfully!',
+      msg: 'Product updated to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',
 
       data: data1,
     });
+    this.resetInputValue();
+
   }
 
   dataadd(row: number, i: number, col: number, event: any) {

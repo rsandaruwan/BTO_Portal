@@ -178,7 +178,7 @@ export class UserListComponent implements AfterViewInit {
 
   done() {
     var data1 = {
-      msg: 'sUb category added to the system Successfully!',
+      msg: 'Update status to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',

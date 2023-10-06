@@ -130,7 +130,7 @@ export class IngredientPopupComponent {
 
   done() {
     var data1 = {
-      msg: 'Category added to the system Successfully!',
+      msg: 'Ingredients added to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',
@@ -141,7 +141,7 @@ export class IngredientPopupComponent {
 
   updated() {
     var data1 = {
-      msg: 'Category updated to the system Successfully!',
+      msg: 'Ingredients updated to the system Successfully!',
     };
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',

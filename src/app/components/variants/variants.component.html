@@ -8,6 +8,8 @@
     </div>
   
     <!-- Product table -->
+
+  
     <div class="col-md-12">
       <div class="row m-0 p-0 first_row border-bottom border-top">
         <div class="col-2 gray-bg">
@@ -32,7 +34,7 @@
             multiple="multiple"
           ></app-image-upload> -->
   
-          <app-image-upload (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2{{indexID}}" multiple="multiple" [shareParent] = varient_image_details ></app-image-upload>
+          <app-image-upload  #removeimage (fileout)="varient_image_data($event) " [value]="varient_image"  id="fileInput2{{indexID}}" multiple="multiple" [shareParent] = varient_image_details ></app-image-upload>
           <mat-hint class="text-danger primary" *ngIf="varient_error.product_images" >{{varient_error['product_images']}}</mat-hint>
         </div>
       </div>
@@ -94,11 +96,10 @@
           >
             <div class="row">
               <div class="col-4 m-auto" *ngIf="selectedValuesNameArray[i]">
-                <p class="content primary text-center m-0">{{ selectedValuesNameArray[i].attribute_name }}</p>
+                <p class="content primary text-center m-0">{{ selectedValuesNameArray[i].attribute_name }} </p>
+             
               </div>
-              <!-- <div class="col-4 m-auto" *ngIf="!selectedValuesNameArray[i]">
-                <p class="content primary text-center m-0">sddf</p>
-              </div> -->
+            
               <div class="col-8 position-relative">
                 <mat-form-field
                   appearance="outline"
@@ -108,7 +109,7 @@
                   <input matInput placeholder="Enter Value" [(ngModel)]="selectedValuesArray[i].attribute_value"/>
   
                 </div>
-                  <!-- <input matInput placeholder="Search by Product Name" [formControl]="varientAttribute_formcontrol"  [(ngModel)]="attribute_name[i]"/> -->
+              
                 </mat-form-field>
                 <mat-icon class="position-absolute red-close-btn">
                   <img
@@ -306,4 +307,5 @@
         </div>
       </div>
     </div>
+
   </div>

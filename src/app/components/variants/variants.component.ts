@@ -5,6 +5,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewChild,
 } from '@angular/core';
 
 import {
@@ -21,6 +22,7 @@ import { AttributePopupComponent } from '../popups/attribute-popup/attribute-pop
 import { DynamicDonePopupComponent } from '../popups/dynamic-done-popup/dynamic-done-popup.component';
 import { AttributeIntarface } from 'src/app/modals/attributes.model';
 import { Subject } from 'rxjs';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-variants',
@@ -28,6 +30,10 @@ import { Subject } from 'rxjs';
   styleUrls: ['./variants.component.scss'],
 })
 export class VariantsComponent implements OnInit {
+  @ViewChild('removeimage', { static: false }) imageUploadComponent:
+    | ImageUploadComponent
+    | undefined;
+
   @Input() changing: Subject<boolean> | undefined;
   @Input() indexID: number | undefined;
   @Input() VarientData: any;
@@ -52,9 +58,8 @@ export class VariantsComponent implements OnInit {
   imageIndex: any;
   getVarientObj: any;
   varient_id: any = '';
-  mulimageName:any
-  mulImageIndex:any
-
+  mulimageName: any;
+  mulImageIndex: any;
 
   table_row: Array<any> = [
     {
@@ -86,8 +91,28 @@ export class VariantsComponent implements OnInit {
     this.getAttribute();
   }
 
+  resetVarient() {
+    this.varient_formcontrol.setValue('');
+    this.priceformcontrol.setValue('');
+    this.table_row = [
+      {
+        nutrition_name: '',
+        nutrition_per_100_gram: [''],
+        nutrition_in_this_pack: [''],
+      },
+    ];
+    this.getAttribute();
+
+    if (this.imageUploadComponent) {
+      this.imageUploadComponent.removeAll();
+    }
+
+    this.selectedValuesArray = [];
+  }
+
   ngAfterViewInit(): void {
     if (this.VarientData) {
+      this.variant_array = [];
       if (this.VarientData.product_variant_id) {
         this.varient_id = this.VarientData.product_variant_id;
       } else {
@@ -95,10 +120,7 @@ export class VariantsComponent implements OnInit {
       }
 
       if (this.VarientData.product_variant_id) {
-        // alert("yes")
         this.changing?.subscribe((v) => {
-          // console.log("var image details",this.varient_image_details);
-
           var mul_image = [];
           for (
             let index = 0;
@@ -108,21 +130,14 @@ export class VariantsComponent implements OnInit {
             var mul_data = {
               product_image: this.varient_image_details[index].image_name,
               product_image_order: index + 1,
-
-             
-              
             };
 
-            console.log("mul n data", this.varient_image_details[index]);
-
             mul_image.push(mul_data);
-            console.log('mul data', mul_image);
           }
 
-          for (let index = 0; index < mul_image.length; index++) {
-           
-           
-          }
+          for (let index = 0; index < mul_image.length; index++) {}
+
+          this.variant_array = [];
 
           this.variant_data = {
             product_variant_id: this.varient_id,
@@ -132,17 +147,13 @@ export class VariantsComponent implements OnInit {
             product_attribute_list: this.selectedValuesArray,
             product_variant_nutrition_list: this.table_row,
           };
-       
+
           this.variant_array.push(this.variant_data);
 
           this.varient_obj.emit(this.variant_data);
         });
       } else
         this.changing?.subscribe((v) => {
-        alert("no")
-
-          // console.log("var image details",this.varient_image_details);
-
           var mul_image = [];
           for (
             let index = 0;
@@ -154,8 +165,9 @@ export class VariantsComponent implements OnInit {
               product_image_order: index + 1,
             };
             mul_image.push(mul_data);
-            // console.log('mul data', mul_image);
           }
+
+          this.variant_array = [];
 
           this.variant_data = {
             product_variant_id: this.varient_id,
@@ -184,12 +196,14 @@ export class VariantsComponent implements OnInit {
         index++
       ) {
         var att_data = {
+          attribute_name: this.VarientData.product_attributes[index].attribute_details .attribute_name,
           attribute_id: this.VarientData.product_attributes[index].attribute_id,
-          attribute_value:
-            this.VarientData.product_attributes[index].attribute_value,
+          attribute_value: this.VarientData.product_attributes[index].attribute_value,
         };
+        this.selectedValuesNameArray.push(att_data);
 
-        this.selectedValuesArray.push(att_data);
+        this.selectedValuesArray = this.selectedValuesNameArray
+        console.log('array', this.selectedValuesNameArray);
       }
 
       this.table_row = this.VarientData.product_nutrition;
@@ -217,11 +231,16 @@ export class VariantsComponent implements OnInit {
       )
     ) {
       var data = {
+        attribute_name : this.selectedAttribute.attribute_name,
         attribute_id: this.selectedAttribute.attribute_id,
         attribute_value: '',
       };
       this.selectedValuesArray.push(data);
-      this.selectedValuesNameArray.push(this.selectedAttribute);
+
+      if (!this.VarientData.product_variant_id) {
+        this.selectedValuesNameArray.push(this.selectedAttribute);
+
+      }
     }
   }
   AddAttribute() {

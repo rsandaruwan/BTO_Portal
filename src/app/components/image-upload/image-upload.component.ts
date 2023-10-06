@@ -52,8 +52,6 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
       for (let index = 0; index < this.shareParent.length; index++) {
         this.urls.push(this.shareParent[index].image_path);
 
-       console.log("urls", this.urls);
-       
 
         this.targetData = this.shareParent.find(
           (item) => item.image_path === this.urls[index]
@@ -61,22 +59,14 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
         if (this.targetData) {
           this.mul_image_path = this.targetData.image_path;
           this.mul_image_name = this.targetData.image_name;
-         
-         
-
-          // this.muti_img_arr.push(this.mul_image_name);
-
-          // console.log('====================================');
-          // console.log(this.muti_img_arr);
-          // console.log('====================================');
         } else {
         }
       }
-    }, 3000);
+    }, 1000);
   }
 
   onSelectFile(event: any) {
- 
+    if (event.target?.files[0].size <= 10000) {
     if (event.target?.files && event.target.files[0]) {
       const reader = new FileReader();
 
@@ -93,7 +83,10 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
     formData.append('files', event.target?.files[0]);
 
-    this.apiService
+    console.log(event.target?.files[0].size);
+
+    
+      this.apiService
       .post_file(
         formData,
         String(this.tokestorage.getToken()),
@@ -106,6 +99,12 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
         this.addNewItem();
       })
       .catch((error: any) => {});
+    }
+    else{
+      alert("image size more than 1 mb")
+    }
+
+ 
   }
 
   onSelectFiles(event: any) {
@@ -142,20 +141,9 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
       .then((response: any) => {
         this.muti_img_arr.push(response.result);
 
-       
-
-        // if (this.shareParent.length) {
-        //   this.getMultipleImages();
-        // }
-
         this.addNewItems(this.muti_img_arr);
       })
       .catch((error: any) => {});
-
-    // if (index == event.target.files.length) {
-
-    //   this.addNewItems(muti_img_arr);
-    // }
   }
 
   addNewItem() {
@@ -176,8 +164,17 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
     }
   }
   public delete1(id: any) {
+
+    console.log(id);
+    
     if (this.urls) {
       this.urls.splice(id, 1);
     }
+  }
+
+  removeAll(){
+    this.url = '';
+    this.urls = []
+
   }
 }

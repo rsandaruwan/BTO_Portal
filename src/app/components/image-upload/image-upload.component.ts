@@ -49,7 +49,7 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
   getMultipleImages() {
     setTimeout(() => {
-      for (let index = 0; index < this.shareParent.length; index++) {
+      for (let index = 0; index < this.shareParent?.length; index++) {
         this.urls.push(this.shareParent[index].image_path);
 
 

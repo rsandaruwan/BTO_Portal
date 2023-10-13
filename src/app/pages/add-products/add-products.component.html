@@ -46,6 +46,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -77,12 +79,11 @@
               </ng-container>
             </mat-select>
           </mat-form-field>
+          <br>
 
-          <mat-hint
-            class="text-danger primary"
-            *ngIf="errors.category_has_sub_category_id"
-            >{{ errors["category_has_sub_category_id"] }}</mat-hint
-          >
+          <ng-container *ngFor="let item of resultArray">
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'category_has_sub_category_id'">{{ item.msg }}</mat-hint>
+            </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -99,8 +100,12 @@
            style="font-size: 12px;"
             />
           </mat-form-field>
+          <br>
 
-          <!-- <mat-hint class="text-danger primary" *ngIf="errors.product_name" >{{errors['product_name']}}</mat-hint> -->
+          
+          <ng-container *ngFor="let item of resultArray">
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'product_name'">{{ item.msg }}</mat-hint>
+            </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -115,11 +120,10 @@
             [value]="product_image"
             #removeImage
           ></app-image-upload>
-          <mat-hint
-            class="text-danger primary"
-            *ngIf="errors.product_main_image"
-            >{{ errors["product_main_image"] }}</mat-hint
-          >
+         
+          <ng-container *ngFor="let item of resultArray">
+            <mat-hint class="text-danger" *ngIf="item?.type == 'product_main_image'">{{ item.msg }}</mat-hint>
+          </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -141,6 +145,12 @@
               [formControl]="description_formcontrol"
             ></textarea>
           </mat-form-field>
+          <br>
+
+
+          <ng-container *ngFor="let item of resultArray"> 
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'product_description'">{{ item.msg }}</mat-hint>
+          </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -172,6 +182,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <br>
+          <ng-container *ngFor="let item of resultArray">
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'product_ingredients'">{{ item.msg }}</mat-hint>
+          </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -227,6 +242,8 @@
     [changing]="changingValue"
     [VarientData]="variant"
     [indexID]="i"
+    [sendErrors]="varientError"
+    [sendErrorData]="changingErrorData"
     #varientReset
   ></app-variants>
 </div>

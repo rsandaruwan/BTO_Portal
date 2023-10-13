@@ -66,8 +66,8 @@ export class AddProductsComponent {
   product_data: any;
   inputcol_1: any[] = [[]];
   inputcol_2: any[] = [[]];
-  selectedSubCategory: any[] = [];
-  selectedIngredient: any[] = [];
+  selectedSubCategory: any[] = [''];
+  selectedIngredient: any[] = [''];
   product_status: any;
   chage_priview_status: any;
   product: any = [];
@@ -87,7 +87,8 @@ export class AddProductsComponent {
   variant_array: any[] = [];
   show = 1;
   changingValue: Subject<boolean> = new Subject();
-  variant_submit_data: any[] = [];
+  changingErrorData: Subject<boolean> = new Subject();
+  variant_submit_data:Array<any> = [];
   productData: any;
   product_status_value: any;
   pro_status: any;
@@ -105,6 +106,10 @@ export class AddProductsComponent {
   ];
   transactionForm: any;
   proId: string | undefined;
+  child_varient_error: any;
+  addData:any
+
+  varientError:any;
 
   // name = 'Angular 4';
   // url: string | ArrayBuffer | null = null;
@@ -278,7 +283,6 @@ export class AddProductsComponent {
       data: data1,
     });
     this.resetInputValue();
-
   }
 
   AddAttribute() {
@@ -400,7 +404,7 @@ export class AddProductsComponent {
       this.getSubCategoryData();
 
       this.selectedCategory = '';
-      this.selectedSubCategory = [];
+      this.selectedSubCategory = [''];
       this.product_nameformcontrol.setValue('');
       if (this.imageUploadComponent) {
         this.imageUploadComponent.delete();
@@ -468,8 +472,27 @@ export class AddProductsComponent {
         this.imageLoop = this.varient_image_details[index];
         this.imageIndex = index;
       }
+    
+     if ( this.variant_submit_data.length==0) {
+      this.addData= {
+        product: {
+          product_id: "",
+          category_has_sub_category_id: "",
+          product_name: "",
+          product_main_image: "",
+          product_description: "",
+          product_ingredients: "",
+          product_in_stock: "",
 
-      const data = {
+          product_rating: 5,
+          product_status: "",
+        },
+        product_variant: "",
+      };
+      
+     }
+     else{
+      this.addData = {
         product: {
           product_id: this.proId,
           category_has_sub_category_id: this.selectedSubCategory,
@@ -484,20 +507,37 @@ export class AddProductsComponent {
         },
         product_variant: this.variant_submit_data,
       };
+     }
+     
+  
 
       // };
 
       this.apiService
 
-        .post(data, String(this.tokestorage.getToken()), 'products/create')
+        .post(this.addData, String(this.tokestorage.getToken()), 'products/create')
         .then((response: any) => {
           this.product_data = response.result[0];
 
           this.done();
-         
-
         })
+
         .catch((error: any) => {
+          this.resultArray = [];
+
+          this.varientError = error.error.detail
+
+          error.error.detail.forEach((item: any) => {
+            if (item.loc && item.loc[1] && item.msg) {
+              this.resultArray.push({
+                type: item.loc[2],
+                msg: item.msg,
+              });
+            }
+          });
+           this.changingErrorData.next(true);
+        
+
           this.errors = [];
           this.varient_error = [];
           this.nutrition_error = [];
@@ -525,7 +565,6 @@ export class AddProductsComponent {
       data: data1,
     });
     this.resetInputValue();
-
   }
 
   dataadd(row: number, i: number, col: number, event: any) {

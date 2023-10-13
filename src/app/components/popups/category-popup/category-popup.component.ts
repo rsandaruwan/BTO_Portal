@@ -84,7 +84,11 @@ export class CategoryPopupComponent {
               this.resultArray.push({
                 type: item.loc[1],
                 msg: item.msg,
+
+                
               });
+              console.log(this.resultArray);
+
             }
           });
         });

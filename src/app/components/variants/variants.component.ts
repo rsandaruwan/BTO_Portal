@@ -35,12 +35,15 @@ export class VariantsComponent implements OnInit {
     | undefined;
 
   @Input() changing: Subject<boolean> | undefined;
+  @Input() sendErrorData: Subject<boolean> | undefined;
   @Input() indexID: number | undefined;
   @Input() VarientData: any;
   @Output() varient_obj = new EventEmitter<string>();
   varient_error: any = [];
+
+  @Input() sendErrors: any | undefined;
   varient_image_details: Array<any> = [];
-  varient_image: any;
+  varient_image: any | undefined;
   textareaContent = '';
   autoHeightTextarea!: ElementRef;
   selectedAttribute: any | undefined;
@@ -60,6 +63,7 @@ export class VariantsComponent implements OnInit {
   varient_id: any = '';
   mulimageName: any;
   mulImageIndex: any;
+  resultArray: { type: string; msg: string }[] = [];
 
   table_row: Array<any> = [
     {
@@ -151,10 +155,15 @@ export class VariantsComponent implements OnInit {
           this.variant_array.push(this.variant_data);
 
           this.varient_obj.emit(this.variant_data);
+
+         
+          
         });
       } else
         this.changing?.subscribe((v) => {
           var mul_image = [];
+
+        
           for (
             let index = 0;
             index < this.varient_image_details.length;
@@ -169,6 +178,8 @@ export class VariantsComponent implements OnInit {
 
           this.variant_array = [];
 
+
+
           this.variant_data = {
             product_variant_id: this.varient_id,
             product_variant_name: this.varient_formcontrol.value,
@@ -180,10 +191,55 @@ export class VariantsComponent implements OnInit {
 
           this.variant_array.push(this.variant_data);
 
+          console.log("varient data",this.variant_array);
+          
+
+
+
           this.varient_obj.emit(this.variant_data);
+
+       
+        
+
+         
+          
+
+          
+          // this.errors = [];
+          // this.varient_error = [];
+          // this.nutrition_error = [];
+
+          // error.error.detail.map((errorData: any) => {
+          //   this.errors[errorData.loc[1]] = errorData.msg;
+          // });
+          // error.error.detail.map((errorData: any) => {
+          //   this.varient_error[errorData.loc[3]] = errorData.msg;
+          // });
+          // error.error.detail.map((errorData: any) => {
+          //   this.nutrition_error[errorData.loc[5]] = errorData.msg;
+          // });
+          
         });
 
+
+
       // End
+
+      this.sendErrorData?.subscribe((v) => {
+        this.resultArray = [];
+        this.sendErrors.forEach((item: any) => {
+          if (item.loc && item.loc[1] && item.msg) {
+            this.resultArray.push({
+              type: item.loc[item.loc.length-1],
+              msg: item.msg,
+            });
+          }
+        });
+  
+      
+      })
+    
+
 
       this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
       this.priceformcontrol.setValue(this.VarientData.product_price);
@@ -203,7 +259,7 @@ export class VariantsComponent implements OnInit {
         this.selectedValuesNameArray.push(att_data);
 
         this.selectedValuesArray = this.selectedValuesNameArray
-        console.log('array', this.selectedValuesNameArray);
+        
       }
 
       this.table_row = this.VarientData.product_nutrition;

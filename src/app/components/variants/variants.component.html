@@ -1,8 +1,11 @@
 <div class="col-12 mt-5 body-table secound_back">
     <div class="row mx-2 py-3">
       <div class="col-12">
-        <p class="headline_4 f_400">
+        <p class="headline_4 f_400" *ngIf="sendErrors">
+          {{sendErrors[0].msg}}
           Variants<span class="content f_400"> 254</span>
+
+        
         </p>
       </div>
     </div>
@@ -20,7 +23,12 @@
             <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
             <input matInput placeholder="Enter variant name"    [formControl]="varient_formcontrol" />
           </mat-form-field>
-          <mat-hint class="text-danger primary" *ngIf="varient_error.product_variant_name" >{{varient_error['product_variant_name']}}</mat-hint>
+      
+
+          <mat-error class="text-danger mx-4" *ngIf="varient_formcontrol.invalid && varient_formcontrol.touched">
+            Variant name is required.
+          </mat-error>
+         
   
         </div>
       </div>

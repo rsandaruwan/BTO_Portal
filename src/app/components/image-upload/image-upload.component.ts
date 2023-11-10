@@ -66,7 +66,7 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
   }
 
   onSelectFile(event: any) {
-    if (event.target?.files[0].size <= 10000) {
+    if (event.target?.files[0].size <= 100000) {
     if (event.target?.files && event.target.files[0]) {
       const reader = new FileReader();
 

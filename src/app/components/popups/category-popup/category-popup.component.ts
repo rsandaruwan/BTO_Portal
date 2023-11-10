@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CategoriesComponent } from 'src/app/pages/categories/categories.component';
 
 interface Food {
   value: string;
@@ -18,7 +19,8 @@ interface Food {
   styleUrls: ['./category-popup.component.scss'],
 })
 export class CategoryPopupComponent {
-  @ViewChild('closebutton') closebutton: any;
+  // @ViewChild('closebutton') closebutton: any;
+
   selectedSubcategory: string | undefined;
   category_data: any;
   errors: any;
@@ -28,12 +30,13 @@ export class CategoryPopupComponent {
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
+
     public dialogRef: MatDialogRef<CategoryPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public cat_data: any
   ) {}
   ngOnInit(): void {
     if (this.cat_data) {
-      this.category_nameformcontrol.setValue(this.cat_data.categoryName);
+      this.category_nameformcontrol.setValue(this.cat_data.name);
     }
   }
 
@@ -49,13 +52,11 @@ export class CategoryPopupComponent {
       this.apiService
         .put(update_data, String(this.tokestorage.getToken()), 'category/edit')
         .then((response: any) => {
-          this.closebutton.nativeElement.click();
           this.updated();
-          this.cat_data.functionToCall()
-          
+          this.dialogRef.close();
         })
         .catch((error: any) => {
-             error.error.detail.forEach((item: any) => {
+          error.error.detail.forEach((item: any) => {
             if (item.loc && item.loc[1] && item.msg) {
               this.resultArray.push({
                 type: item.loc[1],
@@ -74,9 +75,8 @@ export class CategoryPopupComponent {
         .then((response: any) => {
           this.category_data = response.result[0];
 
-          this.closebutton.nativeElement.click();
-
           this.done();
+          this.dialogRef.close();
         })
         .catch((error: any) => {
           error.error.detail.forEach((item: any) => {
@@ -84,11 +84,8 @@ export class CategoryPopupComponent {
               this.resultArray.push({
                 type: item.loc[1],
                 msg: item.msg,
-
-                
               });
               console.log(this.resultArray);
-
             }
           });
         });
@@ -99,6 +96,7 @@ export class CategoryPopupComponent {
     var data1 = {
       msg: 'Category added to the system Successfully!',
     };
+
     this.dialog.open(DynamicDonePopupComponent, {
       width: '25vw',
 
@@ -115,5 +113,4 @@ export class CategoryPopupComponent {
       data: data1,
     });
   }
-  
 }

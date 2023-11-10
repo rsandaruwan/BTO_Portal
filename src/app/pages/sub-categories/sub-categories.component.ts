@@ -27,7 +27,6 @@ export class SubCategoriesComponent implements AfterViewInit {
   skip: any = 0;
   count: number = 0;
 
-
   selectedValue: string | undefined;
 
   displayedColumns: string[] = [
@@ -47,8 +46,7 @@ export class SubCategoriesComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   
   }
 
   ngOnInit(): void {
@@ -61,10 +59,12 @@ export class SubCategoriesComponent implements AfterViewInit {
     let dialogRef = this.dialog.open(SubCategoryPopupComponent, {
       autoFocus: false,
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getSubCategoryData();
+    });
   }
 
   getSubCategoryData() {
-
     var parameter = '?';
 
     if (this.search_sub_cat != undefined) {
@@ -80,28 +80,25 @@ export class SubCategoriesComponent implements AfterViewInit {
     this.apiService
       .get(String(this.tokestorage.getToken()), 'sub-category' + parameter)
       .then((response: any) => {
-
         this.sub_category_data = response.result.data;
         this.count = response.result.page[0].count;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.sub_category_data
         );
-     
-        
+        console.log(this.sub_category_data);
       });
   }
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
-  
-    this.skip = (event.pageIndex* this.selectedPageSize);
+
+    this.skip = event.pageIndex * this.selectedPageSize;
     this.paginator.length = this.count;
 
     this.getSubCategoryData();
   }
 
   search(event: any) {
-  
     this.search_sub_cat = event.target.value;
 
     this.getSubCategoryData();
@@ -112,6 +109,9 @@ export class SubCategoriesComponent implements AfterViewInit {
       autoFocus: false,
 
       data: { id: id },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getSubCategoryData();
     });
   }
 }

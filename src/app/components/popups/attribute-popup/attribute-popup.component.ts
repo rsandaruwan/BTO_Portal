@@ -80,8 +80,9 @@ export class AttributePopupComponent {
       this.apiService
         .put(update_data, String(this.tokestorage.getToken()), 'attributes/edit')
         .then((response: any) => {
-          this.closebutton.nativeElement.click();
+          // this.closebutton.nativeElement.click();
           this.updated();
+          this.dialogRef.close();
         })
         .catch((error: any) => {
           error.error.detail.forEach((item: any) => {
@@ -105,8 +106,8 @@ export class AttributePopupComponent {
               this.attribute_data = response.result[0];
       
               // this.closebutton.nativeElement.click();
-              // this.done();
-              this.dialogRef.close(1);
+              this.done();
+              this.dialogRef.close();
             })
             .catch((error: any) => {
               error.error.detail.forEach((item: any) => {

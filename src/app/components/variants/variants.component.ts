@@ -64,6 +64,8 @@ export class VariantsComponent implements OnInit {
   mulimageName: any;
   mulImageIndex: any;
   resultArray: { type: string; msg: string }[] = [];
+  errors: any = [];
+  attribute_list: any[] = [];
 
   table_row: Array<any> = [
     {
@@ -110,8 +112,6 @@ export class VariantsComponent implements OnInit {
     if (this.imageUploadComponent) {
       this.imageUploadComponent.removeAll();
     }
-
-    this.selectedValuesArray = [];
   }
 
   ngAfterViewInit(): void {
@@ -141,8 +141,6 @@ export class VariantsComponent implements OnInit {
 
           for (let index = 0; index < mul_image.length; index++) {}
 
-          this.variant_array = [];
-
           this.variant_data = {
             product_variant_id: this.varient_id,
             product_variant_name: this.varient_formcontrol.value,
@@ -155,18 +153,14 @@ export class VariantsComponent implements OnInit {
           this.variant_array.push(this.variant_data);
 
           this.varient_obj.emit(this.variant_data);
-
-         
-          
         });
       } else
         this.changing?.subscribe((v) => {
           var mul_image = [];
 
-        
           for (
             let index = 0;
-            index < this.varient_image_details.length;
+            index < this.varient_image_details?.length;
             index++
           ) {
             var mul_data = {
@@ -178,6 +172,9 @@ export class VariantsComponent implements OnInit {
 
           this.variant_array = [];
 
+          console.log(this.selectedValuesArray);
+          
+          this.selectedValuesArray = [];
 
 
           this.variant_data = {
@@ -190,56 +187,42 @@ export class VariantsComponent implements OnInit {
           };
 
           this.variant_array.push(this.variant_data);
-
-          console.log("varient data",this.variant_array);
-          
-
-
-
+          // console.log("varient data",this.variant_array);
           this.varient_obj.emit(this.variant_data);
-
-       
-        
-
-         
-          
-
-          
-          // this.errors = [];
-          // this.varient_error = [];
-          // this.nutrition_error = [];
-
-          // error.error.detail.map((errorData: any) => {
-          //   this.errors[errorData.loc[1]] = errorData.msg;
-          // });
-          // error.error.detail.map((errorData: any) => {
-          //   this.varient_error[errorData.loc[3]] = errorData.msg;
-          // });
-          // error.error.detail.map((errorData: any) => {
-          //   this.nutrition_error[errorData.loc[5]] = errorData.msg;
-          // });
-          
         });
-
-
 
       // End
 
       this.sendErrorData?.subscribe((v) => {
         this.resultArray = [];
-        this.sendErrors.forEach((item: any) => {
+
+        this.sendErrors?.forEach((item: any) => {
           if (item.loc && item.loc[1] && item.msg) {
             this.resultArray.push({
-              type: item.loc[item.loc.length-1],
+              type: item.loc[item.loc.length - 1],
               msg: item.msg,
             });
           }
         });
-  
-      
-      })
-    
 
+      
+        this.errors = [];
+        this.varient_error = [];
+        this.nutrition_error = [];
+        this.attribute_list = [];
+
+        this.sendErrors.map((errorData: any) => {
+          this.attribute_list[errorData.loc[1]] = errorData.msg;
+        });
+        this.sendErrors.map((errorData: any) => {
+          this.varient_error[errorData.loc[3]] = errorData.msg;
+        });
+        this.sendErrors.map((errorData: any) => {
+          this.nutrition_error[errorData.loc[5]] = errorData.msg;
+        });
+
+        console.log(this.attribute_list);
+      });
 
       this.varient_formcontrol.setValue(this.VarientData.product_variant_name);
       this.priceformcontrol.setValue(this.VarientData.product_price);
@@ -252,19 +235,25 @@ export class VariantsComponent implements OnInit {
         index++
       ) {
         var att_data = {
-          attribute_name: this.VarientData.product_attributes[index].attribute_details .attribute_name,
+          attribute_name:
+            this.VarientData.product_attributes[index].attribute_details
+              .attribute_name,
           attribute_id: this.VarientData.product_attributes[index].attribute_id,
-          attribute_value: this.VarientData.product_attributes[index].attribute_value,
+          attribute_value:
+            this.VarientData.product_attributes[index].attribute_value,
         };
         this.selectedValuesNameArray.push(att_data);
 
-        this.selectedValuesArray = this.selectedValuesNameArray
-        
+        this.selectedValuesArray = this.selectedValuesNameArray;
       }
 
       this.table_row = this.VarientData.product_nutrition;
     }
+
+    this.resultArray = [];
   }
+
+  callerrorFunction() {}
 
   varient_image_data(data: Array<any>) {
     data = data[0];
@@ -287,7 +276,7 @@ export class VariantsComponent implements OnInit {
       )
     ) {
       var data = {
-        attribute_name : this.selectedAttribute.attribute_name,
+        attribute_name: this.selectedAttribute.attribute_name,
         attribute_id: this.selectedAttribute.attribute_id,
         attribute_value: '',
       };
@@ -295,7 +284,6 @@ export class VariantsComponent implements OnInit {
 
       if (!this.VarientData.product_variant_id) {
         this.selectedValuesNameArray.push(this.selectedAttribute);
-
       }
     }
   }

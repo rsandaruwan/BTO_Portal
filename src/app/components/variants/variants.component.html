@@ -1,8 +1,8 @@
 <div class="col-12 mt-5 body-table secound_back">
     <div class="row mx-2 py-3">
       <div class="col-12">
-        <p class="headline_4 f_400" *ngIf="sendErrors">
-          {{sendErrors[0].msg}}
+        <p class="headline_4 f_400" >
+        
           Variants<span class="content f_400"> 254</span>
 
         
@@ -21,13 +21,14 @@
         <div class="col-10">
           <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
             <!-- <mat-label class="body-2 gray-text ">Search by Product Name</mat-label> -->
-            <input matInput placeholder="Enter variant name"    [formControl]="varient_formcontrol" />
+            <input matInput placeholder="Enter variant name"    [formControl]="varient_formcontrol"  (click)="callerrorFunction()"/>
           </mat-form-field>
+          <br>
       
 
-          <mat-error class="text-danger mx-4" *ngIf="varient_formcontrol.invalid && varient_formcontrol.touched">
-            Variant name is required.
-          </mat-error>
+          <ng-container *ngFor="let item of resultArray"> 
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'product_variant_name'">{{ item.msg }}</mat-hint>
+          </ng-container>
          
   
         </div>
@@ -65,6 +66,8 @@
               [formControl]="varientDescription_formcontrol"
             ></textarea>
           </mat-form-field>
+
+          
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">
@@ -80,6 +83,7 @@
               placeholder="Select Attributes"
               class="matSelectPlaceholder"
               (selectionChange)="onSelectionChange()"
+              
             >
               <option
                 class="selectAddNew mx-3 my-2 body-2 f_400"
@@ -95,7 +99,13 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-hint class="text-danger primary" *ngIf="nutrition_error.attribute_value" >{{nutrition_error['attribute_value']}}</mat-hint>
+
+
+          <br>
+          <mat-hint class="text-danger mx-4" *ngIf="selectedValuesArray.length == 0 ">Ensure This Value Has At Least 3 Characters</mat-hint>
+          <ng-container *ngFor="let item of resultArray"> 
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'attribute_value'">{{ item.msg }}</mat-hint>
+          </ng-container>
   
           <div
             class="col-4 my-2 mx-4"
@@ -174,7 +184,11 @@
                         [(ngModel)]="table_row[i].nutrition_name"
                       />
                     </mat-form-field>
-                    <mat-hint class="text-danger primary" *ngIf="nutrition_error.nutrition_name" >{{nutrition_error['nutrition_name']}}</mat-hint>
+                   
+                    <br>
+                     <ng-container *ngFor="let item of resultArray"> 
+                       <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'nutrition_name'">{{ item.msg }}</mat-hint>
+                     </ng-container>
                   </td>
                   <td class="borderRL border_bottom">
                     <mat-form-field
@@ -270,7 +284,12 @@
             <input matInput placeholder="Enter Price"  [formControl]="priceformcontrol" />
           </mat-form-field>
   
-          <mat-hint class="text-danger primary" *ngIf="varient_error.product_price" >{{varient_error['product_price']}}</mat-hint>
+          <br>
+      
+
+          <ng-container *ngFor="let item of resultArray"> 
+            <mat-hint class="text-danger mx-4" *ngIf="item?.type == 'product_price'">{{ item.msg }}</mat-hint>
+          </ng-container>
         </div>
       </div>
       <div class="row m-0 p-0 first_row border-bottom">

@@ -1,202 +1,261 @@
+<mat-sidenav-content
+  class="sidenav-content"
+  style="margin-left: 0px !important"
+>
+  <div class="col-12 mx-5 header sticky-top nav-bar secound_back">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="mx-4 mt-3">
+          <p class="headline_4">Welcome Back!</p>
+          <p>All the Details are shown below.</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <app-profile-details></app-profile-details>
+      </div>
+    </div>
+  </div>
 
+  <div class="header mx-5">
+    <mat-tab-group
+      mat-stretch-tabs="false"
+      style="z-index: 0; position: relative"
+      mat-align-tabs="start"
+      color="accent"
+    >
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon mx-2">person</mat-icon>
+          ACCOUNT
+        </ng-template>
+        <div
+          class="w-100"
+          style="background-color: #15171a; border-radius: 15px"
+        >
+          <div class="p-3">
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2">
+                    <div class="avatar-upload">
+                      <div class="avatar-edit">
+                        <input
+                          type="file"
+                          id="imageUpload"
+                          accept=".png, .jpg, .jpeg"
+                          (change)="fileChangeEvent($event)"
+                        />
 
-<div class="header mx-5">
-  <mat-tab-group
-    mat-stretch-tabs="false"
-    style="z-index: 0; position: relative"
-    mat-align-tabs="start"
-    color="accent"
-  >
-    <mat-tab>
-      <ng-template mat-tab-label >
-        <mat-icon class="example-tab-icon mx-2">person</mat-icon>
-     ACCOUNT
-      </ng-template>
-      <div class="w-100" style="background-color: #15171a; border-radius: 15px">
-        <div class="p-3">
-          <div class="row">
-            <div class="col-6">
-              <div class="row">
-                <div class="col-2">
-                  <div class="avatar-upload">
-                    <div class="avatar-edit">
+                        <!-- <label for="imageUpload"></label> -->
+                      </div>
+                      <div class="avatar-preview">
+                        <div
+                          id="#imagePreview"
+                          [@selectedImage]="imageState"
+                          [style.background-image]="'url(' + image + ' )'"
+                        >
+                          <!-- <img src={{user.user_details.user_image}} alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 my-4">
+                    <div class="d-flex">
                       <input
+                        class="d-none"
                         type="file"
                         id="imageUpload"
                         accept=".png, .jpg, .jpeg"
                         (change)="fileChangeEvent($event)"
                       />
-
-                      <!-- <label for="imageUpload"></label> -->
-                    </div>
-                    <div class="avatar-preview">
-                      <div
-                        id="#imagePreview"
-                        [@selectedImage]="imageState"
-                        [style.background-image]="'url(' + image + ' )'"
+                      <label
+                        class="primary_btn float-start"
+                        mat-flat-button
+                        for="imageUpload"
                       >
-                        <!-- <img src={{user.user_details.user_image}} alt=""> -->
-                      </div>
+                        <p class="m-0 primary body-2">UPLOAD NEW A PHOTO</p>
+                      </label>
+                      <button
+                        class="reset_btn mx-2 primary"
+                        mat-dialog-close
+                        (click)="ImageReset()"
+                      >
+                        RESET
+                      </button>
                     </div>
+                    <p class="caption gray-color my-3">
+                      Allowed PNG or JPEG. Max size of 800K.
+                    </p>
                   </div>
                 </div>
-                <div class="col-6 my-4">
-                  <div class="d-flex">
+              </div>
+              <!-- <div class="col-6"></div> -->
+            </div>
+            <form action="">
+              <div class="row my-3">
+                <div class="col-6">
+                  <mat-form-field appearance="outline" class="w-100 body-2">
+                    <mat-label class="content">First Name</mat-label>
+                    <input matInput [formControl]="first_nameformcontrol" />
+                  </mat-form-field>
+                  <mat-hint
+                    class="text-danger"
+                    *ngIf="resultArray[0]?.type == 'first_name'"
+                    >{{ resultArray[0].msg }}</mat-hint
+                  >
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" class="w-100 body-2">
+                    <mat-label class="content">Last Name</mat-label>
+                    <input matInput [formControl]="last_nameformcontrol" />
+                  </mat-form-field>
+                  <mat-hint
+                    class="text-danger"
+                    *ngIf="resultArray[0]?.type == 'last_name'"
+                    >{{ resultArray[0].msg }}</mat-hint
+                  >
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col-6">
+                  <mat-form-field appearance="outline" class="w-100 body-2">
+                    <mat-label class="content">Contact Number</mat-label>
+                    <input matInput [formControl]="user_contactformcontrol" />
+                  </mat-form-field>
+                  <mat-hint
+                    class="text-danger"
+                    *ngIf="resultArray[0]?.type == 'mobile'"
+                    >{{ resultArray[0].msg }}</mat-hint
+                  >
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" class="w-100 body-2">
+                    <mat-label class="content">Email</mat-label>
                     <input
-                      class="d-none"
-                      type="file"
-                      id="imageUpload"
-                      accept=".png, .jpg, .jpeg"
-                      (change)="fileChangeEvent($event)"
+                      matInput
+                      type="email"
+                      [formControl]="user_emailformcontrol"
+                      readonly
                     />
-                    <label
-                    class=" primary_btn float-start "
-                    mat-flat-button
-                    for="imageUpload"
-                  >
-                    <p class="m-0 primary body-2">UPLOAD NEW A PHOTO</p>
-                  </label>
-                    <button
-                      class="reset_btn mx-2 primary"
-                      mat-dialog-close
-                      (click)="ImageReset()"
-                    >
-                      RESET
-                    </button>
-                  </div>
-                  <p class="caption gray-color my-3">
-                    Allowed PNG or JPEG. Max size of 800K.
-                  </p>
+                  </mat-form-field>
                 </div>
               </div>
-            </div>
-            <!-- <div class="col-6"></div> -->
+              <div class="row my-3">
+                <div class="col-6 d-flex gap-3">
+                  <button class="primary_btn primary" (click)="editUser()">
+                    SAVE CHANGES
+                  </button>
+                  <button class="reset_btn primary" (click)="resetData()">
+                    RESET
+                  </button>
+                </div>
+                <div class="col-6"></div>
+              </div>
+            </form>
           </div>
-          <form action="">
-            <div class="row my-3">
-              <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100 body-2">
-                  <mat-label class="content">First Name</mat-label>
-                  <input matInput   [formControl]="first_nameformcontrol"/>
-                </mat-form-field>
-                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'first_name'">{{resultArray[0].msg}}</mat-hint>
-              </div>
-              <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100 body-2">
-                  <mat-label class="content">Last Name</mat-label>
-                  <input matInput   [formControl]="last_nameformcontrol"/>
-                </mat-form-field>
-                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'last_name'">{{resultArray[0].msg}}</mat-hint>
-
-              </div>
-            </div>
-            <div class="row my-3">
-              <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100 body-2">
-                  <mat-label class="content">Contact Number</mat-label>
-                  <input matInput  [formControl]="user_contactformcontrol"/>
-                </mat-form-field>
-                <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'mobile'">{{resultArray[0].msg}}</mat-hint>
-
-              </div>
-              <div class="col-6">
-
-              
-                
-                <mat-form-field appearance="outline" class="w-100 body-2">
-                  <mat-label class="content">Email</mat-label>
-                  <input matInput  type="email" [formControl]="user_emailformcontrol" readonly  />
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row my-3">
-              <div class="col-6 d-flex gap-3">
-                <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
-                <button class="reset_btn primary" (click)="resetData()">RESET</button>
-              </div>
-              <div class="col-6"></div>
-            </div>
-          </form>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab>
 
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="mx-2">shield</mat-icon>
-        <P class="purple-color m-0 caption">SECURITY</P>
-      </ng-template>
-      <div class="w-100" style="background-color: #15171a; border-radius: 15px">
-        <div class="p-3">
-          <p class="headline-7">Change Password</p>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="mx-2">shield</mat-icon>
+          <P class="purple-color m-0 caption">SECURITY</P>
+        </ng-template>
+        <div
+          class="w-100"
+          style="background-color: #15171a; border-radius: 15px"
+        >
+          <div class="p-3">
+            <p class="headline-7">Change Password</p>
 
-          <form action="">
-            <div class="row">
-              <div class="col-6 mt-4">
-                <mat-form-field appearance="outline" class="w-100 body-2">
-                  <mat-label class="content">Current Password</mat-label>
-                  <input matInput type="text"  [formControl]="current_passwordformcontrol"/>
-                </mat-form-field>
+            <form action="">
+              <div class="row">
+                <div class="col-6 mt-4">
+                  <mat-form-field appearance="outline" class="w-100 body-2">
+                    <mat-label class="content">Current Password</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      [formControl]="current_passwordformcontrol"
+                    />
+                  </mat-form-field>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100 p-0 my-3 body-2">
-                  <mat-label class="content">New Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" [formControl]="new_passwordformcontrol"/>
-                  <button
-                    mat-icon-button
-                    matSuffix
-                    (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide"
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100 p-0 my-3 body-2"
                   >
-                    <mat-icon>{{
-                      hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-              <div class="col-6">
-                <mat-form-field appearance="outline" class="w-100 body-2 my-3">
-                  <mat-label class="content">Confirm New Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'"  [formControl]="confirm_passwordformcontrol"/>
-                  <button
-                    mat-icon-button
-                    matSuffix
-                    (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide"
+                    <mat-label class="content">New Password</mat-label>
+                    <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      [formControl]="new_passwordformcontrol"
+                    />
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100 body-2 my-3"
                   >
-                    <mat-icon>{{
-                      hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
+                    <mat-label class="content">Confirm New Password</mat-label>
+                    <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      [formControl]="confirm_passwordformcontrol"
+                    />
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+
+            <div class="col-6">
+              <p class="body-3 regular">Password Requirements:</p>
+
+              <ul class="content gray-color">
+                <li>Minimum 8 characters long - the more, the better</li>
+                <li>At least one lowercase & one uppercase character</li>
+                <li>At least one number, symbol, or whitespace character</li>
+              </ul>
+
+              <div class="row my-3">
+                <div class="col-6 d-flex gap-3">
+                  <button class="primary_btn primary" (click)="editUser()">
+                    SAVE CHANGES
                   </button>
-                </mat-form-field>
+                  <button class="reset_btn primary">RESET</button>
+                </div>
+                <div class="col-6"></div>
               </div>
-            </div>
-          </form>
-
-          <div class="col-6">
-            <p class="body-3 regular">Password Requirements:</p>
-
-            <ul class="content gray-color">
-              <li>Minimum 8 characters long - the more, the better</li>
-              <li>At least one lowercase & one uppercase character</li>
-              <li>At least one number, symbol, or whitespace character</li>
-            </ul>
-
-            <div class="row my-3">
-              <div class="col-6 d-flex gap-3">
-                <button class="primary_btn primary" (click)="editUser()">SAVE CHANGES</button>
-                <button class="reset_btn primary" >RESET</button>
-              </div>
-              <div class="col-6"></div>
             </div>
           </div>
         </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</mat-sidenav-content>

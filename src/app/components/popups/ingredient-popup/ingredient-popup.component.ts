@@ -88,6 +88,7 @@ export class IngredientPopupComponent {
         )
         .then((response: any) => {
           this.updated();
+          this.dialogRef.close();
         })
         .catch((error: any) => {
           error.error.detail.forEach((item: any) => {
@@ -109,9 +110,9 @@ export class IngredientPopupComponent {
 
         .post(data, String(this.tokestorage.getToken()), 'ingredient/create')
         .then((response: any) => {
-          alert();
-
-          this.dialogRef.close(1);
+       
+          this.done();
+          this.dialogRef.close();
         })
         .catch((error: any) => {
           error.error.detail.forEach((item: any) => {
@@ -138,7 +139,7 @@ export class IngredientPopupComponent {
       data: data1,
     });
   }
-
+ 
   updated() {
     var data1 = {
       msg: 'Ingredients updated to the system Successfully!',

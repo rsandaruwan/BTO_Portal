@@ -1,0 +1,26 @@
+
+.not-back{
+    background-color: red;
+    border-radius: 100px;
+     width: 18px;
+     height: 18px ;
+     position: relative;
+     bottom: 30px;
+     left: 15px;
+}
+.not_count{
+ font-size: 10px;
+}
+
+.round-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px !important;
+  }
+  .not_position{
+    position: relative;
+    left: 50px;
+  }

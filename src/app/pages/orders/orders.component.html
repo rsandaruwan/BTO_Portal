@@ -1,200 +1,232 @@
-<div class="mx-5 row gap-4 mt-5 p-0 card-header">
-  <div class="col-4 col-md-2 m-auto card-first pt-3">
-    <p class="w-100 m-auto text-center headline_2">150</p>
-    <p class="w-100 m-auto text-center overline_1">TOTAL ORDERS</p>
-    <hr class=" " style="background-color: #fff" />
-  </div>
-  <div class="col-4 col-md-2 m-auto card-first pt-3">
-    <p class="w-100 m-auto text-center headline_2">150</p>
-    <p class="w-100 m-auto text-center overline_1">PENDING ORDERS</p>
-    <hr class=" " style="background-color: #fff" />
-  </div>
-  <div class="col-4 col-md-2 m-auto card-first pt-3">
-    <p class="w-100 m-auto text-center headline_2">150</p>
-    <p class="w-100 m-auto text-center overline_1">SHIPPING ORDERS</p>
-    <hr class=" " style="background-color: #fff" />
-  </div>
-  <div class="col-4 col-md-2 m-auto card-first pt-3">
-    <p class="w-100 m-auto text-center headline_2">150</p>
-    <p class="w-100 m-auto text-center overline_1">DELIVERED ORDERS</p>
-    <hr class=" " style="background-color: #fff" />
-  </div>
-  <div class="col-4 col-md-2 m-auto card-first pt-3">
-    <p class="w-100 m-auto text-center headline_2">150</p>
-    <p class="w-100 m-auto text-center overline_1">canceled ORDERS</p>
-    <hr class=" " style="background-color: #fff" />
-  </div>
-</div>
-
-<div class="col-md-12 mx-5 header">
-  <p class="headline_4 f_400 mx-4 my-3">Filter by</p>
-</div>
-<div class="col-12 body-header secound_back">
-  <div class="row">
-    <div class="col-md-11">
-      <div class="mx-4 mt-3">
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label class="body-2 gray-text"
-                >Search by Product Name</mat-label
-              >
-              <input matInput placeholder="Placeholder" />
-              <!-- <mat-icon matPrefix>search</mat-icon> -->
-              <img
-                matPrefix
-                src="../../../assets/icons/serach.png"
-                alt=""
-                class="mx-4"
-              />
-            </mat-form-field>
-          </div>
-          <div class="col-md-4 mb-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label class="body-2 gray-text">Select Category</mat-label>
-              <mat-select [(ngModel)]="selectedValue" name="food" multiple>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{ food.viewValue }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-4 mb-3"></div>
+<mat-sidenav-content
+  class="sidenav-content"
+  style="margin-left: 0px !important"
+>
+  <div class="col-12 mx-5 header sticky-top nav-bar secound_back">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="mx-4 mt-3">
+          <p class="headline_4">All Orders</p>
+          <p>All the Details are shown below.</p>
         </div>
       </div>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-</div>
-
-<div class="col-12 mt-4 body-table secound_back">
-  <div class="row mx-2 py-3">
-    <div class="col-6">
-      <p class="headline_4 f_400">
-        All Products <span class="content f_400"> 254</span>
-      </p>
-    </div>
-    <div class="col-6 ">
-      
+      <div class="col-md-2">
+        <app-profile-details></app-profile-details>
+      </div>
     </div>
   </div>
 
-  <!-- Product table -->
-  <div class="col-md-12">
-    <!-- <mat-form-field>
+  <div class="mx-5 row gap-4 mt-5 p-0 card-header">
+    <div class="col-4 col-md-2 m-auto card-first pt-3">
+      <p class="w-100 m-auto text-center headline_2">150</p>
+      <p class="w-100 m-auto text-center overline_1">TOTAL ORDERS</p>
+      <hr class=" " style="background-color: #fff" />
+    </div>
+    <div class="col-4 col-md-2 m-auto card-first pt-3">
+      <p class="w-100 m-auto text-center headline_2">150</p>
+      <p class="w-100 m-auto text-center overline_1">PENDING ORDERS</p>
+      <hr class=" " style="background-color: #fff" />
+    </div>
+    <div class="col-4 col-md-2 m-auto card-first pt-3">
+      <p class="w-100 m-auto text-center headline_2">150</p>
+      <p class="w-100 m-auto text-center overline_1">SHIPPING ORDERS</p>
+      <hr class=" " style="background-color: #fff" />
+    </div>
+    <div class="col-4 col-md-2 m-auto card-first pt-3">
+      <p class="w-100 m-auto text-center headline_2">150</p>
+      <p class="w-100 m-auto text-center overline_1">DELIVERED ORDERS</p>
+      <hr class=" " style="background-color: #fff" />
+    </div>
+    <div class="col-4 col-md-2 m-auto card-first pt-3">
+      <p class="w-100 m-auto text-center headline_2">150</p>
+      <p class="w-100 m-auto text-center overline_1">canceled ORDERS</p>
+      <hr class=" " style="background-color: #fff" />
+    </div>
+  </div>
+
+  <div class="col-md-12 mx-5 header">
+    <p class="headline_4 f_400 mx-4 my-3">Filter by</p>
+  </div>
+  <div class="col-12 body-header secound_back">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="mx-4 mt-3">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="body-2 gray-text"
+                  >Search by Product Name</mat-label
+                >
+                <input matInput placeholder="Placeholder" />
+                <!-- <mat-icon matPrefix>search</mat-icon> -->
+                <img
+                  matPrefix
+                  src="../../../assets/icons/serach.png"
+                  alt=""
+                  class="mx-4"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="body-2 gray-text">Select Category</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="food" multiple>
+                  <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{ food.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 mb-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-4 body-table secound_back">
+    <div class="row mx-2 py-3">
+      <div class="col-6">
+        <p class="headline_4 f_400">
+          All Products <span class="content f_400"> 254</span>
+        </p>
+      </div>
+      <div class="col-6"></div>
+    </div>
+
+    <!-- Product table -->
+    <div class="col-md-12">
+      <!-- <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
       </mat-form-field> -->
 
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
-        <!-- ID Column -->
-        <ng-container matColumnDef="order_id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ORDER ID</th>
-          <td mat-cell class="pointer text-decoration-underline" *matCellDef="let row" (click)="tableclick(row.order_id)"  >{{ row.order_id }}   </td>
-        </ng-container>
-
-        <!-- Progress Column -->
-        <ng-container matColumnDef="order_date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ORDER DATE</th>
-          <td mat-cell *matCellDef="let row">{{ row.order_date }}</td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="delivery_date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            DELIVERY DATE
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.delivery_date }}</td>
-        </ng-container>
-
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="customers">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>CUSTOMERS</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.customers }}
-          </td>
-        </ng-container>
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="payment_status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            PAYMENT STATUS
-          </th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.payment_status }}
-          </td>
-        </ng-container>
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>AMOUNT</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.amount }}
-          </td>
-        </ng-container>
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="order_status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            ORDER STATUS 
-          <td mat-cell *matCellDef="let row">
-            
-            <mat-card
-            style="border-radius: 15px;"
-             
-            [ngStyle]="{
-              'background-color': getStatus(row.order_status)['status_color']
-            }"
-              class="text-center primary white-color status-btn w-75 px-2"
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="order_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ORDER ID</th>
+            <td
+              mat-cell
+              class="pointer text-decoration-underline"
+              *matCellDef="let row"
+              (click)="tableclick(row.order_id)"
             >
-              <p 
-                class="content m-auto py-1"
+              {{ row.order_id }}
+            </td>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="order_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              ORDER DATE
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.order_date }}</td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="delivery_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              DELIVERY DATE
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.delivery_date }}</td>
+          </ng-container>
+
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="customers">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>CUSTOMERS</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.customers }}
+            </td>
+          </ng-container>
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="payment_status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              PAYMENT STATUS
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.payment_status }}
+            </td>
+          </ng-container>
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>AMOUNT</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.amount }}
+            </td>
+          </ng-container>
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="order_status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              ORDER STATUS
+            </th>
+
+            <td mat-cell *matCellDef="let row">
+              <mat-card
+                style="border-radius: 15px"
                 [ngStyle]="{
-                  color: getStatus(row.order_status)['text_color']
+                  'background-color': getStatus(row.order_status)[
+                    'status_color'
+                  ]
                 }"
+                class="text-center primary white-color status-btn w-75 px-2"
               >
-                {{ getStatus(row.order_status)["status_wording"] }}
-              </p>
-            </mat-card>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-          <td mat-cell *matCellDef="let row">
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-              aria-label="Example icon-button with a menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item  (click)="editclick(row.order_id)"  [routerLink]="['/portal/single_order']">
-                <mat-icon class="mat_icon material-symbols-outlined"
-                  >visibility</mat-icon
+                <p
+                  class="content m-auto py-1"
+                  [ngStyle]="{
+                    color: getStatus(row.order_status)['text_color']
+                  }"
                 >
-                <span>View</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon class="mat_icon">edit_square</mat-icon>
-                <span>Edit</span>
-              </button>
-            </mat-menu>
-          </td>
-        </ng-container>
+                  {{ getStatus(row.order_status)["status_wording"] }}
+                </p>
+              </mat-card>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="editclick(row.order_id)"
+                  [routerLink]="['/portal/single_order']"
+                >
+                  <mat-icon class="mat_icon material-symbols-outlined"
+                    >visibility</mat-icon
+                  >
+                  <span>View</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon class="mat_icon">edit_square</mat-icon>
+                  <span>Edit</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
 
-        <!-- Row shown when there is no matching data. -->
-        <!-- <tr class="mat-row" *matNoDataRow>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <!-- <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
           </tr> -->
-      </table>
+        </table>
 
-      <mat-paginator
-        [pageSizeOptions]="[10, 15, 25, 50]"
-        aria-label="Select page of users"
-      ></mat-paginator>
+        <mat-paginator
+          [pageSizeOptions]="[10, 15, 25, 50]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
     </div>
   </div>
-</div>
+</mat-sidenav-content>

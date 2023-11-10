@@ -143,6 +143,7 @@ export class AddProductsComponent {
   }
 
   ngOnInit(): void {
+ 
     this.getCategoryData();
     this.getIngredient();
     this.getAttribute();
@@ -154,6 +155,7 @@ export class AddProductsComponent {
     } else {
       this.variant_array.push({});
     }
+   
   }
 
   addNewItem(value: string) {}
@@ -418,7 +420,8 @@ export class AddProductsComponent {
     }
   }
 
-  save() {
+
+ save() {
     if (this.proId) {
       if (this.product_image_details) {
         this.update_img = this.product_image_details;
@@ -492,6 +495,8 @@ export class AddProductsComponent {
       
      }
      else{
+
+     
       this.addData = {
         product: {
           product_id: this.proId,
@@ -522,22 +527,31 @@ export class AddProductsComponent {
           this.done();
         })
 
-        .catch((error: any) => {
+        .catch((error: any) => {     
+              
           this.resultArray = [];
-
-          this.varientError = error.error.detail
-
+          this.varientError = error.error.detail       
+         
+          setTimeout(() => {
+            this.changingErrorData.next(true);
+          }, 1000);
+          this.variant_submit_data = []
+          
           error.error.detail.forEach((item: any) => {
+         
             if (item.loc && item.loc[1] && item.msg) {
+             
               this.resultArray.push({
                 type: item.loc[2],
                 msg: item.msg,
               });
             }
           });
-           this.changingErrorData.next(true);
+          
+         
         
-
+        
+          /*
           this.errors = [];
           this.varient_error = [];
           this.nutrition_error = [];
@@ -551,8 +565,11 @@ export class AddProductsComponent {
           error.error.detail.map((errorData: any) => {
             this.nutrition_error[errorData.loc[5]] = errorData.msg;
           });
+          */
+
         });
     }
+   
   }
 
   updated() {

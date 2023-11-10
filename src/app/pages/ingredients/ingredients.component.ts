@@ -55,11 +55,17 @@ export class IngredientsComponent implements AfterViewInit {
       autoFocus: false,
       data: {id :id }
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getIngredientData();
+    });
   }
   AddAttribute() {
     let dialogRef = this.dialog.open(IngredientPopupComponent, {
       autoFocus: false,
     
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getIngredientData();
     });
   }
 

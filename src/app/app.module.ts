@@ -27,6 +27,9 @@ import { DynamicDonePopupComponent } from './components/popups/dynamic-done-popu
 import { AddUserComponent } from './components/popups/add-user/add-user.component';
 import { LogoutComponent } from './components/popups/logout/logout.component';
 import { VariantsComponent } from './components/variants/variants.component';
+import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
+
+import { TestPopupComponent } from './components/popups/test-popup/test-popup.component';
 
 
 // pages
@@ -91,6 +94,8 @@ import { AddProductResultData } from './modals/product_data';
     ProfileComponent,
     LogoutComponent,
     VariantsComponent,
+    ProfileDetailsComponent,
+    TestPopupComponent
 
 
   ],

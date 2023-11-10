@@ -58,7 +58,11 @@ export class SubCategoryPopupComponent {
     public dialog: MatDialog,
     private tokestorage: StorageService,
     private apiService: ApiService,
-    @Inject(MAT_DIALOG_DATA) public sub_cat_data: any
+    @Inject(MAT_DIALOG_DATA) public sub_cat_data: any,
+    
+    public dialogRef: MatDialogRef<SubCategoryPopupComponent>,
+  
+
   ) {
     this.userForm = this.fb.group({
       name: [],
@@ -157,8 +161,10 @@ export class SubCategoryPopupComponent {
           'sub-category/edit'
         )
         .then((response: any) => {
-          this.closebutton.nativeElement.click();
+          // this.closebutton.nativeElement.click();
           this.updated();
+          this.dialogRef.close();
+
         })
         .catch((error: any) => {});
     } else {
@@ -186,9 +192,11 @@ export class SubCategoryPopupComponent {
           .then((response: any) => {
             this.subcategory_data = response.result[0];
 
-            this.closebutton.nativeElement.click();
+            // this.closebutton.nativeElement.click();
 
             this.done();
+          this.dialogRef.close();
+
           })
           .catch((error: any) => {
             error.error.detail.forEach((item: any) => {
@@ -215,7 +223,7 @@ export class SubCategoryPopupComponent {
       width: '25vw',
 
       data: data1,
-    });
+    }); 
   }
   updated() {
     var data1 = {

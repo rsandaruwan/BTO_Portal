@@ -6,7 +6,7 @@
       </p>
     </div>
     <div class="col-6 d-flex flex-row-reverse">
-      <button [routerLink]="['/add_product']" class="primary_btn content">
+      <button class="primary_btn content" (click)="save()">
         SAVE DETAILS
       </button>
     </div>
@@ -26,7 +26,7 @@
       </div>
       <div class="col-10">
         <mat-form-field appearance="outline" class="w-50 my-3 mx-4">
-          <input matInput placeholder="Search by Product Name" />
+          <input matInput placeholder="Search by Product Name"  [formControl]="recipes_name"/>
         </mat-form-field>
       </div>
     </div>
@@ -54,6 +54,7 @@
             [(ngModel)]="textareaContent"
             (input)="adjustTextareaHeight($event)"
             #autoHeightTextarea
+            [formControl]="recipes_description"
           ></textarea>
         </mat-form-field>
       </div>
@@ -67,15 +68,42 @@
           Type how you want to display your ingredients, you can select your
           products when you type the name.
         </p>
-        <div *ngFor="let Ingredients of getIngredientsFormControls(); let i = index">
-          <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
-            <input matInput placeholder="Enter a name" />
+        <div
+          *ngFor="
+            let ingredent of fc_array
+            let i = index
+          "
+        >
+          <mat-form-field appearance="outline" class="w-50 my-1 mx-4 d-flex">
+           <!-- <div contentEditable="true" style="color: #97BE41;"  *ngIf="this.myControl.value"  [innerHTML]="(this.myControl.value).ingredient_name"> </div> -->
+            <input
+              type="text"
+              placeholder="Ingredients"
+              aria-label="Assignee"
+              matInput
+              [matAutocomplete]="auto"
+              class="content "
+              (keyup)="onKey($event)"
+              [formControl]="fc_array[i]"
+              [(ngModel)]="selectedIngredent[i].ingredient_name"
+             
+            />
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option 
+                *ngFor="let option of fo_array[i] | async"
+                [value]="option"
+              >
+                <p class="content" style="color: #97BE41;">{{ option.ingredient_name }}</p>
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </div>
 
-       
-        <button class="primary_btn m-auto content my-3 mx-4"  (click)="addIngredients()">
-          SAVE DETAILS
+        <button
+          class="primary_btn m-auto content my-3 mx-4"
+          (click)="addIngredients()"
+        >
+          Add Next
         </button>
       </div>
     </div>
@@ -99,20 +127,47 @@
       </div>
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
-      <div class="col-2 gray-bg"> 
+      <div class="col-2 gray-bg">
         <p class="content mt-4 detail_text">Steps</p>
       </div>
-      <div class="col-10 ">
-        <div class="mt-3" *ngFor="let Step of getStepFormControls(); let i = index">
-            <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
-              <input matInput placeholder="Enter your step" />
-            </mat-form-field>
-          </div>
-  
-       
-          <button class="primary_btn m-auto content my-3 mx-4"  (click)="addStep()">
-            SAVE DETAILS
-          </button>
+      <div class="col-10">
+        <div
+          class="mt-3"
+          *ngFor="let Step of getStepFormControls(); let i = index"
+        >
+          <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
+            <input matInput placeholder="Enter your step"  [formControl]="recipes_step"/>
+          </mat-form-field>
+        </div>
+
+        <button
+          class="primary_btn m-auto content my-3 mx-4"
+          (click)="addStep()"
+        >
+          Add Next Step
+        </button>
+      </div>
+    </div>
+    <div class="row m-0 p-0 first_row border-bottom">
+      <div class="col-2 gray-bg">
+        <p class="content mt-4 detail_text">Tags</p>
+      </div>
+      <div class="col-10">
+        <div
+          class="mt-3"
+          *ngFor="let Step of getTagsFormControls(); let i = index"
+        >
+          <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
+            <input matInput placeholder="Give a name"  [formControl]="recipes_tags"/>
+          </mat-form-field>
+        </div>
+
+        <button
+          class="primary_btn m-auto content my-3 mx-4"
+          (click)="addTags()"
+        >
+          Add
+        </button>
       </div>
     </div>
   </div>

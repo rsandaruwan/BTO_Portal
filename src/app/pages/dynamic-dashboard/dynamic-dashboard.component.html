@@ -37,13 +37,13 @@
           </div>
         </div>
 
-        <div class="col-md-10 mx-3 mt-3"routerLinkActive="active">
-          <div class="row pointer" [routerLink]="['/portal/dashboard']" >
-            <div class="col-2 m-auto">
+        <div class="col-md-10 mx-3 mt-3" routerLinkActive="active">
+          <div class="row pointer" [routerLink]="['/portal/dashboard']">
+            <div class="col-2 m-auto mx-2">
               <img src="../../../assets/icons/dashboard.png" alt="" />
             </div>
-            <div class="col-10 p-0">
-              <p class="body-3 gray m-auto my-2" >Dashboard</p>
+            <div class="col-9 p-0">
+              <p class="body-3 gray  my-2 w-75">Dashboard</p>
             </div>
           </div>
         </div>
@@ -67,15 +67,14 @@
                       fxLayoutAlign="space-between center"
                       routerLinkActive="active"
                     >
-                      <div class="col-md-2 m-auto">
-                        <img
-                          src="{{ item.iconName }}"
-                          alt=""
-                         
-                        />
+                      <div class="col-md-2 m-auto mx-2">
+                        <img src="{{ item.iconName }}" alt="" />
                       </div>
-                      <div class="col-md-10">
-                        <p class="body-3 gray m-auto my-2 " style="min-width: 130px">
+                      <div class="col-md-9 w-75">
+                        <p
+                          class="body-3 gray m-auto my-2"
+                          style="min-width: 130px"
+                        >
                           {{ item.displayName }}
                         </p>
                       </div>
@@ -84,21 +83,19 @@
                 </mat-expansion-panel-header>
                 <span *ngFor="let child of item.children">
                   <mat-list-item [routerLink]="child.route">
-
-                 
                     <div
                       class="row sub_menu"
                       fxLayout="row"
                       fxLayoutAlign="space-between center"
                       routerLinkActive="active"
                     >
-                      <!-- <div class="col-md-2">
-                        <img src="{{ child.iconName }}" alt="" />
-                      </div> -->
+                   
                       <div class="col-md-12">
-                        <ul>
+                        <ul class="my-1">
                           <li>
-                            <p class="body-3 gray m-auto  my-2">{{ child.displayName }}</p>
+                            <p class="body-3 gray m-auto my-2">
+                              {{ child.displayName }}
+                            </p>
                           </li>
                         </ul>
                       </div>
@@ -119,10 +116,10 @@
                 <img
                   src="{{ item.iconName }}"
                   alt=""
-                  class="col-2 my-auto "
+                  class="col-2 my-auto mx-2"
                   style="width: 20px; height: 20px"
                 />
-                <p class="col-9 mx-2 my-2  body-3 gray">
+                <p class="col-9 mx-2 my-2 body-3 gray w-75">
                   {{ item.displayName }}
                 </p>
               </div>
@@ -133,10 +130,10 @@
 
       <div class="col-md-10 mx-3">
         <div class="row pointer" routerLinkActive="active">
-          <div class="col-2">
+          <div class="col-2 mx-2" >
             <img src="../../../assets/icons/logout.png" alt="" />
           </div>
-          <div class="col-10 p-0" (click)="logour_popup()">
+          <div class="col-9 p-0" (click)="logour_popup()">
             <p class="body-3 gray">Logout</p>
           </div>
         </div>
@@ -332,7 +329,7 @@
               </div>
             </div> -->
 
-            <!-- <div class=" Body2_text p-0 bg-gray" hideToggle id="admin">
+          <!-- <div class=" Body2_text p-0 bg-gray" hideToggle id="admin">
                             <div class="h-100 py-1">
                                 <mat-panel-title class="nav-link py-3 m-0">
                                     <div class="row w-100">
@@ -401,7 +398,8 @@
                 "
               >
                 <mat-panel-title
-                  class="nav-link py-3"falselogout
+                  class="nav-link py-3"
+                  falselogout
                   [ngClass]="{ 'active-text-color': i == selectedNavItem }"
                 >
                   {{ navItem.group_name }}
@@ -542,7 +540,7 @@
       </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content class="sidenav-content">
+    <!-- <mat-sidenav-content class="sidenav-content" style="margin-left: 0px !important;">
       <div class="col-12 mx-5 header sticky-top nav-bar secound_back">
         <div class="row">
           <div class="col-md-10">
@@ -551,11 +549,13 @@
               <p>All the Details are shown below.</p>
             </div>
           </div>
-          <div class="col-md-2"></div>
+          <div class="col-md-2">
+          <app-profile-details></app-profile-details>
+          </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- <nav class="top-nav-bar sticky-top nav-bar" style="overflow: hidden;">
+    <!-- <nav class="top-nav-bar sticky-top nav-bar" style="overflow: hidden;">
                 <div class="navbar navbar-expand-lg navbar-light navbar-custom">
                     <div class="container-fluid">
                         <div class="col-9"></div>
@@ -583,11 +583,11 @@
                 </div>
             </nav> -->
 
-      <!-- <div *ngIf="mainMenuItemName == 'Dashboard'">
+    <!-- <div *ngIf="mainMenuItemName == 'Dashboard'">
         <app-product-categories></app-product-categories>
       </div> -->
 
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
+    <router-outlet></router-outlet>
+    <!-- </mat-sidenav-content> -->
   </mat-sidenav-container>
 </div>

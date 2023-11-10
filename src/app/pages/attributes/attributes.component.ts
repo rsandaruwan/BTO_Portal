@@ -61,6 +61,9 @@ export class AttributesComponent implements AfterViewInit {
     let dialogRef = this.dialog.open(AttributePopupComponent, {
       autoFocus: false,
     });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getAttributeData();
+    });
   }
 
   getAttributeData() {
@@ -86,14 +89,13 @@ export class AttributesComponent implements AfterViewInit {
         this.paginator.length = this.count;
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
-       
       });
   }
 
   onPageChange(event: PageEvent) {
     this.selectedPageSize = event.pageSize;
 
-    this.skip = (event.pageIndex* this.selectedPageSize);
+    this.skip = event.pageIndex * this.selectedPageSize;
     this.paginator.length = this.count;
 
     this.getAttributeData();
@@ -105,5 +107,15 @@ export class AttributesComponent implements AfterViewInit {
     this.getAttributeData();
   }
 
-  editclick(id: any, name: string) {}
+  editclick(id: any, name: string) {
+    let dialogRef = this.dialog.open(AttributePopupComponent, {
+      autoFocus: false,
+      
+      data: { id: id, name :name },
+
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getAttributeData();
+    });
+  }
 }

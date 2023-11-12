@@ -28,7 +28,7 @@ import { AddUserComponent } from './components/popups/add-user/add-user.componen
 import { LogoutComponent } from './components/popups/logout/logout.component';
 import { VariantsComponent } from './components/variants/variants.component';
 import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
-
+import { RecipeCategoryPopupComponent } from './components/popups/recipe-category-popup/recipe-category-popup.component';
 import { TestPopupComponent } from './components/popups/test-popup/test-popup.component';
 
 
@@ -52,6 +52,8 @@ import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
 import { SingleOrderComponent } from './pages/single-order/single-order.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RecipeCategoriesComponent } from './pages/recipe-categories/recipe-categories.component';
+
 
 
 import { AddProductResultData } from './modals/product_data';
@@ -95,7 +97,9 @@ import { AddProductResultData } from './modals/product_data';
     LogoutComponent,
     VariantsComponent,
     ProfileDetailsComponent,
-    TestPopupComponent
+    TestPopupComponent,
+    RecipeCategoriesComponent,
+    RecipeCategoryPopupComponent
 
 
   ],

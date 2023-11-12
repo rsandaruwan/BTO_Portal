@@ -65,6 +65,11 @@ export class DynamicDashboardComponent {
       route: '/portal/recipes',
     },
     {
+      displayName: 'Recipes Categories',
+      iconName: '../../../assets/icons/recipe-category.png',
+      route: '/portal/recipe_categories',
+    },
+    {
       displayName: 'Orders',
       iconName: '../../../assets/icons/orders.png',          
       children: [

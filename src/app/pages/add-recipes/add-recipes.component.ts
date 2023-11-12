@@ -170,10 +170,10 @@ export class AddRecipesComponent implements OnInit {
   }
 
   save() {
-    alert();
+    alert(this.fc_array.length);
 
-    var Ind_data :any = this.fc_array[1].value;
-    if (Ind_data) console.log('data resuult', Ind_data);
+    var Ind_data :any = this.fc_array[0].value;
+    if (Ind_data) console.log('data resuult', Ind_data.length);
     
 
 
@@ -213,7 +213,7 @@ export class AddRecipesComponent implements OnInit {
 
     this.apiService
 
-      .post(data, String(this.tokestorage.getToken()), 'category/create')
+      .post(data, String(this.tokestorage.getToken()), 'recipe/create')
       .then((response: any) => {
         this.resipe_data = response.result[0];
 

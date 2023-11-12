@@ -22,6 +22,7 @@ import { AddRecipesComponent } from './pages/add-recipes/add-recipes.component';
 import { SingleOrderComponent } from './pages/single-order/single-order.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RecipeCategoriesComponent } from './pages/recipe-categories/recipe-categories.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'customer', component: CustomerComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'logout', component: LoginComponent },
+      { path: 'recipe_categories', component: RecipeCategoriesComponent },
     ],
   },
 

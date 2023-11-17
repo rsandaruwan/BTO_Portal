@@ -3,9 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AttributePopupComponent } from 'src/app/components/popups/attribute-popup/attribute-popup.component';
 import { RecipeCategoryPopupComponent } from 'src/app/components/popups/recipe-category-popup/recipe-category-popup.component';
-import { AttributeIntarface } from 'src/app/modals/attributes.model';
+import { RecipeCategoryIntarface } from 'src/app/modals/recipe_category.model';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -16,7 +15,7 @@ interface Page {
 @Component({
   selector: 'app-recipe-categories',
   templateUrl: './recipe-categories.component.html',
-  styleUrls: ['./recipe-categories.component.scss']
+  styleUrls: ['./recipe-categories.component.scss'],
 })
 export class RecipeCategoriesComponent implements AfterViewInit {
   @ViewChild(MatPaginator)
@@ -25,8 +24,8 @@ export class RecipeCategoriesComponent implements AfterViewInit {
   sort!: MatSort;
   selectedPageSize: number = 10;
   selectedValue: string | undefined;
-  attribute_data: any;
-  search_att: any = '';
+  recipe_category: any;
+  recipe_category_name: any = '';
   skip: any = 0;
   count: number = 0;
 
@@ -38,8 +37,12 @@ export class RecipeCategoriesComponent implements AfterViewInit {
     { value: 50 },
   ];
 
-  displayedColumns: string[] = ['attribute_id', 'attribute_name', 'action'];
-  dataSource: MatTableDataSource<AttributeIntarface>;
+  displayedColumns: string[] = [
+    'recipe_category_id',
+    'recipe_category_name',
+    'action',
+  ];
+  dataSource: MatTableDataSource<RecipeCategoryIntarface>;
 
   constructor(
     public dialog: MatDialog,
@@ -49,7 +52,7 @@ export class RecipeCategoriesComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
-    this.getAttributeData();
+    this.getRecipeCategoryData();
   }
 
   ngAfterViewInit(): void {
@@ -57,37 +60,43 @@ export class RecipeCategoriesComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  ELEMENT_DATA: AttributeIntarface[] = [];
+  ELEMENT_DATA: RecipeCategoryIntarface[] = [];
 
-  openAttribute() {
+  openRecipeCategory() {
     let dialogRef = this.dialog.open(RecipeCategoryPopupComponent, {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getAttributeData();
+      this.getRecipeCategoryData();
     });
   }
 
-  getAttributeData() {
+  getRecipeCategoryData() {
+    console.log('recipe', this.recipe_category_name);
+  
     var parameter = '?';
 
-    if (this.search_att != undefined) {
-      parameter += 'attribute_name=' + this.search_att + '&';
-    }
+  
     if (this.selectedPageSize != undefined) {
       parameter += 'limit=' + this.selectedPageSize + '&';
     }
     if (this.skip != undefined) {
-      parameter += 'skip=' + this.skip;
+      parameter += 'skip=' + this.skip + '&';
+    }
+    if (this.recipe_category_name != '') {
+      parameter += 'recipe_category_name=' + this.recipe_category_name ;
     }
 
     this.apiService
-      .get(String(this.tokestorage.getToken()), 'attributes/' + parameter)
-      .then((response: any) => {
-        this.attribute_data = response.result.data;
-        this.count = response.result.page[0].count;
 
-        this.dataSource = new MatTableDataSource(this.attribute_data);
+      .get(String(this.tokestorage.getToken()), 'recipe-category/' + parameter)
+      .then((response: any) => {
+        this.recipe_category = response.result.data;
+        this.count = response.result.page.count;
+   
+ 
+
+        this.dataSource = new MatTableDataSource(this.recipe_category);
         this.paginator.length = this.count;
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
@@ -100,24 +109,25 @@ export class RecipeCategoriesComponent implements AfterViewInit {
     this.skip = event.pageIndex * this.selectedPageSize;
     this.paginator.length = this.count;
 
-    this.getAttributeData();
+    this.getRecipeCategoryData();
   }
 
   search(event: any) {
-    this.search_att = event.target.value;
+    this.recipe_category_name = event.target.value;
 
-    this.getAttributeData();
+
+
+    this.getRecipeCategoryData();
   }
 
   editclick(id: any, name: string) {
     let dialogRef = this.dialog.open(RecipeCategoryPopupComponent, {
       autoFocus: false,
-      
-      data: { id: id, name :name },
 
+      data: { id: id, name: name },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getAttributeData();
+      this.getRecipeCategoryData();
     });
   }
 }

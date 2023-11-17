@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-10">
           <ng-container
-            *ngFor="let phone of getPhonesFormControls(); let i = index"
+           
           >
             <div class="row">
               <div class="col-4 my-auto">
@@ -31,7 +31,7 @@
                     type="text"
                     matInput
                     placeholder="Enter name"
-                    [formControl]="attribute_nameformcontrol"
+                    [formControl]="recipe_category_name"
                   />
                 </mat-form-field>
                 <mat-hint class="text-danger" *ngIf="resultArray[0]?.type == 'attribute_name'">{{resultArray[0].msg}}</mat-hint>
@@ -40,25 +40,11 @@
             </div>
           </ng-container>
         </div>
-        <!-- <div class="col-4">
-          <div class="row">
-            <div class="col-6">
-              <button class="primary_btn btn-md  px-3 content" (click)="addPhone()">
-                Add
-              </button>
-            </div>
-            <div class="col-6 p-0">
-              <button class="primary_btn clear_btn m-auto content py-auto px-3" (click)="removePhone(index)">
-                Clear All
-              </button>
-            </div>
-     
-          </div>
-        </div> -->
+       
       </div>
     </div>
   
-    <!-- <button (click)="addPhone()">Add new phone</button> -->
+    
   
     <div class="row">
       <div class="col-12">

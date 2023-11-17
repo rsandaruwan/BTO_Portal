@@ -13,7 +13,7 @@ import {
   styleUrls: ['./toggle-button.component.scss'],
 })
 export class ToggleButtonComponent {
-  @Input() on: boolean | undefined;
+  @Input() on: boolean | undefined=false;
   @Input() id: any;
   @Input() showLabels = true;
   @Input() leftText = 'Yes';
@@ -28,23 +28,19 @@ export class ToggleButtonComponent {
   constructor() {}
 
   ngOnInit() {
-    this.on = false
+
   }
   ngAfterViewInit(): void {
-   
-
-    if (this.value == 3) {
-
-      this.on = true
-    } else {
-    if (this.value == 2) {
-      this.on = false
-
-    } else {
-      
-    }
+    if (this.value) {
+      if (this.value == 3) {
+        this.on = false;
+      } else {
+        if (this.value == 2) {
+          this.on = true;
+        }
+      }
+    } 
   }
-}
 
   Valchange(data: any) {
     if (this.on) {

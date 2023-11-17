@@ -29,7 +29,7 @@ export class RecipeCategoryPopupComponent {
   resultArray: { type: string; msg: string }[] = [];
 
 
-  attribute_data: any;
+  recipe_data: any;
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -48,38 +48,24 @@ export class RecipeCategoryPopupComponent {
 
 
     if (this.att_data) {
-      this.attribute_nameformcontrol.setValue(this.att_data.name);
+      this.recipe_category_name.setValue(this.att_data.name);
     }
   }
 
-  attribute_nameformcontrol = new FormControl('', [Validators.required]);
+  recipe_category_name = new FormControl('', [Validators.required]);
 
-  addPhone(): void {
-    (this.userForm.get('phones') as FormArray).push(this.fb.control(null));
-    this.attribute_array.push('');
-  }
 
-  removePhone(index: any) {
-    (this.userForm.get('phones') as FormArray).removeAt(index);
-  }
-
-  getPhonesFormControls(): AbstractControl[] {
-    return (<FormArray>this.userForm.get('phones')).controls;
-  }
-  returnArray(): Array<string> {
-    return this.attribute_array;
-  }
 
   save() {
 
     if (this.att_data ) {
       var update_data = {
-        attribute_id: this.att_data.id,
-        attribute_name: this.attribute_nameformcontrol.value,
+        recipe_category_id: this.att_data.id,
+        recipe_category_name: this.recipe_category_name.value,
       };
 
       this.apiService
-        .put(update_data, String(this.tokestorage.getToken()), 'attributes/edit')
+        .put(update_data, String(this.tokestorage.getToken()), 'recipe-category/edit')
         .then((response: any) => {
           // this.closebutton.nativeElement.click();
           this.updated();
@@ -98,15 +84,15 @@ export class RecipeCategoryPopupComponent {
 
       }else{
           const data = {
-            attribute_name: this.attribute_nameformcontrol.value,
+            recipe_category_name: this.recipe_category_name.value,
           };
           this.apiService
       
-            .post(data, String(this.tokestorage.getToken()), 'attributes/create')
+            .post(data, String(this.tokestorage.getToken()), 'recipe-category/create')
             .then((response: any) => {
-              this.attribute_data = response.result[0];
+              this.recipe_data = response.result;
       
-              // this.closebutton.nativeElement.click();
+             
               this.done();
               this.dialogRef.close();
             })

@@ -13,7 +13,7 @@
   </div>
 
   <!-- Product table -->
-  <div class="col-md-12">
+  <div class="col-md-12 mb-4">
     <div class="row m-0 p-0 first_row border-bottom border-top">
       <div class="col-2 gray-bg">
         <p class="content mt-4 detail_text">| Basic Details</p>
@@ -35,7 +35,14 @@
         <p class="content mt-4 detail_text">Recipe Image</p>
       </div>
       <div class="col-10 w-75 my-3 mx-4">
-        <app-image-upload id="fileInput1"></app-image-upload>
+
+        <div *ngIf="!get_recipe_image">
+          <app-image-upload (fileout)="image_data($event) " [value]="recipe_image"></app-image-upload>
+        </div>
+        
+        <div *ngIf="get_recipe_image">
+          <app-image-upload (fileout)="image_data($event) " [value]="get_recipe_image"></app-image-upload>
+        </div>
       </div>
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
@@ -85,15 +92,17 @@
               class="content "
               (keyup)="onKey($event)"
               [formControl]="fc_array[i]"
-              [(ngModel)]="selectedIngredent[i].ingredient_name"
+              [(ngModel)]="selectedIngredent[i]"
              
             />
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option 
+            <mat-autocomplete [id]="'auto_' + i" #auto="matAutocomplete"  [displayWith]="displayFn" >
+              <mat-option  
                 *ngFor="let option of fo_array[i] | async"
-                [value]="option"
+                [value]="option" 
+                (click) = "selectOption(option, i)"
+                
               >
-                <p class="content" style="color: #97BE41;">{{ option.ingredient_name }}</p>
+                <p class="content" style="color: #97BE41;">{{ option.product_variant_name }}</p>
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -115,14 +124,14 @@
         <app-toggle-button
           [type]="0"
           class="my-3 mx-4"
-          style="width: 85px"
-          [width]="85"
+          style="width: 90px"
+          [width]="90"
           [on]="false"
           [showLabels]="true"
           leftText="Yes"
           rightText="No  "
-          (changed)="checked = $event"
           [id]="1"
+          (changed)="chagePriviewStatus($event)"
         ></app-toggle-button>
       </div>
     </div>
@@ -133,10 +142,10 @@
       <div class="col-10">
         <div
           class="mt-3"
-          *ngFor="let Step of getStepFormControls(); let i = index"
+          *ngFor="let Step of step_array; let i = index"
         >
           <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
-            <input matInput placeholder="Enter your step"  [formControl]="recipes_step"/>
+            <input matInput placeholder="Enter your step"  [formControl]="recipes_step[i]"  [(ngModel)]="selectedsteps[i].recipe_step_name"/>
           </mat-form-field>
         </div>
 
@@ -150,24 +159,55 @@
     </div>
     <div class="row m-0 p-0 first_row border-bottom">
       <div class="col-2 gray-bg">
-        <p class="content mt-4 detail_text">Tags</p>
+        <p class="content mt-4 detail_text">Category</p>
       </div>
       <div class="col-10">
         <div
           class="mt-3"
           *ngFor="let Step of getTagsFormControls(); let i = index"
         >
-          <mat-form-field appearance="outline" class="w-50 my-1 mx-4">
-            <input matInput placeholder="Give a name"  [formControl]="recipes_tags"/>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-50 my-1 mx-4" >
+          <!-- <mat-label class="body-2 gray-text">Select Category</mat-label> -->
+          <mat-select
+            [(ngModel)]="category_data"
+    
+            name="category"
+            placeholder="Select Attributes"
+            class="matSelectPlaceholder"
+            multiple
+            (selectionChange)="
+              onSelectionChange()
+            "
+           
+          >
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category"
+            >
+              {{ category.recipe_category_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="col-12 d-flex" style="max-width: 40vw"  *ngIf="category_data">
+          <div
+            class="d-flex seletted_attribute"
+            *ngFor="
+              let category of category_data;
+              let i = index
+            "
+          >
+            <p class="content mx-3 my-2 primary">{{ category.recipe_category_name }}</p>
+            <mat-icon
+              ><img
+                src="../../../../assets/icons/close-red.png"
+                alt=""
+                (click)="closebtn(i)"
+            /></mat-icon>
+          </div>
+        </div>
         </div>
 
-        <button
-          class="primary_btn m-auto content my-3 mx-4"
-          (click)="addTags()"
-        >
-          Add
-        </button>
+      
       </div>
     </div>
   </div>

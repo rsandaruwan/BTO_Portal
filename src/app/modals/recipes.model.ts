@@ -1,8 +1,11 @@
+import { RecipeCategoryIntarface } from "./recipe_category.model";
+
 export interface RecipesInterface {
-    recipes_id: string;
-    recipes_name: string;
-    tags: string;
-    pev_status: string;
-    action: string;
-  }
-  
+  recipe_id: string;
+  recipe_name: string;
+
+  recipe_category_details:Array<RecipeCategoryIntarface>;
+
+  recipe_featured: string;
+  action: string;
+}

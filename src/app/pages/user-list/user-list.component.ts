@@ -89,7 +89,7 @@ export class UserListComponent implements AfterViewInit {
       .then((response: any) => {
      
         this.user_data = response.result.data;
-        this.count = response.result.page[0].count;
+        this.count = response.result.page.count;
         this.dataSource = this.dataSource = new MatTableDataSource(
           this.user_data
         );
@@ -115,10 +115,10 @@ export class UserListComponent implements AfterViewInit {
   
 
     if (data == true) {
-      this.user_status_id = '3';
+      this.user_status_id =2;
     }
     if (data == false) {
-      this.user_status_id = '2';
+      this.user_status_id = 3;
     }
 
     var update_data = { 
